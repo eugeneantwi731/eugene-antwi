@@ -179,6 +179,328 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+
+
+// ===== VARIABLE PROXIMITY EFFECT =====
+// Add this to your vt-mfa.js file
+
+class VariableProximity {
+    constructor(element, options = {}) {
+        this.element = element;
+        this.options = {
+            fromWeight: options.fromWeight || 500,
+            toWeight: options.toWeight || 900,
+            radius: options.radius || 80,
+            ...options
+        };
+        
+        this.letterElements = [];
+        this.mousePosition = { x: 0, y: 0 };
+        this.animationId = null;
+        
+        console.log('VariableProximity initialized for:', element.textContent);
+        this.init();
+    }
+    
+    init() {
+        // Wait for font to load
+        document.fonts.ready.then(() => {
+            this.splitTextIntoLetters();
+            this.bindEvents();
+            this.startAnimation();
+        });
+    }
+    
+    splitTextIntoLetters() {
+        const originalText = this.element.textContent;
+        console.log('Splitting text:', originalText);
+        
+        this.element.innerHTML = '';
+        this.letterElements = [];
+        
+        originalText.split('').forEach((char, index) => {
+            const span = document.createElement('span');
+            span.textContent = char;
+            span.style.cssText = `
+                display: inline-block;
+                font-weight: ${this.options.fromWeight};
+                transition: font-weight 0.15s ease;
+            `;
+            
+            if (char === ' ') {
+                span.innerHTML = '&nbsp;';
+            }
+            
+            this.element.appendChild(span);
+            this.letterElements.push(span);
+        });
+        
+        console.log('Created', this.letterElements.length, 'letter elements');
+    }
+    
+    bindEvents() {
+        this.handleMouseMove = (e) => {
+            const rect = this.element.getBoundingClientRect();
+            this.mousePosition = {
+                x: e.clientX - rect.left,
+                y: e.clientY - rect.top
+            };
+        };
+        
+        document.addEventListener('mousemove', this.handleMouseMove);
+    }
+    
+    calculateDistance(x1, y1, x2, y2) {
+        return Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
+    }
+    
+    startAnimation() {
+        const animate = () => {
+            const containerRect = this.element.getBoundingClientRect();
+            
+            this.letterElements.forEach(letterElement => {
+                const letterRect = letterElement.getBoundingClientRect();
+                const letterCenterX = letterRect.left + letterRect.width / 2 - containerRect.left;
+                const letterCenterY = letterRect.top + letterRect.height / 2 - containerRect.top;
+                
+                const distance = this.calculateDistance(
+                    this.mousePosition.x,
+                    this.mousePosition.y,
+                    letterCenterX,
+                    letterCenterY
+                );
+                
+                if (distance >= this.options.radius) {
+                    letterElement.style.fontWeight = this.options.fromWeight;
+                    letterElement.style.color = ''; // Reset to default color
+                } else {
+                    const intensity = 1 - (distance / this.options.radius);
+                    const weight = this.options.fromWeight + 
+                        (this.options.toWeight - this.options.fromWeight) * intensity;
+                    
+                    letterElement.style.fontWeight = Math.round(weight);
+                    
+                    // Add color transition from green to blue based on proximity
+                    const alpha = intensity * 0.7; // Max 70% intensity
+                    letterElement.style.color = `color-mix(in srgb, var(--green) ${(1-alpha)*100}%, var(--blue) ${alpha*100}%)`;
+                }
+            });
+            
+            this.animationId = requestAnimationFrame(animate);
+        };
+        
+        this.animationId = requestAnimationFrame(animate);
+        console.log('Animation started');
+    }
+    
+    destroy() {
+        if (this.animationId) {
+            cancelAnimationFrame(this.animationId);
+        }
+        document.removeEventListener('mousemove', this.handleMouseMove);
+    }
+}
+
+// Initialize variable proximity effect
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOM loaded, looking for variable proximity elements...');
+    
+    // Wait a bit longer to ensure everything is loaded
+    setTimeout(() => {
+        const proximityElements = document.querySelectorAll('.variable-proximity');
+        console.log('Found', proximityElements.length, 'proximity elements');
+        
+        proximityElements.forEach((element, index) => {
+            console.log(`Initializing element ${index}:`, element.textContent);
+            new VariableProximity(element, {
+                fromWeight: 500,
+                toWeight: 900,
+                radius: 100
+            });
+        });
+    }, 1000); // Increased delay
+});
+
+// ===== CLICK SPARK EFFECT =====
+// Add this to your vt-mfa.js file
+
+class ClickSpark {
+    constructor(options = {}) {
+        this.config = {
+            sparkColor: options.sparkColor || '#24FF72',  // Using your green color
+            sparkSize: options.sparkSize || 12,
+            sparkRadius: options.sparkRadius || 20,
+            sparkCount: options.sparkCount || 8,
+            duration: options.duration || 600,
+            easing: options.easing || 'ease-out',
+            extraScale: options.extraScale || 1.2,
+            ...options
+        };
+        
+        this.canvas = null;
+        this.ctx = null;
+        this.sparks = [];
+        this.animationId = null;
+        this.resizeTimeout = null;
+        
+        this.init();
+    }
+    
+    init() {
+        this.createCanvas();
+        this.bindEvents();
+        this.startAnimation();
+    }
+    
+    createCanvas() {
+        this.canvas = document.createElement('canvas');
+        this.canvas.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 9999;
+            user-select: none;
+        `;
+        
+        document.body.appendChild(this.canvas);
+        this.ctx = this.canvas.getContext('2d');
+        
+        this.resizeCanvas();
+    }
+    
+    resizeCanvas() {
+        const devicePixelRatio = window.devicePixelRatio || 1;
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+        
+        this.canvas.width = width * devicePixelRatio;
+        this.canvas.height = height * devicePixelRatio;
+        this.canvas.style.width = width + 'px';
+        this.canvas.style.height = height + 'px';
+        
+        this.ctx.scale(devicePixelRatio, devicePixelRatio);
+    }
+    
+    bindEvents() {
+        // Handle clicks anywhere on the page
+        document.addEventListener('click', (e) => this.handleClick(e));
+        
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            clearTimeout(this.resizeTimeout);
+            this.resizeTimeout = setTimeout(() => this.resizeCanvas(), 100);
+        });
+    }
+    
+    handleClick(e) {
+        const x = e.clientX;
+        const y = e.clientY;
+        const now = performance.now();
+        
+        // Create sparks radiating outward
+        for (let i = 0; i < this.config.sparkCount; i++) {
+            this.sparks.push({
+                x: x,
+                y: y,
+                angle: (2 * Math.PI * i) / this.config.sparkCount,
+                startTime: now
+            });
+        }
+    }
+    
+    easeFunction(t, easing) {
+        switch (easing) {
+            case 'linear':
+                return t;
+            case 'ease-in':
+                return t * t;
+            case 'ease-in-out':
+                return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+            case 'ease-out':
+            default:
+                return t * (2 - t);
+        }
+    }
+    
+    startAnimation() {
+        const animate = (timestamp) => {
+            this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+            
+            // Filter out completed sparks and draw active ones
+            this.sparks = this.sparks.filter(spark => {
+                const elapsed = timestamp - spark.startTime;
+                
+                if (elapsed >= this.config.duration) {
+                    return false; // Remove completed spark
+                }
+                
+                const progress = elapsed / this.config.duration;
+                const eased = this.easeFunction(progress, this.config.easing);
+                
+                const distance = eased * this.config.sparkRadius * this.config.extraScale;
+                const lineLength = this.config.sparkSize * (1 - eased);
+                const opacity = 1 - eased;
+                
+                // Calculate spark line positions
+                const x1 = spark.x + distance * Math.cos(spark.angle);
+                const y1 = spark.y + distance * Math.sin(spark.angle);
+                const x2 = spark.x + (distance + lineLength) * Math.cos(spark.angle);
+                const y2 = spark.y + (distance + lineLength) * Math.sin(spark.angle);
+                
+                // Draw spark line
+                this.ctx.save();
+                this.ctx.globalAlpha = opacity;
+                this.ctx.strokeStyle = this.config.sparkColor;
+                this.ctx.lineWidth = 2;
+                this.ctx.lineCap = 'round';
+                
+                this.ctx.beginPath();
+                this.ctx.moveTo(x1, y1);
+                this.ctx.lineTo(x2, y2);
+                this.ctx.stroke();
+                
+                this.ctx.restore();
+                
+                return true; // Keep spark active
+            });
+            
+            this.animationId = requestAnimationFrame(animate);
+        };
+        
+        this.animationId = requestAnimationFrame(animate);
+    }
+    
+    destroy() {
+        if (this.animationId) {
+            cancelAnimationFrame(this.animationId);
+        }
+        if (this.canvas && this.canvas.parentNode) {
+            this.canvas.parentNode.removeChild(this.canvas);
+        }
+        document.removeEventListener('click', this.handleClick);
+        window.removeEventListener('resize', this.resizeCanvas);
+    }
+}
+
+// Initialize the spark effect when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    // Wait a bit for the page to settle
+    setTimeout(() => {
+        window.clickSpark = new ClickSpark({
+            sparkColor: '#24FF72',  // Your green color
+            sparkSize: 15,
+            sparkRadius: 25,
+            sparkCount: 8,
+            duration: 700,
+            easing: 'ease-out',
+            extraScale: 1.3
+        });
+    }, 500);
+});
+
 // ===== KEYBOARD SHORTCUTS (Global - outside DOM) =====
 document.addEventListener('keydown', (e) => {
     // ESC key to scroll to top

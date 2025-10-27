@@ -126,7 +126,7 @@ h1, h2, h3 {
 
 /* ===== INTRO SECTION ===== */
 #intro {
-    padding: 100px 0 80px;
+    padding: 100px 0 20px; /* Reduced bottom padding from 80px to 20px */
     background: linear-gradient(135deg, #0a0a0f 0%, #141418 100%);
     position: relative;
     overflow: hidden;
@@ -152,13 +152,14 @@ h1, h2, h3 {
 .intro-content {
     display: flex;
     align-items: center;
-    gap: 160px;
-    padding: 80 0px;
+    gap: 125px;
+    padding: 0px 0px;
     position: relative;
     z-index: 1;
     opacity: 0;
     transform: translateY(30px);
     transition: opacity 0.8s ease, transform 0.8s ease;
+    top: -30px;
 }
 
 .intro-main-title {
@@ -166,17 +167,19 @@ h1, h2, h3 {
 }
 
 .intro-image {
-    flex: 0 0 450px; /*layout space fixed */
+    flex: 0 0 450px; /* Keep the layout space the same */
     position: relative;
-    z-index: -1;
+    z-index: -1; /* Changed from -1 to 1 */
+    top: 50px; /* Adjust this value to push down more or less */
 }
 
 .intro-image img {
-    width: 170%; /* reduce from 150% - try 120%, 125%, 130% */
+    width: 190%; /* Increased from 170% - adjust as needed */
     height: auto;
     display: block;
     max-width: none;
     transition: transform 0.4s ease;
+    transform: translateX(-10%); /* Adjust to center the larger image */
 }
 
 
@@ -184,15 +187,19 @@ h1, h2, h3 {
     position: relative;
     width: 100%;
     height: auto;
+    
+    /* Ensure the container doesn't overflow */
+    overflow: visible;
 }
 
 .portrait-static,
 .portrait-gif {
-    width: 170%;
+    width: 190%; /* Match the new size */
     height: auto;
     display: block;
     max-width: none;
     transition: opacity 0.4s ease-out;
+    transform: translateX(-15%); /* Center the images */
 }
 
 .portrait-gif {
@@ -201,6 +208,20 @@ h1, h2, h3 {
     left: 0;
     opacity: 0;
     pointer-events: none;
+}
+
+/* Image Caption */
+.image-caption {
+    position: absolute;
+    bottom: 100px; /* Distance from bottom of image */
+    left: 20px;   /* Distance from left edge */
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #a0a0aa;
+    line-height: 1.4;
+    z-index: 10;
+    max-width: 300px; /* Prevent text from getting too wide */
 }
 
 .portrait-container:hover .portrait-gif {
@@ -243,13 +264,49 @@ h1, h2, h3 {
     margin-top: 32px;
 }
 
+
+/* ===== VARIABLE PROXIMITY FONT EFFECT ===== */
+
+.variable-proximity {
+    cursor: default;
+    user-select: none;
+    line-height: 1.2;
+    display: inline-block;
+    font-family: 'Roboto', sans-serif; /* Use your existing font */
+}
+
+/* Apply to your highlight line */
+.intro-text p.highlight.variable-proximity {
+    color: var(--green);
+    font-weight: 500;
+    font-size: 1.125rem;
+    margin-top: 32px;
+    letter-spacing: 0.02em;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .intro-text p.highlight.variable-proximity {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .intro-text p.highlight.variable-proximity {
+        font-size: 0.938rem;
+    }
+}
+
 /* ===== SCROLL DOWN MOUSE ===== */
 .scroll-indicator {
     text-align: center;
-    margin-top: 20px;
+    margin-top: 0px; /* Keep this unchanged */
     cursor: pointer;
     animation: float 3s ease-in-out infinite;
-    -webkit-tap-highlight-color: transparent; /* ADD THIS LINE */
+    -webkit-tap-highlight-color: transparent;
+    position: relative;
+    z-index: 10; /* Ensure it stays above the image */
+    top: -40px; /* Adjust position as needed */
 }
 
 @keyframes float {
@@ -350,7 +407,7 @@ h1, h2, h3 {
     background: var(--text-dim);
 }
 
-/* Link scroll indicator to gradient line */
+/* Hover interaction remains the same */
 .scroll-indicator:hover ~ .gradient-line {
     animation: lineFlow 1.5s ease-in-out infinite, linePulse 0.3s ease;
 }
@@ -705,6 +762,7 @@ footer p {
         flex: 0 0 auto;
         max-width: 320px;
         margin: 0 auto;
+        top: 0; /* Reset the push-down on mobile */
     }
     
     .intro-image img {
@@ -718,6 +776,20 @@ footer p {
     
     .intro-text p {
         font-size: 1rem;
+    }
+
+    .intro-image img,
+    .portrait-static,
+    .portrait-gif {
+        width: 100%; /* Reset to normal size on mobile */
+        transform: none; /* Remove centering transform on mobile */
+    }
+
+    .image-caption {
+        bottom: 15px;
+        left: 15px;
+        font-size: 0.8rem;
+        max-width: 180px;
     }
     
     #portfolio {
@@ -786,6 +858,14 @@ footer p {
     
     .intro-image img {
         width: 100%;
+    }
+
+    .image-caption {
+        bottom: 12px;
+        left: 12px;
+        font-size: 0.75rem;
+        max-width: 160px;
+        padding: 6px 10px;
     }
     
     .card-header h2 {
