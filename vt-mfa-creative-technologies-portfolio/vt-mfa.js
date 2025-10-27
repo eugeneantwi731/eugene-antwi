@@ -195,7 +195,8 @@ class VariableProximity {
         };
         
         this.letterElements = [];
-        this.mousePosition = { x: 0, y: 0 };
+        this.mousePosition = { x: -999, y: -999 }; // Start way outside the element
+        this.hasMouseEntered = false; // Track if mouse has entered the element
         this.animationId = null;
         
         console.log('VariableProximity initialized for:', element.textContent);
@@ -245,9 +246,26 @@ class VariableProximity {
                 x: e.clientX - rect.left,
                 y: e.clientY - rect.top
             };
+            
+            // Mark that mouse has entered the element
+            if (!this.hasMouseEntered) {
+                this.hasMouseEntered = true;
+            }
+        };
+        
+        this.handleMouseLeave = () => {
+            // Reset all letters to default weight when mouse leaves
+            this.letterElements.forEach(letterElement => {
+                letterElement.style.fontWeight = this.options.fromWeight;
+                letterElement.style.color = ''; // Reset color to default
+            });
+            
+            // Move mouse position far away to prevent effects
+            this.mousePosition = { x: -999, y: -999 };
         };
         
         document.addEventListener('mousemove', this.handleMouseMove);
+        this.element.addEventListener('mouseleave', this.handleMouseLeave);
     }
     
     calculateDistance(x1, y1, x2, y2) {
@@ -259,6 +277,13 @@ class VariableProximity {
             const containerRect = this.element.getBoundingClientRect();
             
             this.letterElements.forEach(letterElement => {
+                // Only apply effects if mouse has entered the element
+                if (!this.hasMouseEntered) {
+                    letterElement.style.fontWeight = this.options.fromWeight;
+                    letterElement.style.color = '';
+                    return;
+                }
+                
                 const letterRect = letterElement.getBoundingClientRect();
                 const letterCenterX = letterRect.left + letterRect.width / 2 - containerRect.left;
                 const letterCenterY = letterRect.top + letterRect.height / 2 - containerRect.top;
