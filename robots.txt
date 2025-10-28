@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://eugene-antwi.com/sitemap.xml
+Host: https://eugene-antwi.com
