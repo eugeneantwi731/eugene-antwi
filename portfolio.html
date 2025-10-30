@@ -188,55 +188,45 @@
         </nav>
     </header>
 
-    <!-- Portfolio Hero Section -->
-    <section id="portfolio-hero" class="portfolio-hero-section" data-nav-title="Portfolio">
-        <!-- Hero Media Container -->
-        <div class="hero-media-container">
-            <!-- Video Element (Primary) -->
-            <video 
-                id="hero-video" 
-                class="hero-video" 
-                autoplay 
-                muted 
-                loop 
-                playsinline
-                preload="metadata"
-                controlslist="nodownload"
-                disablePictureInPicture
-                poster="works/images/avt Final.png">
-                <source src="works/videos/EUGENE_ANTWI_SHOWREEL_2025_lower.mp4" type="video/mp4">
-                <!-- Fallback for browsers that don't support video -->
-            </video>
-            
-            <!-- Fallback Image (Secondary) -->
-            <img 
-                id="hero-fallback" 
-                class="hero-image-fallback" 
-                src="works/images/portfolio-hero-fallback.jpg" 
-                alt="Eugene Antwi Portfolio Hero">
-        </div>
+<!-- Portfolio Hero Section -->
+<section id="portfolio-hero" class="portfolio-hero-section" data-nav-title="Portfolio">
+    <!-- Hero Media Container -->
+    <div class="hero-media-container">
+        <!-- Video Element -->
+        <video 
+            class="hero-video" 
+            autoplay 
+            muted 
+            loop 
+            playsinline
+            preload="metadata"
+            poster="works/IMAGES/portfolio-hero-poster.jpg">
+            <source src="works/VIDEOS/EUGENE_ANTWI_SHOWREEL_2025_lower.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
 
-        <!-- Hero Content Overlay -->
-        <div class="hero-content-overlay">
-            <div class="hero-content">
-                <h1 class="hero-title">MY PORTFOLIO</h1>
-                <p class="hero-description">Showcasing Technical Artistry, Design and Storytelling</p>
+    <!-- Hero Content Overlay -->
+    <div class="hero-content-overlay">
+        <div class="hero-content">
+            <h1 class="hero-title">MY PORTFOLIO</h1>
+            <p class="hero-description">Showcasing Technical Artistry, Design and Storytelling</p>
+        </div>
+    </div>
+
+    <!-- Mouse Scroll Down Indicator -->
+    <a class="scroll-indicator-link" href="#visual-gallery">
+        <div class="scroll-indicator">
+            <div class="mouse">
+                <div class="wheel"></div>
+            </div>
+            <div class="arrows">
+                <span></span>
+                <span></span>
             </div>
         </div>
-
-        <!-- Mouse Scroll Down Indicator -->
-        <a class="scroll-indicator-link" href="#visual-gallery">
-            <div class="scroll-indicator">
-                <div class="mouse">
-                    <div class="wheel"></div>
-                </div>
-                <div class="arrows">
-                    <span></span>
-                    <span></span>
-                </div>
-            </div>
-        </a>
-    </section>
+    </a>
+</section>
 
     <!-- VISUAL GALLERY SECTION -->
     <section id="visual-gallery" class="visual-gallery-section" data-nav-title="Visual Gallery">
