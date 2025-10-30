@@ -66,6 +66,7 @@
 <link href="works/images/EUGENE-ANTWI-FAVICON .png" rel="icon" type="image/x-icon"/>
 <link rel="stylesheet" href="css/preloader.css">
 <link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/electric-border.css">
 <link rel="stylesheet" href="css/scroll-to-top.css">
 <link rel="stylesheet" href="css/quick-navigation.css">
 <!-- Font Awesome for icons -->
@@ -383,17 +384,17 @@
     <div class="portfolio-container">
         <h2 class="section-title">MY PORTFOLIO</h2>
         
-        <!-- Video Strip Container -->
-        <div class="portfolio-reel-container">
+        <!-- Video Strip Container with Electric Border -->
+        <div class="portfolio-reel-container" id="electric-video">
             <video 
                 class="portfolio-reel" 
                 autoplay 
                 loop 
                 muted 
                 playsinline
-                poster="works/images/portfolio-reel-poster.jpg">
+                poster="works/IMAGES/portfolio-reel-poster.jpg">
                 <source src="works/videos/EUGENE_ANTWI_SHOWREEL_2025_lower.mp4" type="video/mp4">
-                <source src="works/videos/portfolio-reel.webm" type="video/webm">
+                <source src="works/VIDEOS/portfolio-reel.webm" type="video/webm">
                 Your browser does not support the video tag.
             </video>
         </div>
@@ -574,6 +575,20 @@
 <script src="js/glitter-effect.js"></script>
 <script src="js/scroll-to-top.js"></script>
 <script src="js/quick-navigation.js"></script>
+
+<script src="js/electric-border.js"></script>
+    <script>
+    // Initialize electric border on portfolio video
+    document.addEventListener('DOMContentLoaded', function() {
+        initElectricBorder('.portfolio-reel-container', {
+            color: '#3b82f6',  // change color
+            speed: 0.8,
+            chaos: 0.6,
+            thickness: 3,
+            borderRadius: '20px'
+        });
+    });
+    </script>
 
 </body>
 </html>

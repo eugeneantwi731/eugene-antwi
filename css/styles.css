@@ -1,4 +1,5 @@
 
+
 /* __NAVBAR_STACKING_FIX__ */
 #navbar, #navbar.scrolled {
     z-index: 9999 !important; /* Ensure header stays above hero/effects */
