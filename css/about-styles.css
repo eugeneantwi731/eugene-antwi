@@ -395,7 +395,7 @@ p {
     align-items: center;
     background: transparent; /* sits on hero background */
     transition: background-color 0.3s ease;
-    z-index: 1000;
+    z-index: 900;
 }
 
 #navbar.scrolled { background: rgba(0, 0, 0, 0.9); /* solid after scroll */ }

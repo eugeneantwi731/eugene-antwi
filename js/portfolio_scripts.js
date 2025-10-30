@@ -1692,3 +1692,8 @@ function setActiveNavigation() {
 
 // Call it in your existing DOMContentLoaded
 setActiveNavigation();
+
+// ADD THIS if it's not already there
+document.addEventListener('DOMContentLoaded', function() {
+    initializeHeroVideo();
+});
