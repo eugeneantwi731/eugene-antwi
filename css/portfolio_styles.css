@@ -1713,6 +1713,24 @@ body.portfolio-page .fade-in.visible {
     letter-spacing: 0.5px;
 }
 
+.platform i {
+    margin-right: 5px;
+    font-size: 0.9em;
+}
+
+.fa-youtube {
+    color: #ff0000;
+}
+
+.fa-vimeo-v {
+    color: #1ab7ea;
+}
+
+.fa-desktop,
+.fa-play-circle {
+    color: #6e45e2;
+}
+
 /* Responsive - Maintain Uniformity */
 @media (max-width: 1024px) {
     .visual-gallery-grid {
