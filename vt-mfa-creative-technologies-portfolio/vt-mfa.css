@@ -631,7 +631,7 @@ h1, h2, h3 {
 .media-container video {
     width: 100%;
     height: auto;
-    min-height: 500px;
+    max-height: 70vh; /* Maximum 70% of viewport height */
     display: block;
     border: none;
     border-radius: 12px;
@@ -643,6 +643,14 @@ h1, h2, h3 {
 
 video {
     background: var(--bg-darker);
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .media-container iframe,
+    .media-container video {
+        max-height: 50vh;
+    }
 }
 
 /* ===== BACK TO TOP BUTTON ===== */
