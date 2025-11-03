@@ -56,12 +56,32 @@
     <div class="gradient-line"></div>
 </div>
 
+<!-- STICKY PROJECT NAVIGATION (Desktop only) -->
+<nav id="project-nav" class="project-nav">
+    <a href="#photogrammetry" class="nav-dot active" data-index="1">
+        <span class="dot-number">1</span>
+        <span class="dot-tooltip">Photogrammetry Digital Characters</span>
+    </a>
+    <a href="#kente-fashion" class="nav-dot" data-index="2">
+        <span class="dot-number">2</span>
+        <span class="dot-tooltip">Contemporary Kente Fashion</span>
+    </a>
+    <a href="#comeback" class="nav-dot" data-index="3">
+        <span class="dot-number">3</span>
+        <span class="dot-tooltip">The Comeback</span>
+    </a>
+    <a href="#akofena" class="nav-dot" data-index="4">
+        <span class="dot-number">4</span>
+        <span class="dot-tooltip">Akofena</span>
+    </a>
+</nav>
+
 <!-- PORTFOLIO SECTION -->
     <section id="portfolio">
         <div class="container">
             
             <!-- PROJECT 1 - Photogrammetry Digital Characters -->
-            <article class="project-card">
+            <article class="project-card" id="photogrammetry">
                 <div class="card-header">
                     <h2 class="gradient-title">Photogrammetry Digital Characters</h2>
                     <span class="project-number">1/4</span>
@@ -71,7 +91,7 @@
                     <div class="project-details">
                         <p class="project-meta">2025 | Agisoft Metashape, Wrap3D, Cinema 4D, Blender, DAZ Studio</p>
                         <p class="project-description">
-                            I'm building a digital library of authentic Ghanaian characters for animation and interactive media because they don't exist in commercial 3D libraries. Using photogrammetry, I document volunteers from different ethnic groups, creating production-ready 3D assets that animators can use to tell African stories with actual African faces.
+                            A photogrammetry-based system for creating authentic Ghanaian 3D characters. I document volunteers from diverse backgrounds, generating production-ready assets for animation and interactive media.
                         </p>
                     </div>
                     
@@ -82,7 +102,7 @@
                     
                     <div class="project-details">
                         <p class="project-description">
-                            I work with volunteers from different regions across Ghana, capturing 120+ photographs per person using controlled lighting. This systematic approach generates the data photogrammetry software needs to build accurate facial geometry.
+                            I work with volunteers from diverse backgrounds, capturing 120+ photographs per person using controlled lighting. This systematic approach generates the data photogrammetry software needs to build accurate facial geometry.
                         </p>
                     </div>
                     
@@ -120,17 +140,76 @@
                     </div>
                 </div>
             </article>
-            
-            <!-- PROJECT 2 - The Comeback PowerPoint Animation -->
-            <article class="project-card">
+
+            <!-- PROJECT 2 - Contemporary Kente Fashion -->
+            <article class="project-card" id="kente-fashion">
                 <div class="card-header">
-                    <h2 class="gradient-title">The Comeback | PowerPoint Animation</h2>
+                    <h2 class="gradient-title">Contemporary Kente Fashion</h2>
                     <span class="project-number">2/4</span>
                 </div>
                 
                 <div class="card-content layout-single">
                     <div class="project-details">
-                        <p class="project-meta">2024 | Microsoft PowerPoint, Freepik Assets</p>
+                        <p class="project-meta">2024-2025 | Marvelous Designer, Cinema 4D, V-Ray</p>
+                        <p class="project-description">
+                            Three digital garments exploring contemporary applications of traditional Ghanaian kente textiles. I collaborated with a fashion design student on the wedding gown concept, while developing the other two designs independently.
+                        </p>
+                    </div>
+                    
+                    <div class="media-container">
+                        <!-- VIDEO 1: Wedding Gown -->
+                        <video controls preload="metadata" loading="lazy" loop>
+                            <source src="./videos/wedding-gown.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    
+                    <div class="project-details">
+                        <p class="project-description">
+                            Kente-embellished wedding dress combining ornamental bodice detailing with mixed traditional and modern fabric. Built in Marvelous Designer and rendered on one of my photogrammetry characters to test how the design works on authentic Ghanaian body proportions.
+                        </p>
+                    </div>
+                    
+                    <div class="media-container">
+                        <!-- VIDEO 2: Male Kaftan -->
+                        <video controls preload="metadata" loading="lazy" loop>
+                            <source src="./videos/dashiki-kaftan.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    
+                    <div class="project-details">
+                        <p class="project-description">
+                            Traditional dashiki kaftan with knotted pattern details, exploring how ceremonial menswear translates into digital garment simulation.
+                        </p>
+                    </div>
+                    
+                    <div class="media-container">
+                        <!-- VIDEO 3: Modern Kente Fusion Dress -->
+                        <video controls preload="metadata" loading="lazy" loop>
+                            <source src="./videos/modern-dress.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    
+                    <div class="project-details">
+                        <p class="project-description">
+                            Contemporary interpretation placing kente patterns within modern silhouettes, investigating new contexts for traditional textiles beyond conventional applications.
+                        </p>
+                    </div>
+                </div>
+            </article>
+            
+            <!-- PROJECT 3 - The Comeback PowerPoint Animation -->
+            <article class="project-card" id="comeback">
+                <div class="card-header">
+                    <h2 class="gradient-title">The Comeback | PowerPoint Animation</h2>
+                    <span class="project-number">3/4</span>
+                </div>
+                
+                <div class="card-content layout-single">
+                    <div class="project-details">
+                        <p class="project-meta">2025 | Microsoft PowerPoint, Freepik Assets</p>
                         <p class="project-description">
                             I noticed PowerPoint had animation features nobody uses for anything beyond slide transitions. I wanted to see if I could build a complete film with them.
                         </p>
@@ -155,45 +234,9 @@
                 </div>
             </article>
             
-            <!-- PROJECT 3 - PBR Auto Mapper -->
-            <article class="project-card">
-                <div class="card-header">
-                    <h2 class="gradient-title">PBR Auto Mapper</h2>
-                    <span class="project-number">3/4</span>
-                </div>
-                
-                <div class="card-content layout-single">
-                    <div class="project-details">
-                        <p class="project-meta">2025 | Cinema 4D, Python</p>
-                        <p class="project-description">
-                            As a look developer, I map PBR textures in Cinema 4D constantly - basecolor, normal, roughness, metalness, displacement. Doing this manually for every material wastes hours on repetitive technical work instead of creative decisions.
-                        </p>
-                    </div>
-                    
-                    <div class="media-container">
-                        <!-- VIDEO: PBR Auto Mapper demonstration - 30 seconds -->
-                        <video controls preload="metadata" loading="lazy">
-                            <source src="./videos/pbr-auto-mapper-demo.mp4" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
-                    </div>
-                    
-                    <div class="project-details">
-                        <p class="project-description">
-                            This Cinema 4D plugin automates the texture mapping process. I point it at a folder containing PBR texture sets, and it scans the files, groups them by naming patterns (like "wood_basecolor.png" and "wood_roughness.png"), and presents checkboxes for each material group. After selecting which materials to create, the plugin generates Cinema 4D materials with all texture channels properly mapped and configured for physically-based rendering workflows.
-                        </p>
-                        <p class="project-description">
-                            The plugin switches materials from Cinema 4D's default Blinn reflection to GGX distribution, ensuring textures render correctly in modern PBR pipelines. It handles the technical setup automatically so I can focus on lighting and compositional decisions rather than manual channel assignment.
-                        </p>
-                        <p class="project-description">
-                            I built this after mapping hundreds of materials for the photogrammetry characters and Akofena project. The plugin saves approximately 3-5 minutes per material, which adds up significantly across production work.
-                        </p>
-                    </div>
-                </div>
-            </article>
-            
+
             <!-- PROJECT 4 - Akofena -->
-            <article class="project-card">
+            <article class="project-card" id="akofena">
                 <div class="card-header">
                     <h2 class="gradient-title">Akofena</h2>
                     <span class="project-number">4/4</span>
@@ -201,28 +244,14 @@
                 
                 <div class="card-content layout-single">
                     <div class="project-details">
-                        <p class="project-meta">2024 | DAZ Studio, Cascadeur, Cinema 4D, V-Ray, After Effects</p>
+                        <p class="project-meta">2025 | Cinema 4D, V-Ray, Blender, After Effects</p>
                         <p class="project-description">
-                            I handled look development and compositing for Akofena, a pre-colonial Ashanti narrative animation, while supervising six final-year students through their thesis project. My role focused on establishing the visual approach and executing the technical pipeline for bringing these historical characters to life.
+                            As look development lead and co-supervisor for Akofena, I established the lighting and shading pipeline that unified six students' work into a cohesive visual language. I created several characters, performed motion reference and voice work for the antagonist, and developed the compositing approach. The project investigated how pre-colonial Ashanti narratives could be visualized through contemporary CG techniques while building reusable assets for our emerging character library.
                         </p>
                     </div>
                     
                     <div class="media-container">
-                        <!-- VIDEO 1: Lip-sync split screen - 20 seconds -->
-                        <video controls preload="metadata" loading="lazy">
-                            <source src="./videos/akofena-lipsync.mp4" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
-                    </div>
-                    
-                    <div class="project-details">
-                        <p class="project-description">
-                            I provided voice acting for one of the characters. This split-screen shows the recorded performance alongside the final animated result, demonstrating how vocal performance translates into character animation.
-                        </p>
-                    </div>
-                    
-                    <div class="media-container">
-                        <!-- VIDEO 2: Character acting reference - ? seconds -->
+                        <!-- VIDEO 1: Character acting reference -->
                         <video controls preload="metadata" loading="lazy">
                             <source src="../works/videos/akofena-acting-reference.mp4" type="video/mp4">
                             Your browser does not support the video tag.
@@ -231,13 +260,13 @@
                     
                     <div class="project-details">
                         <p class="project-description">
-                            I performed the physical acting for the protagonist character, using my body mechanics as reference for the animation. This side-by-side comparison shows my live-action performance next to the final animation, which combined auto-physics simulation with manual keyframe animation. Understanding how real human movement translates into digital performance informed the animation approach.
+                            I performed the physical acting for the protagonist character, using my body mechanics as reference for the animation. This side-by-side comparison shows my live-action performance next to the final animation, which combined auto-physics simulation with manual keyframe animation.
                         </p>
                     </div>
                     
                     <div class="media-container">
-                        <!-- VIDEO 3: Lighting + poster compositing - 24 seconds -->
-                        <video controls preload="metadata" loading="lazy" poster="../works/images/video-thumbnails/akofena-poster.png">
+                        <!-- VIDEO 2: Lighting + poster compositing - 24 seconds -->
+                        <video controls preload="metadata" loading="lazy">
                             <source src="../works/videos/akofena-poster-compositing-breakdown.mp4" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>
@@ -245,15 +274,22 @@
                     
                     <div class="project-details">
                         <p class="project-description">
-                            This shows my lighting and compositing process. I developed the lighting setup for each character using multiple light passes in V-Ray, then imported these passes into After Effects to composite the final promotional poster. The lighting needed to feel authentic to pre-colonial Ashanti aesthetics while maintaining production quality.
+                            This shows my lighting and compositing process. I developed the lighting setup for each character using multiple light passes in V-Ray, then imported these passes into After Effects to composite the final promotional poster.
                         </p>
+                    </div>
+                    
+                    <div class="media-container">
+                        <!-- IMAGE: Character lineup -->
+                        <img src="./images/akofena-characters.png" alt="Akofena Characters" loading="lazy">
+                    </div>
+                    
+                    <div class="project-details">
                         <p class="project-description">
-                            Supervising this project meant balancing teaching production fundamentals while maintaining visual consistency across six students' contributions through a unified lighting and compositing approach.
+                            Characters I created and supervised for the project. Supervising this project meant balancing teaching production fundamentals while maintaining visual consistency across six students' contributions through a unified lighting and compositing approach.
                         </p>
                     </div>
                 </div>
             </article>
-            
         </div>
     </section>
             

@@ -24,6 +24,54 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // ===== STICKY PROJECT NAVIGATION =====
+    const projectNav = document.getElementById('project-nav');
+    
+    if (projectNav) {
+        const navDots = document.querySelectorAll('.nav-dot');
+        const projects = document.querySelectorAll('.project-card');
+        const intro = document.getElementById('intro');
+
+        // Show/hide navigation based on scroll
+        function updateNavigation() {
+            const introBottom = intro.offsetHeight;
+            
+            // Show nav after intro
+            if (window.pageYOffset > introBottom) {
+                projectNav.classList.add('visible');
+            } else {
+                projectNav.classList.remove('visible');
+            }
+
+            // Update active state based on scroll position
+            let currentProject = null;
+            
+            projects.forEach(project => {
+                const projectTop = project.offsetTop - 200;
+                const projectBottom = projectTop + project.offsetHeight;
+                
+                if (window.pageYOffset >= projectTop && window.pageYOffset < projectBottom) {
+                    currentProject = project.getAttribute('id');
+                }
+            });
+
+            // Update active class
+            navDots.forEach(dot => {
+                dot.classList.remove('active');
+                const href = dot.getAttribute('href').substring(1); // Remove #
+                if (href === currentProject) {
+                    dot.classList.add('active');
+                }
+            });
+        }
+
+        // Run on scroll
+        window.addEventListener('scroll', updateNavigation);
+        
+        // Run once on load
+        updateNavigation();
+    }
+
     // ===== BACK TO TOP BUTTON =====
     const backToTopBtn = document.getElementById('back-to-top');
     const progressCircle = document.querySelector('.progress-ring__circle');
@@ -176,6 +224,76 @@ document.addEventListener('DOMContentLoaded', () => {
     const videos = document.querySelectorAll('video');
     videos.forEach(video => {
         videoObserver.observe(video);
+    });
+});
+
+
+
+// ===== LIGHTBOX FOR IMAGES AND VIDEOS =====
+document.addEventListener('DOMContentLoaded', () => {
+    // Create lightbox HTML
+    const lightbox = document.createElement('div');
+    lightbox.id = 'lightbox';
+    lightbox.innerHTML = `
+        <span class="lightbox-close">&times;</span>
+        <div class="lightbox-content">
+            <img class="lightbox-image" src="" alt="">
+            <video class="lightbox-video" controls>
+                <source src="" type="video/mp4">
+            </video>
+        </div>
+    `;
+    document.body.appendChild(lightbox);
+
+    const lightboxImg = lightbox.querySelector('.lightbox-image');
+    const lightboxVideo = lightbox.querySelector('.lightbox-video');
+    const closeBtn = lightbox.querySelector('.lightbox-close');
+
+    // Add click handlers to all images in media containers
+    document.querySelectorAll('.media-container img').forEach(img => {
+        img.style.cursor = 'pointer';
+        img.addEventListener('click', () => {
+            lightboxImg.src = img.src;
+            lightboxImg.alt = img.alt;
+            lightboxImg.style.display = 'block';
+            lightboxVideo.style.display = 'none';
+            lightbox.classList.add('active');
+        });
+    });
+
+    // Add click handlers to all videos in media containers
+    document.querySelectorAll('.media-container video').forEach(video => {
+        video.style.cursor = 'pointer';
+        video.addEventListener('click', () => {
+            const source = video.querySelector('source');
+            lightboxVideo.querySelector('source').src = source.src;
+            lightboxVideo.load();
+            lightboxVideo.style.display = 'block';
+            lightboxImg.style.display = 'none';
+            lightbox.classList.add('active');
+        });
+    });
+
+    // Close lightbox when clicking close button
+    closeBtn.addEventListener('click', () => {
+        lightbox.classList.remove('active');
+        lightboxVideo.pause();
+    });
+
+    // Close lightbox when clicking outside content
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) {
+            lightbox.classList.remove('active');
+            lightboxVideo.pause();
+        }
+    });
+
+    // Close lightbox with Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+            lightbox.classList.remove('active');
+            lightboxVideo.pause();
+        }
     });
 });
 
