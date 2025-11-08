@@ -646,9 +646,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // ===== KEYBOARD SHORTCUTS (Global - outside DOM) =====
 document.addEventListener('keydown', (e) => {
-    // ESC key to scroll to top
+    // ESC key to scroll to top - but only if lightbox is not active
     if (e.key === 'Escape' && window.pageYOffset > 400) {
-        window.scrollTo({top: 0, behavior: 'smooth'});
+        const lightbox = document.getElementById('lightbox');
+        if (lightbox && !lightbox.classList.contains('active')) {
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
     }
 });
 
