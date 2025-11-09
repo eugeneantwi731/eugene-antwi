@@ -332,28 +332,40 @@
     <!-- External JavaScript -->
     <script src="./vt-mfa.js"></script>
 
-    <!-- ID Fetch -->
+    <!-- Smooth Scroll to Hash Script -->
     <script>
-    window.addEventListener('load', () => {
-      const hash = window.location.hash;
-      if (hash) {
+    window.addEventListener('DOMContentLoaded', () => {
+    function scrollToHash(hash) {
+        if (!hash) return;
         const el = document.querySelector(hash);
         if (el) {
-          el.scrollIntoView({ behavior: 'smooth' });
-        } else {
-          // retry after lazy load finishes
-          const observer = new MutationObserver(() => {
-            const target = document.querySelector(hash);
-            if (target) {
-              target.scrollIntoView({ behavior: 'smooth' });
-              observer.disconnect();
-            }
-          });
-          observer.observe(document.body, { childList: true, subtree: true });
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        return true;
         }
-      }
+        return false;
+    }
+
+    const hash = window.location.hash;
+
+    if (hash) {
+        // Immediate attempt
+        if (!scrollToHash(hash)) {
+        // Retry until it appears (useful for lazy-loaded content)
+        const observer = new MutationObserver(() => {
+            if (scrollToHash(hash)) observer.disconnect();
+        });
+        observer.observe(document.body, { childList: true, subtree: true });
+
+        // Safety timeout after 10 seconds
+        setTimeout(() => observer.disconnect(), 10000);
+        }
+    }
+
+    // React to hash changes too (e.g. user clicks # links)
+    window.addEventListener('hashchange', () => scrollToHash(window.location.hash));
     });
-  </script>
+    </script>
+
     
 </body>
 </html>
