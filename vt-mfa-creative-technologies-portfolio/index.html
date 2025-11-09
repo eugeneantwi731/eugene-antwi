@@ -331,6 +331,29 @@
     
     <!-- External JavaScript -->
     <script src="./vt-mfa.js"></script>
+
+    <!-- ID Fetch -->
+    <script>
+    window.addEventListener('load', () => {
+      const hash = window.location.hash;
+      if (hash) {
+        const el = document.querySelector(hash);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth' });
+        } else {
+          // retry after lazy load finishes
+          const observer = new MutationObserver(() => {
+            const target = document.querySelector(hash);
+            if (target) {
+              target.scrollIntoView({ behavior: 'smooth' });
+              observer.disconnect();
+            }
+          });
+          observer.observe(document.body, { childList: true, subtree: true });
+        }
+      }
+    });
+  </script>
     
 </body>
 </html>
