@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eugene Antwi - Animation & Technical Artist</title>
+    <!-- Fallback favicon (keep your path) -->
+    <link rel="icon" href="../works/images/eugene-antwi-favicon.png" type="image/x-icon">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px 60px;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: #a78bfa;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            font-weight: 300;
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            color: #b8b8d1;
+            max-width: 700px;
+            margin: 0 auto 20px;
+            line-height: 1.6;
+        }
+
+        .intro-text {
+            font-size: 1rem;
+            color: #9090aa;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        .showreels-section {
+            padding: 40px 0;
+        }
+
+        .showreels-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .reel-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(167, 139, 250, 0.2);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .reel-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(167, 139, 250, 0.5);
+        }
+
+        .reel-header {
+            padding: 25px;
+            background: rgba(167, 139, 250, 0.1);
+        }
+
+        .reel-header h2 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #a78bfa;
+        }
+
+        .reel-header p {
+            color: #b8b8d1;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+        }
+
+        .video-container iframe,
+        .video-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .cta-section {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 18px 50px;
+            background: linear-gradient(135deg, #a78bfa 0%, #8b5cf6 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(167, 139, 250, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(167, 139, 250, 0.5);
+            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: #9090aa;
+            border-top: 1px solid rgba(167, 139, 250, 0.1);
+            margin-top: 40px;
+        }
+
+        @media (max-width: 1100px) {
+            .showreels-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .tagline {
+                font-size: 1rem;
+            }
+
+            .showreels-grid {
+                gap: 30px;
+            }
+
+            .reel-header h2 {
+                font-size: 1.3rem;
+            }
+
+            .cta-button {
+                padding: 15px 40px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">EUGENE ANTWI</div>
+            <h1>Technical Artist & Animator</h1>
+            <p class="tagline">
+                Specializing in Look Development, Compositing, Character/Product Animation & Motion Graphics
+            </p>
+            <p class="intro-text">
+                Watch my showreels below to see the range of work I create from technical look development and product visualization to character-driven animation. Each reel showcases different aspects of my expertise.
+            </p>
+        </header>
+
+        <section class="showreels-section">
+            <div class="showreels-grid">
+                <!-- Diverse Reel -->
+                <div class="reel-card">
+                    <div class="reel-header">
+                        <h2>Look Development & Motion Graphics</h2>
+                        <p>Technical artistry showcasing look development, compositing, motion graphics, and product animation. This reel demonstrates lighting workflows, visual integration, and commercial animation techniques.</p>
+                    </div>
+                    <div class="video-container">
+                        <iframe 
+                            src="https://www.youtube.com/embed/TAik-FxlvDw?si=sFU7tMIOz-7_Huix" 
+                            title="YouTube video player"
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                            referrerpolicy="strict-origin-when-cross-origin"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+
+                <!-- Character Animation Reel -->
+                <div class="reel-card">
+                    <div class="reel-header">
+                        <h2>Character Animation</h2>
+                        <p>Character-driven animation work featuring performance animation, product animation, and storytelling. This reel highlights character design, motion principles, and narrative animation skills.</p>
+                    </div>
+                    <div class="video-container">
+                        <!-- Replace 'YOUR_VIDEO_PATH_HERE.mp4' with your actual video file path -->
+                        <video controls poster="../works/images/video-thumbnails/2025_sreel_lowbit.mp4_cover.png">
+                            <source src="../works/videos/2025_sreel_lowbit.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <a href="https://eugene-antwi.com/portfolio" class="cta-button">View Full Portfolio</a>
+        </section>
+
+        <footer>
+            <p>&copy; 2025 Eugene Ampadu Antwi. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>
