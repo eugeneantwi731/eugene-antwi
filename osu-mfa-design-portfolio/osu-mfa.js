@@ -1,9 +1,9 @@
-// ===== VT MFA CREATIVE TECHNOLOGIES PORTFOLIO SCRIPT =====
-// FILENAME: vt-mfa.js
+// ===== OSU MFA DESIGN PORTFOLIO SCRIPT =====
+// FILENAME: osu-mfa.js
 
 // ===== INITIALIZE ON DOM LOAD =====
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('VT MFA Portfolio loaded successfully');
+    console.log('OSU MFA Portfolio loaded successfully');
     
     // ===== PORTRAIT HOVER ANIMATION =====
     const portraitContainer = document.querySelector('.portrait-container');
@@ -300,7 +300,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // ===== VARIABLE PROXIMITY EFFECT =====
-// Add this to your vt-mfa.js file
 
 class VariableProximity {
     constructor(element, options = {}) {
@@ -465,7 +464,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ===== CLICK SPARK EFFECT =====
-// Add this to your vt-mfa.js file
 
 class ClickSpark {
     constructor(options = {}) {
