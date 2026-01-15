@@ -250,7 +250,7 @@ class LightRaysWebGL {
                 const touch = e.touches[0];
                 this.mouse.x = (touch.clientX - rect.left) / rect.width;
                 this.mouse.y = (touch.clientY - rect.top) / rect.height;
-            });
+            }, { passive: true });
         }
     }
 
@@ -410,20 +410,44 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             };
 
-            // Click to change theme
+            // Track if user is trying to scroll
+            let touchStartY = 0;
+            let touchMoved = false;
+
+            // FIXED: Touch handling that allows both color change AND scrolling
+            heroSection.addEventListener('touchstart', (e) => {
+                // Don't trigger if touching the scroll indicator
+                if (e.target.closest('.scroll-indicator')) return;
+                
+                // Record touch start position
+                touchStartY = e.touches[0].clientY;
+                touchMoved = false;
+            }, { passive: true });
+
+            heroSection.addEventListener('touchmove', (e) => {
+                // Track if user moved their finger (scrolling)
+                const touchCurrentY = e.touches[0].clientY;
+                if (Math.abs(touchCurrentY - touchStartY) > 10) {
+                    touchMoved = true;
+                }
+            }, { passive: true });
+
+            heroSection.addEventListener('touchend', (e) => {
+                // Don't trigger if touching the scroll indicator
+                if (e.target.closest('.scroll-indicator')) return;
+                
+                // Only change color if user tapped (didn't scroll)
+                if (!touchMoved) {
+                    changeTheme();
+                }
+            }, { passive: true });
+
+            // Click to change theme (desktop)
             heroSection.addEventListener('click', (e) => {
                 // Don't trigger if clicking the scroll indicator
                 if (e.target.closest('.scroll-indicator')) return;
                 changeTheme();
             });
-            
-            // Touch support for mobile
-            heroSection.addEventListener('touchstart', (e) => {
-                // Don't trigger if touching the scroll indicator
-                if (e.target.closest('.scroll-indicator')) return;
-                e.preventDefault();
-                changeTheme();
-            }, { passive: false });
         }
     } else {
         // NOT HOME PAGE - Apply saved theme if exists
@@ -455,10 +479,10 @@ document.addEventListener('DOMContentLoaded', () => {
         scrollDownBtn.addEventListener('click', (e) => {
             e.stopPropagation(); // Prevent triggering hero color change
             
-            const introCardsSection = document.getElementById('intro-cards');
-            if (introCardsSection) {
+            const introSection = document.getElementById('intro');
+            if (introSection) {
                 const yOffset = -20; // 20px offset from top
-                const y = introCardsSection.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                const y = introSection.getBoundingClientRect().top + window.pageYOffset + yOffset;
                 window.scrollTo({top: y, behavior: 'smooth'});
             }
             
