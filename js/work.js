@@ -268,7 +268,6 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Render projects and setup UI (these don't need to wait)
     renderProjects();
-    setupFilters();
     setupLightbox();
     setupShowreel();
     
@@ -283,6 +282,9 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             renderMasonryGallery();
         }
+        
+        // Setup filters AFTER masonry is rendered
+        setupFilters();
     });
     
     // Fallback: If no preloader event after 50ms, start animations immediately
@@ -295,6 +297,9 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 renderMasonryGallery();
             }
+            
+            // Setup filters AFTER masonry is rendered
+            setupFilters();
         }
     }, 50); // Very short timeout - almost instant
 });
