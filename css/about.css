@@ -717,19 +717,34 @@ a.contact-value:hover {
         padding: 80px 20px;
     }
     
+    /* FIX: Reset container padding/margin on mobile */
+    .contact-section .container {
+        padding: 0;
+        margin: 0 auto;
+        max-width: 100%;
+    }
+    
     .section-title {
         font-size: 2.5rem;
         margin-bottom: 40px;
     }
     
+    /* FIX: Ensure grid is properly centered */
     .contact-grid {
         grid-template-columns: 1fr;
         gap: 30px;
+        margin: 0 auto 80px;
+        padding: 0;
+        max-width: 100%;
     }
     
+    /* FIX: Remove any inherited margins */
     .contact-info-container,
     .contact-form-container {
         padding: 30px;
+        margin: 0;
+        width: 100%;
+        box-sizing: border-box;
     }
     
     .contact-info-container h3,
@@ -821,13 +836,29 @@ a.contact-value:hover {
         padding: 70px 15px;
     }
     
+    /* FIX: Extra small screen alignment */
+    .contact-section .container {
+        padding: 0;
+        margin: 0 auto;
+        max-width: 100%;
+    }
+    
     .section-title {
         font-size: 2rem;
+    }
+    
+    .contact-grid {
+        margin: 0 auto 80px;
+        padding: 0;
+        max-width: 100%;
     }
     
     .contact-info-container,
     .contact-form-container {
         padding: 25px;
+        margin: 0;
+        width: 100%;
+        box-sizing: border-box;
     }
     
     .contact-item {

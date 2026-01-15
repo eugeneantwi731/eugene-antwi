@@ -66,6 +66,7 @@
     </script>
     
     <!-- CSS -->
+    <link rel="stylesheet" href="./css/preloader.css">
     <link rel="stylesheet" href="./css/styles.css">
     <link rel="stylesheet" href="./css/navbar.css">
     <link rel="stylesheet" href="./css/cv.css">
@@ -79,6 +80,24 @@
 </head>
 
 <body>
+
+    <body class="preloader-active">
+    
+    <!-- PRELOADER -->
+    <div class="site-preloader" id="sitePreloader">
+        <div class="preloader-logo">
+            <img src="./images/eugene-antwi-logo-nav.svg" alt="Eugene Antwi Logo">
+        </div>
+        
+        <div class="preloader-leds">
+            <div class="led-indicator led-green" data-led="1"></div>
+            <div class="led-indicator led-purple" data-led="2"></div>
+            <div class="led-indicator led-blue" data-led="3"></div>
+            <div class="led-indicator led-cyan" data-led="4"></div>
+        </div>
+    </div>
+    
+    <!-- Rest of your page content... -->
     
     <!-- HEADER/NAVBAR -->
     <header class="site-header">
@@ -546,6 +565,7 @@
     </footer>
 
     <!-- JavaScript -->
+    <script src="./js/preloader.js"></script>
     <script src="./js/navbar.js"></script>
     <script src="./js/lightrays.js"></script>
     <script src="./js/scroll-to-top.js"></script>

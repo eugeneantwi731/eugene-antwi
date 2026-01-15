@@ -1,0 +1,250 @@
+/* ===== PRELOADER.CSS ===== */
+        
+        /* Preloader Overlay */
+        .site-preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0a0a0f 0%, #1a1a24 100%);
+            z-index: 99999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+        
+        .site-preloader.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+        
+        /* Logo Container */
+        .preloader-logo {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: logoFloat 2s ease-in-out infinite, logoPulse 1.5s ease-in-out infinite;
+        }
+        
+        .preloader-logo svg,
+        .preloader-logo img {
+            width: 100%;
+            height: 100%;
+        }
+        
+        /* Float Animation */
+        @keyframes logoFloat {
+            0%, 100% {
+                transform: translateY(0) scale(1);
+            }
+            50% {
+                transform: translateY(-10px) scale(1.05);
+            }
+        }
+        
+        /* Transparency Pulse Animation */
+        @keyframes logoPulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.6;
+            }
+        }
+        
+        /* LED Indicators Container */
+        .preloader-leds {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+        
+        /* Individual LED */
+        .led-indicator {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        /* LED Active State */
+        .led-indicator.active {
+            box-shadow: 0 0 20px currentColor, 0 0 40px currentColor;
+            border-color: currentColor;
+            background: currentColor;
+        }
+        
+        /* LED Colors */
+        .led-green {
+            color: #24FF72;
+        }
+        
+        .led-purple {
+            color: #8B5CF6;
+        }
+        
+        .led-blue {
+            color: #4A9EFF;
+        }
+        
+        .led-cyan {
+            color: #00D9FF;
+        }
+        
+        /* Glow Ring Animation */
+        .led-indicator.active::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 2px solid currentColor;
+            opacity: 0;
+            animation: ledPulse 0.6s ease-out;
+        }
+        
+        @keyframes ledPulse {
+            0% {
+                width: 16px;
+                height: 16px;
+                opacity: 1;
+            }
+            100% {
+                width: 40px;
+                height: 40px;
+                opacity: 0;
+            }
+        }
+        
+        /* Page Content - INITIALLY HIDDEN */
+        body.preloader-active .page-content {
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        /* Page Content Visible After Preloader */
+        .page-content {
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.8s ease 0.2s, visibility 0s 0.2s;
+        }
+        
+        .page-content.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* Prevent scrolling during preloader */
+        body.preloader-active {
+            overflow: hidden !important;
+            height: 100vh;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .preloader-logo {
+                width: 100px;
+                height: 100px;
+                margin-bottom: 50px;
+            }
+            
+            .preloader-leds {
+                gap: 16px;
+            }
+            
+            .led-indicator {
+                width: 14px;
+                height: 14px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .preloader-logo {
+                width: 80px;
+                height: 80px;
+                margin-bottom: 40px;
+            }
+            
+            .preloader-leds {
+                gap: 12px;
+            }
+            
+            .led-indicator {
+                width: 12px;
+                height: 12px;
+            }
+        }
+        
+        /* ===== DEMO PAGE STYLES ===== */
+        /* REMOVED h1 gradient style that was affecting all pages */
+        
+        .demo-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 100px 20px;
+            text-align: center;
+        }
+        
+        /* Only apply gradient to h1 inside demo-container */
+        .demo-container h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #24FF72 0%, #00D9FF 50%, #8B5CF6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .demo-container p {
+            font-size: 1.2rem;
+            color: #a0a0aa;
+            margin-bottom: 40px;
+        }
+        
+        .demo-button {
+            display: inline-block;
+            padding: 16px 48px;
+            background: linear-gradient(135deg, #8B5CF6 0%, #4A9EFF 40%, #00D9FF 70%, #24FF72 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: transform 0.3s ease;
+        }
+        
+        .demo-button:hover {
+            transform: translateY(-4px);
+        }
+        
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 60px;
+        }
+        
+        .demo-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 30px;
+            transition: transform 0.3s ease;
+        }
+        
+        .demo-card:hover {
+            transform: translateY(-5px);
+            border-color: #24FF72;
+        }
