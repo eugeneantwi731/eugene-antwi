@@ -1,76 +1,88 @@
-/* =====================================================
-   SCROLL-TO-TOP FUNCTIONALITY
-   Universal JavaScript for all portfolio pages
-===================================================== */
+// ===== SCROLL TO TOP BUTTON WITH PROGRESS INDICATOR =====
 
-document.addEventListener('DOMContentLoaded', function () {
-  const scrollToTopBtn = document.getElementById('scrollToTop');
-  const progressCircle = document.querySelector('.progress-circle-fill');
-
-  function getRadius() {
-    if (window.innerWidth <= 480) return 16;
-    if (window.innerWidth <= 768) return 18;
-    return 20;
-  }
-
-  let radius = getRadius();
-  let circumference = 2 * Math.PI * radius;
-
-  // Set initial circle
-  progressCircle.style.strokeDasharray = circumference;
-  progressCircle.style.strokeDashoffset = circumference;
-
-  function handleScroll() {
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    const windowHeight = window.innerHeight;
-    const documentHeight = document.documentElement.scrollHeight;
-    const scrollableHeight = documentHeight - windowHeight;
-
-    const scrollPercentage = (scrollTop / scrollableHeight) * 100;
-
-    // Show/hide button
-    if (scrollTop > 300) {
-      scrollToTopBtn.classList.add('visible');
-    } else {
-      scrollToTopBtn.classList.remove('visible', 'near-bottom');
+document.addEventListener('DOMContentLoaded', () => {
+    const backToTopBtn = document.getElementById('back-to-top');
+    const progressCircle = document.querySelector('.progress-ring__circle');
+    
+    if (!backToTopBtn || !progressCircle) {
+        console.warn('Scroll-to-top button or progress circle not found');
+        return;
     }
-
-    // Update progress circle
-    const offset = circumference - (scrollPercentage / 100) * circumference;
-    progressCircle.style.strokeDashoffset = offset;
-
-    // Pulse when near bottom (90%+)
-    if (scrollPercentage >= 90) {
-      scrollToTopBtn.classList.add('near-bottom');
-    } else {
-      scrollToTopBtn.classList.remove('near-bottom');
+    
+    // Calculate circle circumference (radius is 30)
+    const radius = 30;
+    const circumference = 2 * Math.PI * radius;
+    
+    // Set up the circle
+    progressCircle.style.strokeDasharray = `${circumference} ${circumference}`;
+    progressCircle.style.strokeDashoffset = circumference;
+    
+    // Update scroll progress and button visibility
+    function updateScrollProgress() {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrollPercent = scrollTop / docHeight;
+        
+        // Update circle progress
+        const offset = circumference - (scrollPercent * circumference);
+        progressCircle.style.strokeDashoffset = offset;
+        
+        // Show/hide button based on scroll position
+        if (scrollTop > 400) {
+            backToTopBtn.classList.add('visible');
+        } else {
+            backToTopBtn.classList.remove('visible');
+        }
     }
-  }
-
-  // Smooth scroll to top
-  function scrollToTop() {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
-  // Event listeners
-  window.addEventListener('scroll', handleScroll, { passive: true });
-  scrollToTopBtn.addEventListener('click', scrollToTop);
-
-  // Handle window resize
-  window.addEventListener('resize', function () {
-    radius = getRadius();
-    circumference = 2 * Math.PI * radius;
-    progressCircle.style.strokeDasharray = circumference;
-
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    const windowHeight = window.innerHeight;
-    const documentHeight = document.documentElement.scrollHeight;
-    const scrollableHeight = documentHeight - windowHeight;
-    const scrollPercentage = (scrollTop / scrollableHeight) * 100;
-    const offset = circumference - (scrollPercentage / 100) * circumference;
-    progressCircle.style.strokeDashoffset = offset;
-  });
-
-  // Initial call
-  handleScroll();
+    
+    // Listen for scroll events (with throttling for performance)
+    let scrollTimeout;
+    window.addEventListener('scroll', () => {
+        if (scrollTimeout) {
+            window.cancelAnimationFrame(scrollTimeout);
+        }
+        scrollTimeout = window.requestAnimationFrame(() => {
+            updateScrollProgress();
+        });
+    });
+    
+    // Click to scroll to top with smooth animation
+    backToTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+    
+    // Keyboard accessibility
+    backToTopBtn.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+    });
+    
+    // Optional: ESC key to scroll to top (only if not in a modal/lightbox)
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && window.pageYOffset > 400) {
+            const lightbox = document.getElementById('lightbox');
+            const mobileMenu = document.querySelector('.nav-container.active');
+            
+            // Only scroll if no modal/menu is open
+            if ((!lightbox || !lightbox.classList.contains('active')) && !mobileMenu) {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            }
+        }
+    });
+    
+    // Initial update
+    updateScrollProgress();
+    
+    console.log('✅ Scroll-to-top button initialized');
 });

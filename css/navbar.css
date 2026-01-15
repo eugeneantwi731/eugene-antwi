@@ -1,0 +1,320 @@
+/* ===== FLOATING GLASS NAVBAR - DYNAMIC THEMING VERSION ===== */
+
+/* Header Container */
+.site-header {
+    position: fixed;
+    top: 20px;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    pointer-events: none;
+}
+
+/* Navbar Wrapper */
+.navbar-wrapper {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+/* Navbar - Floating Glass Effect */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(26, 26, 36, 0.6);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 50px;
+    padding: 12px 24px;
+    pointer-events: auto;
+    transition: all 0.3s ease;
+}
+
+/* Logo Container */
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+}
+
+.logo-container:hover {
+    transform: translateX(4px);
+}
+
+.logo-icon {
+    width: 32px;
+    height: 32px;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.logo-container:hover .logo-icon {
+    transform: rotate(-5deg) scale(1.1);
+}
+
+.logo-text {
+    font-family: 'Sugar Snow', cursive;
+    font-size: 1.25rem;
+    color: var(--text-light);
+    letter-spacing: 0.02em;
+    transition: color 0.3s ease;
+}
+
+.logo-container:hover .logo-text {
+    color: var(--green);
+}
+
+/* Navigation Container */
+.nav-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+/* Navigation Links */
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    z-index: 3;
+}
+
+.nav-item {
+    position: relative;
+    border-radius: 100vw;
+    transition: all 0.3s ease;
+}
+
+.nav-link {
+    display: inline-block;
+    padding: 10px 24px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.938rem;
+    font-weight: 500;
+    color: var(--text-gray);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+/* Hover - Text uses dynamic accent color */
+.nav-item:not(.active) .nav-link:hover {
+    color: var(--green);
+}
+
+/* Active State - White pill background, BLACK text */
+.nav-item.active {
+    background: white;
+}
+
+.nav-item.active .nav-link {
+    color: var(--bg-dark);
+}
+
+/* Clicked state - Uses dynamic accent color */
+.nav-item.clicked .nav-link {
+    color: var(--green);
+}
+
+/* Mobile Menu Toggle */
+.mobile-menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    z-index: 1001;
+}
+
+.mobile-menu-toggle span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--text-light);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+.mobile-menu-toggle:hover span {
+    background: var(--green);
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media (max-width: 968px) {
+    .navbar-wrapper {
+        padding: 0 32px;
+    }
+}
+
+/* ===== MOBILE MENU - COMPLETE OVERRIDE ===== */
+@media (max-width: 768px) {
+    .site-header {
+        top: 16px;
+    }
+    
+    .navbar-wrapper {
+        padding: 0 20px;
+    }
+    
+    .navbar {
+        padding: 10px 16px;
+    }
+    
+    .logo-icon {
+        width: 28px;
+        height: 28px;
+    }
+    
+    .logo-text {
+        font-size: 1rem;
+    }
+    
+    .mobile-menu-toggle {
+        display: flex !important;
+    }
+    
+    /* CRITICAL: Mobile dropdown positioned below hamburger */
+    .nav-container {
+        position: fixed !important;
+        top: 70px !important;
+        right: 20px !important;
+        left: auto !important;
+        width: 220px !important;
+        height: auto !important;
+        max-height: none !important;
+        max-width: none !important;
+        background: rgba(26, 26, 36, 0.95) !important;
+        backdrop-filter: blur(20px) !important;
+        -webkit-backdrop-filter: blur(20px) !important;
+        border-radius: 20px !important;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+        padding: 8px !important;
+        margin: 0 !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
+        transform: translateY(-10px) scale(0.95) !important;
+        transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4) !important;
+        overflow: visible !important;
+        z-index: 999 !important;
+    }
+    
+    .nav-container.active {
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
+        transform: translateY(0) scale(1) !important;
+    }
+    
+    /* Menu list - vertical stack */
+    .nav-links {
+        position: static !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 4px !important;
+        width: 100% !important;
+        height: auto !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        list-style: none !important;
+        background: transparent !important;
+        border: none !important;
+        overflow: visible !important;
+    }
+    
+    /* Each menu item */
+    .nav-item {
+        position: static !important;
+        display: block !important;
+        width: 100% !important;
+        height: auto !important;
+        border-radius: 14px !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        background: transparent !important;
+        border: none !important;
+        overflow: visible !important;
+        transition: background 0.2s ease !important;
+    }
+    
+    /* ACTIVE TAB - White rounded background */
+    .nav-item.active {
+        background: white !important;
+    }
+    
+    /* Non-active hover */
+    .nav-item:not(.active):hover {
+        background: rgba(255, 255, 255, 0.08) !important;
+    }
+    
+    /* Links inside items */
+    .nav-link {
+        position: static !important;
+        display: block !important;
+        width: 100% !important;
+        height: auto !important;
+        padding: 14px 24px !important;
+        margin: 0 !important;
+        text-align: center !important;
+        font-size: 1rem !important;
+        font-weight: 500 !important;
+        border: none !important;
+        border-bottom: none !important;
+        border-radius: 14px !important;
+        background: transparent !important;
+        overflow: visible !important;
+    }
+    
+    /* Active link text - BLACK on white */
+    .nav-item.active .nav-link {
+        color: #0a0a0f !important;
+    }
+    
+    /* Non-active link text - GRAY */
+    .nav-item:not(.active) .nav-link {
+        color: #a0a0aa !important;
+    }
+    
+    /* Hover on non-active */
+    .nav-item:not(.active) .nav-link:hover {
+        color: #24FF72 !important;
+    }
+    
+    /* Remove any ::after pseudo-elements */
+    .nav-link::after {
+        display: none !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo-text {
+        font-size: 0.938rem;
+    }
+    
+    .logo-icon {
+        width: 24px;
+        height: 24px;
+    }
+    
+    .nav-container {
+        top: 60px !important;
+        right: 16px !important;
+        width: 200px !important;
+    }
+    
+    .nav-link {
+        padding: 12px 20px !important;
+        font-size: 0.938rem !important;
+    }
+}

@@ -1,0 +1,217 @@
+/* ===== UNIVERSAL FOOTER STYLES ===== */
+/* Works consistently across all pages (index, work, about, cv) */
+
+.site-footer {
+    padding: 60px 0 40px;
+    background: var(--bg-darker);
+    border-top: 1px solid var(--border-subtle);
+    margin-top: 0;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 60px;
+    margin-bottom: 40px;
+    align-items: start;
+}
+
+/* ===== QUICK LINKS SECTION (LEFT) ===== */
+.footer-section h4 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--text-light);
+    margin-bottom: 20px;
+}
+
+.footer-links {
+    list-style: none;
+}
+
+.footer-links li {
+    margin-bottom: 12px;
+}
+
+.footer-links a {
+    font-size: 0.938rem;
+    color: var(--text-gray);
+    transition: var(--transition-smooth);
+    display: inline-block;
+}
+
+.footer-links a:hover {
+    color: var(--green);
+    padding-left: 8px;
+}
+
+/* ===== SOCIAL ICONS SECTION (CENTER) ===== */
+.footer-section.social-section h4 {
+    text-align: center;
+}
+
+.social-icons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.social-icons a {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-gray);
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 50%;
+    border: 1px solid var(--border-subtle);
+    transition: var(--transition-smooth);
+}
+
+.social-icons a:hover {
+    color: var(--green);
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--green);
+    transform: translateY(-4px);
+}
+
+.social-icons svg,
+.social-icons img {
+    width: 20px;
+    height: 20px;
+}
+
+/* ===== LOGO SECTION (RIGHT) ===== */
+.footer-logo-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.footer-logo-icon {
+    width: 60px;
+    height: 60px;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.footer-logo-icon:hover {
+    transform: scale(1.1) rotate(-5deg);
+}
+
+.footer-logo-text {
+    font-family: 'Sugar Snow', cursive;
+    font-size: 1.5rem;
+    color: var(--text-light);
+    letter-spacing: 0.02em;
+    text-align: center;
+}
+
+/* ===== FOOTER BOTTOM (COPYRIGHT) ===== */
+.footer-bottom {
+    text-align: center;
+    padding-top: 40px;
+    border-top: 1px solid var(--border-subtle);
+}
+
+.footer-bottom p {
+    font-size: 0.875rem;
+    color: var(--text-dim);
+    margin: 5px 0;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+
+/* Tablet */
+@media (max-width: 968px) {
+    .footer-content {
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+    }
+    
+    .footer-logo-section {
+        grid-column: 1 / -1;
+        margin-top: 20px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .site-footer {
+        padding: 50px 0 30px;
+        margin-top: 80px;
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    
+    .footer-section h4 {
+        text-align: center;
+    }
+    
+    .footer-links {
+        text-align: center;
+    }
+    
+    .footer-links a:hover {
+        padding-left: 0;
+    }
+    
+    .social-icons {
+        justify-content: center;
+    }
+    
+    .footer-logo-section {
+        margin-top: 10px;
+    }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+    .site-footer {
+        padding: 40px 0 25px;
+    }
+    
+    .footer-content {
+        gap: 35px;
+    }
+    
+    .footer-section h4 {
+        font-size: 1rem;
+    }
+    
+    .social-icons a {
+        width: 36px;
+        height: 36px;
+    }
+    
+    .social-icons svg,
+    .social-icons img {
+        width: 18px;
+        height: 18px;
+    }
+    
+    .footer-logo-icon {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .footer-logo-text {
+        font-size: 1.25rem;
+    }
+}
+
+/* ===== ACCESSIBILITY ===== */
+@media (prefers-reduced-motion: reduce) {
+    .footer-links a,
+    .social-icons a,
+    .footer-logo-icon {
+        transition-duration: 0.01ms !important;
+    }
+}

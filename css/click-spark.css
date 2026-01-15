@@ -1,0 +1,31 @@
+/* ===== CLICK SPARK EFFECT ===== */
+
+/* Canvas for sparks - sits on top of everything but doesn't block clicks */
+#spark-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 9999;
+    user-select: none;
+}
+
+/* Ensure sparks are visible but don't interfere with page interaction */
+body {
+    position: relative;
+}
+
+/* Optional: Subtle cursor effect on clickable elements */
+a, button, .clickable {
+    cursor: pointer;
+    position: relative;
+}
+
+/* Accessibility - reduce motion */
+@media (prefers-reduced-motion: reduce) {
+    #spark-canvas {
+        display: none !important;
+    }
+}

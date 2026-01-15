@@ -1,146 +1,157 @@
-/* =====================================================
-   SCROLL-TO-TOP FEATURE - PORTFOLIO STYLES (FIXED)
-===================================================== */
+/* ===== SCROLL TO TOP BUTTON ===== */
 
-.scroll-to-top {
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  width: 50px;
-  height: 50px;
-  cursor: pointer;
-  z-index: 9999;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(20px);
-  transition: all 0.3s ease;
+#back-to-top {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    width: 56px;
+    height: 56px;
+    background: var(--green); /* Uses dynamic theme color */
+    color: var(--bg-dark);
+    border: none;
+    border-radius: 50%;
+    font-size: 22px;
+    font-weight: bold;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 998;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
-.scroll-to-top.visible {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
+#back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+    animation: slideInFromBottom 0.4s ease;
 }
 
-/* Progress Circle */
-.progress-circle {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  transform: rotate(-90deg);
+@keyframes slideInFromBottom {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-.progress-circle-bg,
-.progress-circle-fill {
-  fill: none;
-  stroke-width: 4;
-  cx: 50%;
-  cy: 50%;
-  r: 20; /* default radius */
+/* Hover Effect - Brightens the current color */
+#back-to-top:hover {
+    transform: translateY(-4px) scale(1.05);
+    filter: brightness(1.3);
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.4);
 }
 
-.progress-circle-bg {
-  stroke: rgba(255, 255, 255, 0.2);
+/* Active/Click Effect - Darkens the current color */
+#back-to-top:active {
+    transform: translateY(-2px) scale(1.02);
+    filter: brightness(0.8);
 }
 
-.progress-circle-fill {
-  stroke: #6e45e2;
-  stroke-linecap: round;
-  stroke-dasharray: 125.66;  /* 2πr (r=20) */
-  stroke-dashoffset: 125.66;
-  transition: stroke-dashoffset 0.15s ease;
+/* Circular Progress Indicator */
+.progress-ring {
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    width: 64px;
+    height: 64px;
+    transform: rotate(-90deg);
+    pointer-events: none;
 }
 
-/* Inner Button */
-.scroll-icon {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 38px;
-  height: 38px;
-  background: #6e45e2;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
+.progress-ring__circle {
+    fill: none;
+    stroke: var(--green); /* Uses dynamic theme color */
+    stroke-width: 3;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.1s linear, stroke 0.3s ease;
+    opacity: 0.8;
 }
 
-.scroll-icon svg {
-  stroke: white;
-  width: 30px;   /* bigger arrow */
-  height: 30px;  /* bigger arrow */
-  transition: transform 0.3s ease;
+/* Hover effect for progress ring */
+#back-to-top:hover .progress-ring__circle {
+    opacity: 1;
+    filter: brightness(1.3);
 }
 
-/* Hover */
-.scroll-to-top:hover .progress-circle-fill {
-  stroke: #8b5cf6;
+/* ===== RESPONSIVE DESIGN ===== */
+
+/* Tablet */
+@media (max-width: 968px) {
+    #back-to-top {
+        bottom: 32px;
+        right: 32px;
+        width: 52px;
+        height: 52px;
+        font-size: 20px;
+    }
+    
+    .progress-ring {
+        width: 60px;
+        height: 60px;
+    }
 }
 
-.scroll-to-top:hover .scroll-icon {
-  background: #8b5cf6;
-  transform: translate(-50%, -50%) scale(1.08);
-}
-
-/* Pulse when near bottom */
-.scroll-to-top.near-bottom .scroll-icon {
-  animation: pulse 2s infinite;
-  border-radius: 50%; /* ensures circular glow */
-}
-
-@keyframes pulse {
-  0%   { box-shadow: 0 0 0 0 rgba(110, 69, 226, 0.8); }
-  70%  { box-shadow: 0 0 0 30px rgba(110, 69, 226, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(110, 69, 226, 0); }
-}
-
-/* Responsive */
+/* Mobile */
 @media (max-width: 768px) {
-  .scroll-to-top {
-    bottom: 20px;
-    right: 20px;
-    width: 45px;
-    height: 45px;
-  }
-  .progress-circle-bg,
-  .progress-circle-fill {
-    r: 18;
-    stroke-dasharray: 113.1; /* 2πr */
-    stroke-dashoffset: 113.1;
-  }
-  .scroll-icon {
-    width: 34px;
-    height: 34px;
-  }
-  .scroll-icon svg {
-    width: 22px;
-    height: 22px;
-  }
+    #back-to-top {
+        bottom: 24px;
+        right: 24px;
+        width: 50px;
+        height: 50px;
+        font-size: 18px;
+    }
+    
+    .progress-ring {
+        width: 58px;
+        height: 58px;
+        top: -4px;
+        left: -4px;
+    }
+    
+    .progress-ring__circle {
+        cx: 29;
+        cy: 29;
+        r: 26;
+    }
 }
 
+/* Small Mobile */
 @media (max-width: 480px) {
-  .scroll-to-top {
-    bottom: 15px;
-    right: 15px;
-    width: 40px;
-    height: 40px;
-  }
-  .progress-circle-bg,
-  .progress-circle-fill {
-    r: 16;
-    stroke-dasharray: 100.5; /* 2πr */
-    stroke-dashoffset: 100.5;
-  }
-  .scroll-icon {
-    width: 30px;
-    height: 30px;
-  }
-  .scroll-icon svg {
-    width: 20px;
-    height: 20px;
-  }
+    #back-to-top {
+        bottom: 20px;
+        right: 20px;
+        width: 46px;
+        height: 46px;
+        font-size: 16px;
+    }
+    
+    .progress-ring {
+        width: 54px;
+        height: 54px;
+    }
+    
+    .progress-ring__circle {
+        cx: 27;
+        cy: 27;
+        r: 24;
+    }
+}
+
+/* ===== ACCESSIBILITY ===== */
+@media (prefers-reduced-motion: reduce) {
+    #back-to-top,
+    .progress-ring__circle {
+        transition-duration: 0.01ms !important;
+        animation: none !important;
+    }
+    
+    #back-to-top.visible {
+        animation: none !important;
+    }
 }
