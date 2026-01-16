@@ -257,51 +257,23 @@ let masonryConfig = {
     colorShiftOnHover: false
 };
 
-// ===== TRACK IF PRELOADER IS COMPLETE =====
-let preloaderComplete = false;
-
 // ===== INITIALIZE ON PAGE LOAD =====
 document.addEventListener('DOMContentLoaded', () => {
     console.log('%c Work Page Loaded ', 'background: #24FF72; color: #0a0a0f; font-size: 14px; font-weight: bold; padding: 8px 16px;');
     
     applySavedTheme();
     
-    // Render projects and setup UI (these don't need to wait)
+    if (typeof gsap === 'undefined') {
+        console.error('GSAP is not loaded. Please include GSAP library.');
+        renderMasonryGalleryFallback();
+    } else {
+        renderMasonryGallery();
+    }
+    
     renderProjects();
+    setupFilters();
     setupLightbox();
     setupShowreel();
-    
-    // WAIT FOR PRELOADER TO COMPLETE BEFORE ANIMATING MASONRY
-    document.addEventListener('preloaderComplete', () => {
-        console.log('🎨 Preloader complete - starting masonry animation');
-        preloaderComplete = true;
-        
-        if (typeof gsap === 'undefined') {
-            console.error('GSAP is not loaded. Please include GSAP library.');
-            renderMasonryGalleryFallback();
-        } else {
-            renderMasonryGallery();
-        }
-        
-        // Setup filters AFTER masonry is rendered
-        setupFilters();
-    });
-    
-    // Fallback: If no preloader event after 50ms, start animations immediately
-    // This ensures masonry loads INSTANTLY when preloader was skipped
-    setTimeout(() => {
-        if (!preloaderComplete) {
-            console.log('⚡ No preloader - starting masonry immediately');
-            if (typeof gsap === 'undefined') {
-                renderMasonryGalleryFallback();
-            } else {
-                renderMasonryGallery();
-            }
-            
-            // Setup filters AFTER masonry is rendered
-            setupFilters();
-        }
-    }, 50); // Very short timeout - almost instant
 });
 
 // ===== APPLY SAVED THEME FROM HOME PAGE =====

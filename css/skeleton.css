@@ -1,0 +1,341 @@
+/* ===== UNIVERSAL SKELETON LOADING SYSTEM ===== */
+/* Add this file to your css folder and link it in all pages */
+
+/* Skeleton Base Styles */
+.skeleton-wrapper {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.03) 0%,
+        rgba(255, 255, 255, 0.08) 50%,
+        rgba(255, 255, 255, 0.03) 100%
+    );
+    border-radius: inherit;
+}
+
+.skeleton-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.1) 50%,
+        transparent 100%
+    );
+    animation: skeleton-loading 1.5s infinite;
+}
+
+@keyframes skeleton-loading {
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
+/* Image Skeleton - maintains aspect ratio */
+.skeleton-image {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        rgba(26, 26, 36, 0.8) 0%,
+        rgba(40, 40, 55, 0.9) 50%,
+        rgba(26, 26, 36, 0.8) 100%
+    );
+    background-size: 200% 100%;
+    animation: skeleton-shimmer 1.5s infinite;
+    border-radius: inherit;
+    position: relative;
+    overflow: hidden;
+}
+
+.skeleton-image::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.1) 50%,
+        transparent 100%
+    );
+    animation: skeleton-slide 1.5s infinite;
+}
+
+@keyframes skeleton-shimmer {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+@keyframes skeleton-slide {
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
+/* Video Skeleton */
+.skeleton-video {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        135deg,
+        rgba(26, 26, 36, 0.9) 0%,
+        rgba(40, 40, 55, 0.95) 50%,
+        rgba(26, 26, 36, 0.9) 100%
+    );
+    background-size: 200% 200%;
+    animation: skeleton-gradient 2s infinite;
+    border-radius: inherit;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.skeleton-video::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.08) 50%,
+        transparent 100%
+    );
+    animation: skeleton-slide 1.8s infinite;
+}
+
+/* Play icon for video skeleton */
+.skeleton-video::after {
+    content: '';
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    position: relative;
+    z-index: 1;
+    animation: skeleton-pulse 1.5s infinite;
+}
+
+@keyframes skeleton-gradient {
+    0% {
+        background-position: 0% 0%;
+    }
+    50% {
+        background-position: 100% 100%;
+    }
+    100% {
+        background-position: 0% 0%;
+    }
+}
+
+@keyframes skeleton-pulse {
+    0%, 100% {
+        opacity: 0.4;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.7;
+        transform: scale(1.1);
+    }
+}
+
+/* Iframe Skeleton (for YouTube/Vimeo) */
+.skeleton-iframe {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        135deg,
+        rgba(26, 26, 36, 0.95) 0%,
+        rgba(50, 50, 65, 0.98) 50%,
+        rgba(26, 26, 36, 0.95) 100%
+    );
+    background-size: 200% 200%;
+    animation: skeleton-gradient 2.5s infinite;
+    border-radius: inherit;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.skeleton-iframe::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -150%;
+    width: 150%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.06) 50%,
+        transparent 100%
+    );
+    animation: skeleton-slide-slow 2s infinite;
+}
+
+/* YouTube/Vimeo play button skeleton */
+.skeleton-iframe::after {
+    content: '';
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.12);
+    position: relative;
+    z-index: 1;
+    animation: skeleton-pulse 2s infinite;
+}
+
+@keyframes skeleton-slide-slow {
+    0% {
+        left: -150%;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
+/* Hide actual content while loading */
+img.skeleton-loading,
+video.skeleton-loading,
+iframe.skeleton-loading {
+    opacity: 0;
+    position: absolute;
+    pointer-events: none;
+}
+
+/* Smooth fade-in when loaded */
+img.skeleton-loaded,
+video.skeleton-loaded,
+iframe.skeleton-loaded {
+    animation: skeleton-fade-in 0.4s ease-out forwards;
+}
+
+@keyframes skeleton-fade-in {
+    from {
+        opacity: 0;
+        transform: scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Container for maintaining aspect ratio */
+.skeleton-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-radius: inherit;
+}
+
+/* Special handling for masonry items */
+.masonry-item .skeleton-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+/* Special handling for project banners */
+.project-banner .skeleton-wrapper,
+.showreel-thumbnail .skeleton-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+/* Lightbox skeleton */
+.lightbox-content .skeleton-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 90%;
+    max-height: 85vh;
+    z-index: 1;
+}
+
+/* Text skeleton (optional - for captions/titles) */
+.skeleton-text {
+    height: 1em;
+    background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.05) 0%,
+        rgba(255, 255, 255, 0.1) 50%,
+        rgba(255, 255, 255, 0.05) 100%
+    );
+    background-size: 200% 100%;
+    animation: skeleton-shimmer 1.5s infinite;
+    border-radius: 4px;
+    margin: 5px 0;
+}
+
+.skeleton-text.short {
+    width: 60%;
+}
+
+.skeleton-text.medium {
+    width: 80%;
+}
+
+.skeleton-text.long {
+    width: 100%;
+}
+
+/* Reduce animation on mobile for performance */
+@media (max-width: 768px) {
+    .skeleton-wrapper::before,
+    .skeleton-image::before,
+    .skeleton-video::before,
+    .skeleton-iframe::before {
+        animation-duration: 2s;
+    }
+}
+
+/* Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+    .skeleton-wrapper::before,
+    .skeleton-image::before,
+    .skeleton-video::before,
+    .skeleton-iframe::before,
+    .skeleton-video::after,
+    .skeleton-iframe::after {
+        animation: none;
+    }
+    
+    .skeleton-image,
+    .skeleton-video,
+    .skeleton-iframe {
+        opacity: 0.5;
+    }
+}

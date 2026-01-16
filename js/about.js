@@ -1,8 +1,5 @@
 // ===== ABOUT PAGE JAVASCRIPT =====
 
-// Track if preloader is complete
-let preloaderComplete = false;
-
 document.addEventListener('DOMContentLoaded', () => {
     console.log('About page loaded');
     
@@ -10,21 +7,6 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeSmoothScroll();
     initializeCVPatternRepel();
     initializeContactForm();
-    
-    // WAIT FOR PRELOADER BEFORE LAZY LOADING BIO SECTION
-    document.addEventListener('preloaderComplete', () => {
-        console.log('🎨 Preloader complete - starting bio animations');
-        preloaderComplete = true;
-        initializeBioLazyLoad();
-    });
-    
-    // Fallback: If no preloader event after 50ms, start animations immediately
-    setTimeout(() => {
-        if (!preloaderComplete) {
-            console.log('⚡ No preloader - starting bio animations immediately');
-            initializeBioLazyLoad();
-        }
-    }, 50);
 });
 
 // ===== SET ACTIVE NAVIGATION =====
@@ -68,59 +50,6 @@ function initializeSmoothScroll() {
             }
         });
     });
-}
-
-// ===== BIO SECTION LAZY LOAD WITH ANIMATION =====
-function initializeBioLazyLoad() {
-    const heroStrip = document.querySelector('.hero-strip-image');
-    const aboutTitle = document.querySelector('.about-title');
-    const bioTexts = document.querySelectorAll('.bio-text');
-    
-    // Set initial states - hidden
-    if (heroStrip) {
-        heroStrip.style.opacity = '0';
-        heroStrip.style.transform = 'translateY(30px)';
-        heroStrip.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-    }
-    
-    if (aboutTitle) {
-        aboutTitle.style.opacity = '0';
-        aboutTitle.style.transform = 'translateX(-30px)';
-        aboutTitle.style.transition = 'opacity 0.6s ease 0.2s, transform 0.6s ease 0.2s';
-    }
-    
-    bioTexts.forEach((text, index) => {
-        text.style.opacity = '0';
-        text.style.transform = 'translateY(20px)';
-        text.style.transition = `opacity 0.6s ease ${0.4 + (index * 0.15)}s, transform 0.6s ease ${0.4 + (index * 0.15)}s`;
-    });
-    
-    // Create Intersection Observer
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.1 // Trigger when 10% visible
-    };
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                // Animate in
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0) translateX(0)';
-                
-                // Stop observing after animation
-                observer.unobserve(entry.target);
-            }
-        });
-    }, observerOptions);
-    
-    // Observe elements
-    if (heroStrip) observer.observe(heroStrip);
-    if (aboutTitle) observer.observe(aboutTitle);
-    bioTexts.forEach(text => observer.observe(text));
-    
-    console.log('✅ Bio lazy load initialized');
 }
 
 // ===== CV PATTERN REPEL EFFECT - FIXED FOR MOBILE =====

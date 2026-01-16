@@ -1,4 +1,4 @@
-(function() {
+        (function() {
             'use strict';
             
             // ===== CONFIGURATION =====
@@ -76,11 +76,6 @@
                 // Show page content with slight delay
                 setTimeout(() => {
                     pageContent.classList.add('visible');
-                    
-                    // DISPATCH CUSTOM EVENT - TELL PAGE ANIMATIONS TO START
-                    const preloaderCompleteEvent = new CustomEvent('preloaderComplete');
-                    document.dispatchEvent(preloaderCompleteEvent);
-                    console.log('✅ Preloader complete - animations can now start');
                 }, 200);
                 
                 // Clean up preloader element after fade completes
@@ -97,11 +92,9 @@
                 const pageContent = document.getElementById('pageContent');
                 const body = document.body;
                 
-                // INSTANTLY remove preloader WITHOUT any transition/animation
+                // Immediately remove all preloader classes and show content
                 if (preloader) {
-                    preloader.style.transition = 'none'; // NO fade
                     preloader.style.display = 'none';
-                    preloader.remove(); // Completely remove from DOM
                 }
                 
                 body.classList.remove('preloader-active');
@@ -109,16 +102,10 @@
                 body.style.height = '';
                 
                 if (pageContent) {
-                    pageContent.style.transition = 'none'; // NO fade
                     pageContent.classList.add('visible');
                     pageContent.style.opacity = '1';
                     pageContent.style.visibility = 'visible';
                 }
-                
-                // DISPATCH EVENT IMMEDIATELY - No setTimeout
-                const preloaderCompleteEvent = new CustomEvent('preloaderComplete');
-                document.dispatchEvent(preloaderCompleteEvent);
-                console.log('✅ Preloader skipped - animations can start immediately');
             }
             
             // ===== INITIALIZE PRELOADER =====
@@ -143,6 +130,7 @@
                     setTimeout(() => {
                         hidePreloader();
                         markPreloaderShown();
+                        console.log('✅ Preloader complete - page animations can now start');
                     }, remainingTime);
                 });
             }
