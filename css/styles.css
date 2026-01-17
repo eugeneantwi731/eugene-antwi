@@ -349,6 +349,47 @@ a {
     display: block;
 }
 
+/* Caption for CG Portrait */
+.intro-portrait-caption {
+    position: absolute;
+    bottom: 40px;
+    left: 15px;
+    padding: 8px 16px;
+    background: rgba(10, 10, 15, 0.85);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-gray);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.4s ease;
+    z-index: 5;
+}
+
+/* Show caption when slide is active */
+.intro-slide.active .intro-portrait-caption {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.3s; /* Slight delay for smooth entrance */
+}
+
+/* Accent color for "CG" text */
+.intro-portrait-caption .caption-accent {
+    color: var(--green);
+    font-weight: 600;
+}
+
+/* Hover effect on portrait shows caption more prominently */
+.intro-portrait:hover .intro-portrait-caption {
+    background: rgba(10, 10, 15, 0.95);
+    border-color: var(--green);
+    color: var(--text-light);
+}
+
 /* Statement Container - Right Side, Overlaps Portrait */
 .intro-statement-container {
     position: relative;
@@ -573,6 +614,13 @@ a {
         height: 350px;
     }
 
+    .intro-portrait-caption {
+        bottom: 30px;
+        left: 10px;
+        padding: 6px 12px;
+        font-size: 0.688rem;
+    }
+
     .intro-statement-container {
         padding: 20px 15px;
     }
@@ -618,6 +666,13 @@ a {
     .intro-portrait img {
         width: 300px;
         height: 300px;
+    }
+
+    .intro-portrait-caption {
+        bottom: 25px;
+        left: 8px;
+        padding: 5px 10px;
+        font-size: 0.625rem;
     }
 
     .intro-statement-container {
