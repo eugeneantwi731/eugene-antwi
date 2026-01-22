@@ -118,24 +118,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const scrollDownBtn = document.getElementById('scroll-down');
 
     if (scrollDownBtn) {
-    // Click/touch handler with offset
-    scrollDownBtn.addEventListener('click', (e) => {
-        const portfolioSection = document.getElementById('portfolio');
-        if (portfolioSection) {
-            const yOffset = -20; // 20px offset from top
-            const y = portfolioSection.getBoundingClientRect().top + window.pageYOffset + yOffset;
-            window.scrollTo({top: y, behavior: 'smooth'});
-        }
-        
-        // Force remove hover state on mobile
-        scrollDownBtn.blur();
-        
-        // Add a temporary class to reset colors immediately
-        scrollDownBtn.classList.add('clicked');
-        setTimeout(() => {
-            scrollDownBtn.classList.remove('clicked');
-        }, 100);
-    });
+        // Click/touch handler with offset
+        scrollDownBtn.addEventListener('click', (e) => {
+            const videoPitchSection = document.getElementById('video-pitch');
+            if (videoPitchSection) {
+                const yOffset = -20;
+                const y = videoPitchSection.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                window.scrollTo({top: y, behavior: 'smooth'});
+            }
+            
+            // Force remove hover state on mobile
+            scrollDownBtn.blur();
+            
+            // Add a temporary class to reset colors immediately
+            scrollDownBtn.classList.add('clicked');
+            setTimeout(() => {
+                scrollDownBtn.classList.remove('clicked');
+            }, 100);
+        });
 
         // Keyboard accessibility
         scrollDownBtn.setAttribute('tabindex', '0');
@@ -312,8 +312,8 @@ class VariableProximity {
         };
         
         this.letterElements = [];
-        this.mousePosition = { x: -999, y: -999 }; // Start way outside the element
-        this.hasMouseEntered = false; // Track if mouse has entered the element
+        this.mousePosition = { x: -999, y: -999 };
+        this.hasMouseEntered = false;
         this.animationId = null;
         
         console.log('VariableProximity initialized for:', element.textContent);
@@ -321,7 +321,6 @@ class VariableProximity {
     }
     
     init() {
-        // Wait for font to load
         document.fonts.ready.then(() => {
             this.splitTextIntoLetters();
             this.bindEvents();
@@ -364,20 +363,17 @@ class VariableProximity {
                 y: e.clientY - rect.top
             };
             
-            // Mark that mouse has entered the element
             if (!this.hasMouseEntered) {
                 this.hasMouseEntered = true;
             }
         };
         
         this.handleMouseLeave = () => {
-            // Reset all letters to default weight when mouse leaves
             this.letterElements.forEach(letterElement => {
                 letterElement.style.fontWeight = this.options.fromWeight;
-                letterElement.style.color = ''; // Reset color to default
+                letterElement.style.color = '';
             });
             
-            // Move mouse position far away to prevent effects
             this.mousePosition = { x: -999, y: -999 };
         };
         
@@ -394,7 +390,6 @@ class VariableProximity {
             const containerRect = this.element.getBoundingClientRect();
             
             this.letterElements.forEach(letterElement => {
-                // Only apply effects if mouse has entered the element
                 if (!this.hasMouseEntered) {
                     letterElement.style.fontWeight = this.options.fromWeight;
                     letterElement.style.color = '';
@@ -414,7 +409,7 @@ class VariableProximity {
                 
                 if (distance >= this.options.radius) {
                     letterElement.style.fontWeight = this.options.fromWeight;
-                    letterElement.style.color = ''; // Reset to default color
+                    letterElement.style.color = '';
                 } else {
                     const intensity = 1 - (distance / this.options.radius);
                     const weight = this.options.fromWeight + 
@@ -422,8 +417,7 @@ class VariableProximity {
                     
                     letterElement.style.fontWeight = Math.round(weight);
                     
-                    // Add color transition from green to blue based on proximity
-                    const alpha = intensity * 0.7; // Max 70% intensity
+                    const alpha = intensity * 0.7;
                     letterElement.style.color = `color-mix(in srgb, var(--green) ${(1-alpha)*100}%, var(--blue) ${alpha*100}%)`;
                 }
             });
@@ -447,7 +441,6 @@ class VariableProximity {
 document.addEventListener('DOMContentLoaded', () => {
     console.log('DOM loaded, looking for variable proximity elements...');
     
-    // Wait a bit longer to ensure everything is loaded
     setTimeout(() => {
         const proximityElements = document.querySelectorAll('.variable-proximity');
         console.log('Found', proximityElements.length, 'proximity elements');
@@ -460,7 +453,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 radius: 100
             });
         });
-    }, 1000); // Increased delay
+    }, 1000);
 });
 
 // ===== CLICK SPARK EFFECT =====
@@ -468,7 +461,7 @@ document.addEventListener('DOMContentLoaded', () => {
 class ClickSpark {
     constructor(options = {}) {
         this.config = {
-            sparkColor: options.sparkColor || '#24FF72',  // Using your green color
+            sparkColor: options.sparkColor || '#24FF72',
             sparkSize: options.sparkSize || 12,
             sparkRadius: options.sparkRadius || 20,
             sparkCount: options.sparkCount || 8,
@@ -526,10 +519,8 @@ class ClickSpark {
     }
     
     bindEvents() {
-        // Handle clicks anywhere on the page
         document.addEventListener('click', (e) => this.handleClick(e));
         
-        // Handle window resize
         window.addEventListener('resize', () => {
             clearTimeout(this.resizeTimeout);
             this.resizeTimeout = setTimeout(() => this.resizeCanvas(), 100);
@@ -541,7 +532,6 @@ class ClickSpark {
         const y = e.clientY;
         const now = performance.now();
         
-        // Create sparks radiating outward
         for (let i = 0; i < this.config.sparkCount; i++) {
             this.sparks.push({
                 x: x,
@@ -570,12 +560,11 @@ class ClickSpark {
         const animate = (timestamp) => {
             this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
             
-            // Filter out completed sparks and draw active ones
             this.sparks = this.sparks.filter(spark => {
                 const elapsed = timestamp - spark.startTime;
                 
                 if (elapsed >= this.config.duration) {
-                    return false; // Remove completed spark
+                    return false;
                 }
                 
                 const progress = elapsed / this.config.duration;
@@ -585,13 +574,11 @@ class ClickSpark {
                 const lineLength = this.config.sparkSize * (1 - eased);
                 const opacity = 1 - eased;
                 
-                // Calculate spark line positions
                 const x1 = spark.x + distance * Math.cos(spark.angle);
                 const y1 = spark.y + distance * Math.sin(spark.angle);
                 const x2 = spark.x + (distance + lineLength) * Math.cos(spark.angle);
                 const y2 = spark.y + (distance + lineLength) * Math.sin(spark.angle);
                 
-                // Draw spark line
                 this.ctx.save();
                 this.ctx.globalAlpha = opacity;
                 this.ctx.strokeStyle = this.config.sparkColor;
@@ -605,7 +592,7 @@ class ClickSpark {
                 
                 this.ctx.restore();
                 
-                return true; // Keep spark active
+                return true;
             });
             
             this.animationId = requestAnimationFrame(animate);
@@ -628,10 +615,9 @@ class ClickSpark {
 
 // Initialize the spark effect when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    // Wait a bit for the page to settle
     setTimeout(() => {
         window.clickSpark = new ClickSpark({
-            sparkColor: '#24FF72',  // Your green color
+            sparkColor: '#24FF72',
             sparkSize: 15,
             sparkRadius: 25,
             sparkCount: 8,
@@ -642,9 +628,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 500);
 });
 
-// ===== KEYBOARD SHORTCUTS (Global - outside DOM) =====
+// ===== KEYBOARD SHORTCUTS =====
 document.addEventListener('keydown', (e) => {
-    // ESC key to scroll to top - but only if lightbox is not active
     if (e.key === 'Escape' && window.pageYOffset > 400) {
         const lightbox = document.getElementById('lightbox');
         if (lightbox && !lightbox.classList.contains('active')) {
@@ -652,4 +637,3 @@ document.addEventListener('keydown', (e) => {
         }
     }
 });
-

@@ -1,25 +1,5 @@
+
 /* ===== IADT MA ANIMATION PORTFOLIO ===== */
-/* 
-FILENAME: iadt-ma.css
-
-DESIGN PHILOSOPHY:
-- Dark mode throughout for a cinematic, professional feel
-- Card-based portfolio items with depth and shadow
-- Gradient animated titles inspired by faceform.com
-- Flexible layouts that help tell each project's story
-- Alive feeling with subtle animations and interactions
-
-FONTS:
-- Sugar Snow: Big titles and headings only
-- Roboto: Everything else (body text, meta, descriptions)
-
-COLORS:
-- Purple: #6e45e2
-- Blue: #2196F3
-- Green: #24FF72
-- Dark BG: #0a0a0f, #141418
-- Card BG: #1a1a24
-*/
 
 @font-face {
     font-family: 'Sugar Snow';
@@ -41,6 +21,16 @@ COLORS:
     --blue: #2196F3;
     --green: #24FF72;
     --border-subtle: rgba(255, 255, 255, 0.08);
+    
+    /* Application section colors */
+    --app-section-bg: #0d0e14;
+    --app-card-bg: #16181f;
+    --app-accent: #5a8fd8;
+    --app-border: rgba(90, 143, 216, 0.2);
+    --notepad-bg: #fafaf8;
+    --notepad-line: rgba(0, 0, 0, 0.06);
+    --notepad-text: #1a1a1a;
+    --line-height: 32px;
 }
 
 /* ===== RESET & BASE ===== */
@@ -69,7 +59,6 @@ h1, h2, h3 {
 }
 
 /* ===== GRADIENT ANIMATED TITLES ===== */
-/* Inspired by faceform.com - creates an alive, dynamic feel */
 .gradient-title {
     background: linear-gradient(
         135deg,
@@ -83,6 +72,20 @@ h1, h2, h3 {
     background-clip: text;
     animation: gradientShift 8s ease infinite;
     font-weight: 700;
+}
+
+.application-title {
+    background: linear-gradient(
+        135deg,
+        var(--app-accent) 0%,
+        #7aa8e8 50%,
+        var(--blue) 100%
+    );
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientShift 8s ease infinite;
 }
 
 @keyframes gradientShift {
@@ -104,7 +107,7 @@ h1, h2, h3 {
     border: 1px solid var(--border-subtle);
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 8px;
     z-index: 999;
     opacity: 0;
     visibility: hidden;
@@ -114,6 +117,23 @@ h1, h2, h3 {
 .project-nav.visible {
     opacity: 1;
     visibility: visible;
+}
+
+
+.nav-dot[data-index="0b"] {
+    margin-bottom: 16px;
+    position: relative;
+}
+
+.nav-dot[data-index="0b"]::after {
+    content: '';
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--app-accent), transparent);
 }
 
 .nav-dot {
@@ -129,6 +149,19 @@ h1, h2, h3 {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.nav-dot[data-index="0"]:hover,
+.nav-dot[data-index="0b"]:hover {
+    background: rgba(90, 143, 216, 0.15);
+    color: var(--app-accent);
+}
+
+.nav-dot[data-index="0"].active,
+.nav-dot[data-index="0b"].active {
+    background: rgba(90, 143, 216, 0.2);
+    color: var(--app-accent);
+    border-color: rgba(90, 143, 216, 0.3);
 }
 
 .dot-number {
@@ -149,6 +182,11 @@ h1, h2, h3 {
     pointer-events: none;
 }
 
+.nav-dot[data-index="0"] .dot-tooltip,
+.nav-dot[data-index="0b"] .dot-tooltip {
+    color: var(--app-accent);
+}
+
 .nav-dot:hover .dot-tooltip {
     opacity: 1;
     visibility: visible;
@@ -165,7 +203,6 @@ h1, h2, h3 {
     background: rgba(36, 255, 114, 0.1);
 }
 
-/* Hide on tablets and mobile */
 @media (max-width: 1024px) {
     .project-nav {
         display: none !important;
@@ -178,7 +215,6 @@ h1, h2, h3 {
     margin: 0 auto;
     padding: 0 40px;
 }
-
 
 /* ===== IMAGE LOADING STATE ===== */
 .media-container,
@@ -204,10 +240,9 @@ h1, h2, h3 {
     opacity: 1;
 }
 
-
 /* ===== INTRO SECTION ===== */
 #intro {
-    padding: 100px 0 20px; /* Reduced bottom padding from 80px to 20px */
+    padding: 100px 0 20px;
     background: linear-gradient(135deg, #0a0a0f 0%, #141418 100%);
     position: relative;
     overflow: hidden;
@@ -248,39 +283,36 @@ h1, h2, h3 {
 }
 
 .intro-image {
-    flex: 0 0 450px; /* Keep the layout space the same */
+    flex: 0 0 450px;
     position: relative;
-    z-index: -1; /* Changed from -1 to 1 */
-    top: 50px; /* Adjust this value to push down more or less */
+    z-index: -1;
+    top: 50px;
 }
 
 .intro-image img {
-    width: 190%; /* Increased from 170% - adjust as needed */
+    width: 190%;
     height: auto;
     display: block;
     max-width: none;
     transition: transform 0.4s ease;
-    transform: translateX(-10%); /* Adjust to center the larger image */
+    transform: translateX(-10%);
 }
-
 
 .portrait-container {
     position: relative;
     width: 100%;
     height: auto;
-    
-    /* Ensure the container doesn't overflow */
     overflow: visible;
 }
 
 .portrait-static,
 .portrait-gif {
-    width: 190%; /* Match the new size */
+    width: 190%;
     height: auto;
     display: block;
     max-width: none;
     transition: opacity 0.4s ease-out;
-    transform: translateX(-15%); /* Center the images */
+    transform: translateX(-15%);
 }
 
 .portrait-gif {
@@ -291,18 +323,17 @@ h1, h2, h3 {
     pointer-events: none;
 }
 
-/* Image Caption */
 .image-caption {
     position: absolute;
-    bottom: 100px; /* Distance from bottom of image */
-    left: 20px;   /* Distance from left edge */
+    bottom: 100px;
+    left: 20px;
     font-family: 'Roboto', sans-serif;
     font-size: 0.875rem;
     font-weight: 500;
     color: #a0a0aa;
     line-height: 1.4;
     z-index: 10;
-    max-width: 300px; /* Prevent text from getting too wide */
+    max-width: 300px;
 }
 
 .portrait-container:hover .portrait-gif {
@@ -313,7 +344,6 @@ h1, h2, h3 {
     opacity: 0;
 }
 
-/* Mobile - no hover state */
 @media (max-width: 768px) {
     .portrait-gif {
         display: none;
@@ -345,18 +375,15 @@ h1, h2, h3 {
     margin-top: 32px;
 }
 
-
 /* ===== VARIABLE PROXIMITY FONT EFFECT ===== */
-
 .variable-proximity {
     cursor: default;
     user-select: none;
     line-height: 1.2;
     display: inline-block;
-    font-family: 'Roboto', sans-serif; /* Use your existing font */
+    font-family: 'Roboto', sans-serif;
 }
 
-/* Apply to your highlight line */
 .intro-text p.highlight.variable-proximity {
     color: var(--green);
     font-weight: 500;
@@ -365,29 +392,16 @@ h1, h2, h3 {
     letter-spacing: 0.02em;
 }
 
-/* Mobile adjustments */
-@media (max-width: 768px) {
-    .intro-text p.highlight.variable-proximity {
-        font-size: 1rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .intro-text p.highlight.variable-proximity {
-        font-size: 0.938rem;
-    }
-}
-
 /* ===== SCROLL DOWN MOUSE ===== */
 .scroll-indicator {
     text-align: center;
-    margin-top: 0px; /* Keep this unchanged */
+    margin-top: 0px;
     cursor: pointer;
     animation: float 3s ease-in-out infinite;
     -webkit-tap-highlight-color: transparent;
     position: relative;
-    z-index: 10; /* Ensure it stays above the image */
-    top: -40px; /* Adjust position as needed */
+    z-index: 10;
+    top: -40px;
 }
 
 @keyframes float {
@@ -474,11 +488,6 @@ h1, h2, h3 {
     background: var(--green);
 }
 
-.scroll-indicator:active .mouse::before {
-    background: var(--green);
-}
-
-/* Force reset on mobile after click */
 .scroll-indicator.clicked .mouse,
 .scroll-indicator.clicked .arrow {
     border-color: var(--text-dim);
@@ -487,17 +496,6 @@ h1, h2, h3 {
 .scroll-indicator.clicked .mouse::before {
     background: var(--text-dim);
 }
-
-/* Hover interaction remains the same */
-.scroll-indicator:hover ~ .gradient-line {
-    animation: lineFlow 1.5s ease-in-out infinite, linePulse 0.3s ease;
-}
-
-@keyframes linePulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.7; }
-}
-
 
 /* ===== ANIMATED GRADIENT LINE ===== */
 .gradient-line {
@@ -514,6 +512,11 @@ h1, h2, h3 {
     100% { background-position: 0% 0%; }
 }
 
+/* ===== APPLICATION SECTION (SEPARATE) ===== */
+#application-section {
+    padding: 80px 0 100px;
+    background: var(--app-section-bg);
+}
 
 /* ===== PORTFOLIO SECTION ===== */
 #portfolio {
@@ -539,7 +542,16 @@ h1, h2, h3 {
     margin-bottom: 0;
 }
 
-/* Card Header */
+/* ===== APPLICATION CARDS (DISTINCT COLOR) ===== */
+.application-card {
+    background: var(--app-card-bg);
+    border: 1px solid var(--app-border);
+}
+
+.application-card:hover {
+    transform: translateY(-4px);
+}
+
 .card-header {
     display: flex;
     justify-content: space-between;
@@ -563,9 +575,6 @@ h1, h2, h3 {
     background: rgba(255, 255, 255, 0.05);
     border-radius: 20px;
     border: 1px solid var(--border-subtle);
-}
-
-.project-number {
     opacity: 0;
     transform: translateY(-10px);
     transition: opacity 0.5s ease 0.3s, transform 0.5s ease 0.3s;
@@ -576,9 +585,139 @@ h1, h2, h3 {
     transform: translateY(0);
 }
 
-/* ===== LAYOUT VARIATIONS ===== */
+/* ===== PROPOSAL CARD-ON-CARD DESIGN ===== */
+.proposal-item {
+    background: rgba(90, 143, 216, 0.06);
+    border-radius: 16px;
+    padding: 28px;
+    margin-bottom: 36px;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(90, 143, 216, 0.1);
+}
 
-/* Layout 1: Single Image + Description */
+.proposal-item:last-child {
+    margin-bottom: 0;
+}
+
+.proposal-item:hover {
+    transform: translateY(-6px);
+    border: 1px solid #5a8fd8;
+    background: rgba(90, 143, 216, 0.08);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+}
+
+/* ===== NOTEPAD PAPER EFFECT ===== */
+.proposal-content {
+    background: var(--notepad-bg);
+    background-image: repeating-linear-gradient(
+        transparent,
+        transparent calc(var(--line-height) - 1px),
+        var(--notepad-line) calc(var(--line-height) - 1px),
+        var(--notepad-line) var(--line-height)
+    );
+    background-position: 0 8px;
+    border-radius: 8px;
+    padding: 8px 32px 32px 32px;
+    box-shadow: 
+        0 2px 4px rgba(0, 0, 0, 0.08),
+        inset 0 0 0 1px rgba(0, 0, 0, 0.04);
+    position: relative;
+}
+
+.proposal-title {
+    font-family: 'Sugar Snow', cursive;
+    font-size: 1.875rem;
+    color: var(--text-light);
+    margin-bottom: 0;
+    font-weight: 700;
+    padding-left: 0;
+    line-height: calc(var(--line-height) * 1.5);
+    padding-top: calc(var(--line-height) * 0.5);
+    padding-bottom: calc(var(--line-height) * 1);
+}
+
+.proposal-section {
+    margin-bottom: 0;
+    padding-left: 0;
+}
+
+.proposal-section:last-child {
+    margin-bottom: 0;
+}
+
+.proposal-label {
+    font-size: 0.813rem;
+    color: var(--app-accent);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0;
+    line-height: var(--line-height);
+    padding-top: 0;
+}
+
+.proposal-text {
+    font-size: 1rem;
+    line-height: var(--line-height);
+    color: var(--notepad-text);
+    font-weight: 400;
+    margin-bottom: calc(var(--line-height) * 1);
+}
+
+/* ===== PROPOSAL IMAGES WITH CAPTIONS ===== */
+.proposal-images {
+    display: grid;
+    gap: 20px;
+    margin-top: calc(var(--line-height) * 1.5);
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.proposal-image-item {
+    display: flex;
+    flex-direction: column;
+    background: rgba(90, 143, 216, 0.06);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(90, 143, 216, 0.1);
+}
+
+.proposal-image-item:hover {
+    transform: translateY(-4px);
+    background: rgba(90, 143, 216, 0.1);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.proposal-image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 280px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.proposal-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: all 0.3s ease;
+}
+
+.proposal-image-wrapper:hover img {
+    transform: scale(1.05);
+}
+
+.proposal-image-caption {
+    padding: 14px 16px;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: var(--text-gray);
+    font-weight: 400;
+    background: rgba(26, 26, 36, 0.6);
+}
+
+/* ===== LAYOUT VARIATIONS ===== */
 .layout-single {
     display: grid;
     gap: 32px;
@@ -602,7 +741,6 @@ h1, h2, h3 {
     transform: scale(1.02);
 }
 
-/* Layout 2: Grid (Hero Image + Detail Grid) */
 .layout-grid {
     display: grid;
     gap: 32px;
@@ -645,7 +783,6 @@ h1, h2, h3 {
     transform: scale(1.05);
 }
 
-/* Layout 3: Comparison (Before/After) */
 .layout-comparison {
     display: grid;
     gap: 32px;
@@ -712,7 +849,7 @@ h1, h2, h3 {
 .media-container video {
     width: 100%;
     height: auto;
-    max-height: 70vh; /* Maximum 70% of viewport height */
+    max-height: 70vh;
     display: block;
     border: none;
     border-radius: 12px;
@@ -726,7 +863,6 @@ video {
     background: var(--bg-darker);
 }
 
-/* Mobile adjustments */
 @media (max-width: 768px) {
     .media-container iframe,
     .media-container video {
@@ -734,8 +870,7 @@ video {
     }
 }
 
-
-/* ===== LIGHTBOX WITH ANIMATIONS ===== */
+/* ===== LIGHTBOX ===== */
 #lightbox {
     display: none;
     position: fixed;
@@ -757,12 +892,8 @@ video {
 }
 
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 .lightbox-content {
@@ -824,7 +955,6 @@ video {
     transform: rotate(90deg) scale(1.1);
 }
 
-/* Mobile adjustments */
 @media (max-width: 768px) {
     .lightbox-close {
         top: 10px;
@@ -832,7 +962,6 @@ video {
         font-size: 36px;
     }
 }
-
 
 /* ===== BACK TO TOP BUTTON ===== */
 #back-to-top {
@@ -849,7 +978,7 @@ video {
     cursor: pointer;
     opacity: 0;
     visibility: hidden;
-    transition: all 0.3s ease, background 0.5s ease; /* Added background transition */
+    transition: all 0.3s ease, background 0.5s ease;
     z-index: 1000;
     display: flex;
     align-items: center;
@@ -863,10 +992,9 @@ video {
 
 #back-to-top:hover {
     transform: translateY(-4px) scale(1.05);
-    background: var(--blue); /* Changes to blue on hover */
+    background: var(--blue);
 }
 
-/* Circular Progress Indicator */
 .progress-ring {
     position: absolute;
     top: -4px;
@@ -882,10 +1010,9 @@ video {
     stroke: var(--purple);
     stroke-width: 3;
     stroke-linecap: round;
-    transition: stroke-dashoffset 0.1s linear, stroke 0.5s ease; /* Added stroke transition */
+    transition: stroke-dashoffset 0.1s linear, stroke 0.5s ease;
 }
 
-/* Change progress ring color on hover too */
 #back-to-top:hover .progress-ring__circle {
     stroke: var(--blue);
 }
@@ -905,7 +1032,6 @@ footer p {
 }
 
 /* ===== RESPONSIVE DESIGN ===== */
-
 @media (max-width: 968px) {
     .intro-content {
         gap: 60px;
@@ -930,6 +1056,22 @@ footer p {
     .project-card {
         padding: 40px;
     }
+
+    .proposal-title {
+        font-size: 1.5rem;
+    }
+
+    .proposal-content {
+        padding: 0 24px 24px 24px;
+    }
+
+    .proposal-content::before {
+        left: 40px;
+    }
+
+    .proposal-image-wrapper {
+        height: 240px;
+    }
 }
 
 @media (max-width: 768px) {
@@ -951,27 +1093,14 @@ footer p {
         flex: 0 0 auto;
         max-width: 320px;
         margin: 0 auto;
-        top: 0; /* Reset the push-down on mobile */
+        top: 0;
     }
     
-    .intro-image img {
-        width: 100%; /* reset to 100% on mobile */
-        transform: none; /* remove hover effect on mobile */
-    }
-    
-    .intro-text h1 {
-        font-size: 2.8rem;
-    }
-    
-    .intro-text p {
-        font-size: 1rem;
-    }
-
     .intro-image img,
     .portrait-static,
     .portrait-gif {
-        width: 100%; /* Reset to normal size on mobile */
-        transform: none; /* Remove centering transform on mobile */
+        width: 100%;
+        transform: none;
     }
 
     .image-caption {
@@ -981,13 +1110,47 @@ footer p {
         max-width: 180px;
     }
     
+    .intro-text h1 {
+        font-size: 2.8rem;
+    }
+    
+    .intro-text p {
+        font-size: 1rem;
+    }
+    
+    #application-section,
     #portfolio {
-        padding: 60px 0 80px;
+        padding: 60px 0;
     }
     
     .project-card {
         padding: 32px 24px;
         margin-bottom: 40px;
+    }
+
+    .proposal-content {
+        padding: 0 20px 20px 20px;
+    }
+
+    .proposal-content::before {
+        left: 36px;
+    }
+
+    .proposal-title {
+        font-size: 1.35rem;
+        padding-left: 12px;
+    }
+
+    .proposal-section {
+        padding-left: 12px;
+    }
+
+    .proposal-images {
+        grid-template-columns: 1fr;
+    }
+
+    .proposal-image-wrapper {
+        height: 220px;
     }
     
     .card-header {
@@ -1044,17 +1207,12 @@ footer p {
     .intro-image {
         max-width: 280px;
     }
-    
-    .intro-image img {
-        width: 100%;
-    }
 
     .image-caption {
         bottom: 12px;
         left: 12px;
         font-size: 0.75rem;
         max-width: 160px;
-        padding: 6px 10px;
     }
     
     .card-header h2 {
@@ -1064,6 +1222,27 @@ footer p {
     .project-card {
         padding: 24px 20px;
         border-radius: 16px;
+    }
+
+    .proposal-content {
+        padding: 0 16px 16px 16px;
+    }
+
+    .proposal-content::before {
+        left: 32px;
+    }
+
+    .proposal-title {
+        font-size: 1.25rem;
+        padding-left: 8px;
+    }
+
+    .proposal-section {
+        padding-left: 8px;
+    }
+
+    .proposal-image-wrapper {
+        height: 200px;
     }
     
     .media-container iframe,
