@@ -71,6 +71,8 @@
       gtag('config', 'G-VC30KXRECG');
     </script>
     
+    <!-- EmailJS SDK - MUST BE LOADED BEFORE about.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     
     <!-- CSS -->
      <link rel="stylesheet" href="./css/preloader.css">
@@ -358,7 +360,7 @@
                             </svg>
                             <div class="contact-details">
                                 <span class="contact-label">Email</span>
-                                <a href="/cdn-cgi/l/email-protection#56332331333833373822213f61656716313b373f3a7835393b" class="contact-value"><span class="__cf_email__" data-cfemail="97f2e2f0f2f9f2f6f9e3e0fea0a4a6d7f0faf6fefbb9f4f8fa">[email&#160;protected]</span></a>
+                                <a href="mailto:eugeneantwi731@gmail.com" class="contact-value">eugeneantwi731@gmail.com</a>
                             </div>
                         </div>
 
@@ -419,8 +421,7 @@
                     <!-- Right Side: Contact Form in Container -->
                     <div class="contact-form-container">
                         <h3>Send a Message</h3>
-                        <form id="contactForm" name="contact" method="POST" data-netlify="true" class="contact-form">
-                            <input type="hidden" name="form-name" value="contact" />
+                        <form id="contactForm" class="contact-form">
                             <div class="form-group">
                                 <label for="name">Name</label>
                                 <input 
@@ -581,8 +582,11 @@
     <script src="./js/preloader.js"></script>
     <script src="./js/navbar.js"></script>
     <script src="./js/lightrays.js"></script>
-       <script src="./js/scroll-to-top.js"></script>
+    <script src="./js/scroll-to-top.js"></script>
     <script src="./js/click-spark.js"></script>
+    <script src="./js/skeleton.js"></script>
+    <script src="./js/scripts.js"></script>
     <script src="./js/about.js"></script>
+    
 </body>
 </html>
