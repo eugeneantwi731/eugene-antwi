@@ -194,25 +194,22 @@ function initializeCVPatternRepel() {
     console.log('CV Pattern repel initialized with touch support');
 }
 
-// ===== CONTACT FORM HANDLER =====
+// ===== CONTACT FORM HANDLER - NETLIFY FORMS =====
 function initializeContactForm() {
     const form = document.getElementById('contactForm');
     const submitBtn = form?.querySelector('.submit-btn');
     const btnText = submitBtn?.querySelector('.btn-text');
     const btnLoading = submitBtn?.querySelector('.btn-loading');
     const formMessages = document.getElementById('formMessages');
-    
+
     if (!form) {
         console.log('Contact form not found');
         return;
     }
 
-    // Initialize EmailJS
-    emailjs.init("Iy2TmQhMFrZPbnpGe");
-
     form.addEventListener('submit', async function(e) {
         e.preventDefault();
-        
+
         // Disable button and show loading
         submitBtn.disabled = true;
         btnText.style.display = 'none';
@@ -220,37 +217,28 @@ function initializeContactForm() {
         formMessages.textContent = '';
         formMessages.className = 'form-messages';
 
-        // Get form data
-        const formData = {
-            name: document.getElementById('name').value,
-            email: document.getElementById('email').value,
-            message: document.getElementById('message').value
-        };
+        const formData = new FormData(form);
 
         try {
-            // Send email using EmailJS
-            const response = await emailjs.send(
-                "service_63yx83g",
-                "template_gk0l0zl",
-                {
-                    from_name: formData.name,
-                    from_email: formData.email,
-                    message: formData.message,
-                    to_name: "Eugene Antwi"
-                }
-            );
+            const response = await fetch('/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams(formData).toString()
+            });
 
-            console.log('Email sent successfully:', response);
+            if (response.ok) {
+                // Show success message
+                formMessages.textContent = 'Thank you! Your message has been sent successfully.';
+                formMessages.className = 'form-messages success';
 
-            // Show success message
-            formMessages.textContent = 'Thank you! Your message has been sent successfully.';
-            formMessages.className = 'form-messages success';
-
-            // Reset form
-            form.reset();
+                // Reset form
+                form.reset();
+            } else {
+                throw new Error('Form submission failed');
+            }
 
         } catch (error) {
-            console.error('Error sending email:', error);
+            console.error('Error sending message:', error);
 
             // Show error message
             formMessages.textContent = 'Oops! Something went wrong. Please try again or email me directly at eugeneantwi731@gmail.com';
@@ -263,7 +251,7 @@ function initializeContactForm() {
         }
     });
 
-    console.log('Contact form initialized');
+    console.log('Contact form initialized with Netlify Forms');
 }
 
 // ===== CONSOLE SIGNATURE =====
