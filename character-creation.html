@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en" style="--project-accent: #E8A87C;">
+<!--
+    PROJECT: Digital Character Creation
+    Accent:  #E8A87C  (warm skin-tone amber)
+    To change: update the ONE value on <html> above.
+-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Character Creation | Eugene Antwi</title>
+    <meta name="description" content="A photogrammetry pipeline for creating authentic Ghanaian digital characters, filling the gap in global 3D asset libraries.">
+    <meta name="keywords" content="Eugene Antwi, Ghanaian 3D assets, photogrammetry, character creation, DAZ, Metashape, Substance Painter">
+    <meta name="author" content="Eugene Antwi">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://eugene-antwi.com/character-creation.html">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://eugene-antwi.com/character-creation.html">
+    <meta property="og:title" content="Digital Character Creation | Eugene Antwi">
+    <meta property="og:description" content="A photogrammetry pipeline for creating authentic Ghanaian digital characters.">
+    <meta property="og:image" content="https://eugene-antwi.com/images/character-creation-og.png">
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://eugene-antwi.com/character-creation.html">
+    <meta property="twitter:title" content="Digital Character Creation | Eugene Antwi">
+    <meta property="twitter:description" content="A photogrammetry pipeline for creating authentic Ghanaian digital characters.">
+    <meta property="twitter:image" content="https://eugene-antwi.com/images/character-creation-og.png">
+    <link rel="icon" href="./images/eugene-antwi-favicon-1.svg" type="image/svg">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VC30KXRECG"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date()); gtag('config', 'G-VC30KXRECG');
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/preloader.css">
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="./css/navbar.css">
+    <link rel="stylesheet" href="./css/scroll-to-top.css">
+    <link rel="stylesheet" href="./css/click-spark.css">
+    <link rel="stylesheet" href="./css/footer.css">
+    <link rel="stylesheet" href="./css/project-single.css">
+    <script>
+        window.PS_SLIDES = [
+            './images/warrior-breakdown-cover.png',
+            './images/digital-avatar-cover.png',
+            './images/electragene-ignition-x-commercial-cover.png',
+        ];
+    </script>
+</head>
+<body>
+
+    <div class="site-preloader" id="sitePreloader">
+        <div class="preloader-logo"><img src="./images/eugene-antwi-logo-nav.svg" alt="Eugene Antwi Logo"></div>
+        <div class="preloader-leds">
+            <div class="led-indicator led-green" data-led="1"></div>
+            <div class="led-indicator led-purple" data-led="2"></div>
+            <div class="led-indicator led-blue" data-led="3"></div>
+            <div class="led-indicator led-cyan" data-led="4"></div>
+        </div>
+    </div>
+
+    <header class="site-header">
+        <div class="navbar-wrapper">
+            <nav class="navbar">
+                <a href="index.html" class="logo-container">
+                    <img src="./images/eugene-antwi-logo-nav.svg" alt="Eugene Antwi Logo" class="logo-icon">
+                    <span class="logo-text">EUGENE ANTWI</span>
+                </a>
+                <div class="nav-container">
+                    <ul class="nav-links" id="navLinks">
+                        <li class="nav-item" data-page="index"><a href="index.html" class="nav-link">Home</a></li>
+                        <li class="nav-item" data-page="work"><a href="work.html" class="nav-link">Work</a></li>
+                        <li class="nav-item active subpage" data-page="projects"><a href="projects.html" class="nav-link">Projects</a></li>
+                        <li class="nav-item" data-page="about"><a href="about.html" class="nav-link">About</a></li>
+                    </ul>
+                </div>
+                <button class="mobile-menu-toggle" aria-label="Toggle menu" id="mobileMenuToggle">
+                    <span></span><span></span><span></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO — click anywhere to advance, dots also work -->
+    <section class="ps-hero">
+        <div class="ps-hero-grid" id="psHeroGrid"></div>
+        <div class="ps-hero-overlay"></div>
+        <div class="ps-dots" id="psHeroDots"></div>
+        <div class="ps-hero-content">
+            <span class="ps-hero-tag">3D Pipeline · Character Development</span>
+            <h1 class="ps-hero-title">
+                Digital<br>
+                <em>Character</em><br>
+                Creation
+            </h1>
+            <div class="ps-hero-meta">
+                <div>
+                    <span class="ps-hero-meta-label">Status</span>
+                    <span class="ps-hero-meta-value">In Progress</span>
+                </div>
+                <div>
+                    <span class="ps-hero-meta-label">Started</span>
+                    <span class="ps-hero-meta-value">2025</span>
+                </div>
+                <div>
+                    <span class="ps-hero-meta-label">Role</span>
+                    <span class="ps-hero-meta-value">Pipeline Developer</span>
+                </div>
+            </div>
+            <div class="ps-hero-tools">
+                <span class="ps-hero-tool">Metashape</span>
+                <span class="ps-hero-tool">Wrap3D</span>
+                <span class="ps-hero-tool">FaceGen</span>
+                <span class="ps-hero-tool">DAZ Studio</span>
+                <span class="ps-hero-tool">Substance Painter</span>
+                <span class="ps-hero-tool">Photoshop</span>
+                <span class="ps-hero-tool">Blender</span>
+            </div>
+        </div>
+    </section>
+
+    <main class="ps-main">
+
+        <!-- 01 THE PROBLEM -->
+        <section class="ps-section ps-reveal">
+            <div class="ps-container">
+                <span class="ps-section-label">01 — The Problem</span>
+                <h2 class="ps-section-title">Ghanaian faces don't exist in global digital libraries</h2>
+                <p class="ps-body-text">
+                    Search Sketchfab or CGTrader for a Ghanaian character and you'll find generic,
+                    flattened <strong>"African" representations</strong> with wrong proportions, wrong skin texture,
+                    wrong features. Creatives across Ghana are borrowing <em>foreign assets to tell local stories</em>,
+                    and the technical execution is often flawless. But the authenticity is absent.
+                </p>
+                <p class="ps-body-text">
+                    This project addresses that gap directly. Using <strong>photogrammetry</strong> and a carefully
+                    developed pipeline, I am building a library of digital characters from real Ghanaian subjects,
+                    starting with human characters and expanding into objects and architecture.
+                </p>
+                <div class="ps-meta-grid">
+                    <div class="ps-meta-cell">
+                        <span class="ps-meta-cell-label">Focus</span>
+                        <span class="ps-meta-cell-value">Human Characters</span>
+                    </div>
+                    <div class="ps-meta-cell">
+                        <span class="ps-meta-cell-label">Expanding To</span>
+                        <span class="ps-meta-cell-value">Objects & Architecture</span>
+                    </div>
+                    <div class="ps-meta-cell">
+                        <span class="ps-meta-cell-label">Distribution</span>
+                        <span class="ps-meta-cell-value">Students (Free) then Sketchfab</span>
+                    </div>
+                    <div class="ps-meta-cell">
+                        <span class="ps-meta-cell-label">Status</span>
+                        <span class="ps-meta-cell-value">
+                            <span class="ps-status-led active" aria-label="Active"></span>
+                            Active
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 02 THE PIPELINE — merged with visuals, stage by stage -->
+        <section class="ps-section ps-reveal">
+            <div class="ps-container">
+                <span class="ps-section-label">02 — The Pipeline</span>
+                <h2 class="ps-section-title">From real person to production-ready asset</h2>
+                <p class="ps-body-text">
+                    Seven stages, each with a defined input and output. The same sequence runs
+                    on every subject, which is what makes it scalable.
+                </p>
+
+                <div class="ps-pipeline">
+
+                    <!-- STAGE 01: Scouting — text only -->
+                    <div class="ps-pipeline-step ps-step-text-only">
+                        <div class="ps-step-text">
+                            <span class="ps-step-num">01 — Scouting</span>
+                            <div class="ps-step-title">Finding the right subjects</div>
+                            <p class="ps-step-desc">
+                                I look for subjects with <strong>distinct faces and exaggerated features</strong>:
+                                strong brow bones, pronounced cheekbones, character-rich skin.
+                                These hold up better at lower polygon counts and produce more
+                                interesting variations when aged or stylised downstream.
+                                <em>Authenticity starts here.</em>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- STAGE 02: Photography — image right -->
+                    <div class="ps-pipeline-step">
+                        <div class="ps-step-text">
+                            <span class="ps-step-num">02 — Photography</span>
+                            <div class="ps-step-title">360 degrees of reference</div>
+                            <p class="ps-step-desc">
+                                <strong>Three height levels</strong> around the head, full-figure
+                                front, side, and back in A-pose. Close-up detail shots capture
+                                pores, wrinkles, and pigment variation that procedural tools
+                                cannot replicate later. Every shot is a texture reference
+                                as much as it is a geometry reference.
+                            </p>
+                        </div>
+                        <div class="ps-step-visual ps-blur-in" data-blur-delay="0.1"
+                             data-lightbox-src="./images/pipeline-photography.jpg"
+                             data-lightbox-caption="360 degree photography setup">
+                            <!-- Replace with: <img src="./images/pipeline-photography.jpg" alt="Photography session"> -->
+                            <div style="position:absolute;inset:0;background:linear-gradient(135deg,#0f2a1a,#1a4a2a);"></div>
+                            <div class="ps-step-visual-overlay">+</div>
+                        </div>
+                    </div>
+
+                    <!-- STAGE 03: Metashape — image left (flipped) -->
+                    <div class="ps-pipeline-step ps-step-flipped">
+                        <div class="ps-step-text">
+                            <span class="ps-step-num">03 — Metashape Processing</span>
+                            <div class="ps-step-title">Point cloud to mesh</div>
+                            <p class="ps-step-desc">
+                                Images go into Metashape. Unusable frames are removed first.
+                                Then: point cloud, dense cloud, mesh, textures.
+                                The process is largely automated, but I manually clean
+                                <strong>stray geometry</strong> that floats off the surface.
+                                The output is a high-poly scan mesh and a raw diffuse texture bake.
+                            </p>
+                        </div>
+                        <div class="ps-step-visual ps-blur-in" data-blur-delay="0.1"
+                             data-lightbox-src="./images/pipeline-metashape.jpg"
+                             data-lightbox-caption="Dense point cloud in Metashape">
+                            <!-- Replace with: <img src="./images/pipeline-metashape.jpg" alt="Metashape point cloud"> -->
+                            <div style="position:absolute;inset:0;background:linear-gradient(135deg,#0a0a1a,#1a1a3a);"></div>
+                            <div class="ps-step-visual-overlay">+</div>
+                        </div>
+                    </div>
+
+                    <!-- STAGE 04: Shape Transfer — image right -->
+                    <div class="ps-pipeline-step">
+                        <div class="ps-step-text">
+                            <span class="ps-step-num">04 — Shape Transfer</span>
+                            <div class="ps-step-title">Scan shape onto a rig-ready mesh</div>
+                            <p class="ps-step-desc">
+                                The scan's shape is transferred onto a <strong>Genesis 9 base mesh</strong>
+                                via Wrap3D or FaceGen, then loaded back into DAZ as a morph target.
+                                The subject's proportions now live inside a mesh that is already
+                                <em>rigged, weighted, and compatible</em> with thousands of
+                                existing DAZ assets.
+                            </p>
+                        </div>
+                        <div class="ps-step-visual ps-blur-in" data-blur-delay="0.1"
+                             data-lightbox-src="./images/pipeline-shape-transfer.jpg"
+                             data-lightbox-caption="Scan shape transferred to Genesis 9 base mesh">
+                            <!-- Replace with: <img src="./images/pipeline-shape-transfer.jpg" alt="Shape transfer result"> -->
+                            <div style="position:absolute;inset:0;background:linear-gradient(135deg,#1a0f2a,#2a1a3a);"></div>
+                            <div class="ps-step-visual-overlay">+</div>
+                        </div>
+                    </div>
+
+                    <!-- STAGE 05: DAZ Refinement — image left (flipped) -->
+                    <div class="ps-pipeline-step ps-step-flipped">
+                        <div class="ps-step-text">
+                            <span class="ps-step-num">05 — DAZ Refinement</span>
+                            <div class="ps-step-title">Proportions dialled in</div>
+                            <p class="ps-step-desc">
+                                Proportions are refined against the A-pose reference photos,
+                                matching the real subject's body ratios. The morph system also
+                                allows <em>aging or de-aging</em> the character without
+                                rebuilding from scratch. One scan can produce
+                                <strong>multiple age variations</strong> of the same person.
+                            </p>
+                        </div>
+                        <div class="ps-step-visual ps-blur-in" data-blur-delay="0.1"
+                             data-lightbox-src="./images/pipeline-daz-refinement.jpg"
+                             data-lightbox-caption="DAZ Studio morph refinement">
+                            <!-- Replace with: <img src="./images/pipeline-daz-refinement.jpg" alt="DAZ Studio viewport"> -->
+                            <div style="position:absolute;inset:0;background:linear-gradient(135deg,#0f3460,#1a2a4a);"></div>
+                            <div class="ps-step-visual-overlay">+</div>
+                        </div>
+                    </div>
+
+                    <!-- STAGE 06: Texturing — 2x2 PBR map grid -->
+                    <div class="ps-pipeline-step">
+                        <div class="ps-step-text">
+                            <span class="ps-step-num">06 — Texturing</span>
+                            <div class="ps-step-title">Four maps. One real person.</div>
+                            <p class="ps-step-desc">
+                                UVs go into <strong>Substance Painter</strong>. The base is built
+                                from the photogrammetry diffuse bake. Skin details including
+                                <em>pores, subsurface variation, pigment patches</em>
+                                are finished in Photoshop because no procedural generator
+                                can replicate how a specific person's skin actually looks.
+                                Four maps carry all of it.
+                            </p>
+                        </div>
+                        <!-- 2x2 PBR map grid in the visual pane -->
+                        <div class="ps-step-visual">
+                            <div class="ps-step-texture-grid">
+
+                                <div class="ps-step-texture-tile"
+                                     data-lightbox-src="./images/texture-diffuse.png"
+                                     data-lightbox-caption="Diffuse / Base Color Map">
+                                    <img src="./images/texture-diffuse.png" alt="Diffuse map"> 
+                                    <!-- <div style="background:linear-gradient(135deg,#3a1a0a,#7a3a1a);"></div> -->
+                                    <span class="ps-step-texture-label">Diffuse</span>
+                                    <div class="ps-tile-overlay">+</div>
+                                </div>
+
+                                <div class="ps-step-texture-tile"
+                                     data-lightbox-src="./images/texture-normal.png"
+                                     data-lightbox-caption="Normal Map">
+                                     <img src="./images/texture-normal.png" alt="Normal map"> 
+                                    <!-- <div style="background:linear-gradient(135deg,#0a1a3a,#1a3a7a);"></div> --> 
+                                    <span class="ps-step-texture-label">Normal</span>
+                                    <div class="ps-tile-overlay">+</div>
+                                </div>
+
+                                <div class="ps-step-texture-tile"
+                                     data-lightbox-src="./images/texture-roughness.png"
+                                     data-lightbox-caption="Roughness Map">
+                                    <img src="./images/texture-roughness.png" alt="Roughness map"> 
+                                    <!-- <div style="background:linear-gradient(135deg,#1a1a1a,#3a3a3a);"></div> --> 
+                                    <span class="ps-step-texture-label">Roughness</span>
+                                    <div class="ps-tile-overlay">+</div>
+                                </div>
+
+                                <div class="ps-step-texture-tile"
+                                     data-lightbox-src="./images/texture-displacement.png"
+                                     data-lightbox-caption="Displacement Map">
+                                    <img src="./images/texture-displacement.png" alt="Displacement map"> 
+                                    <!-- <div style="background:linear-gradient(135deg,#0a1a0a,#1a3a1a);"></div> -->
+                                    <span class="ps-step-texture-label">Displacement</span>
+                                    <div class="ps-tile-overlay">+</div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- STAGE 07: Export — text only -->
+                    <div class="ps-pipeline-step ps-step-text-only">
+                        <div class="ps-step-text">
+                            <span class="ps-step-num">07 — Export & Distribution</span>
+                            <div class="ps-step-title">Into any pipeline, for free</div>
+                            <p class="ps-step-desc">
+                                Characters export as <strong>FBX, OBJ, or GLTF</strong> with all maps packed.
+                                Because the base is Genesis 9, they drop cleanly into Blender, Cinema 4D,
+                                Maya, and Unreal with no retopology needed. Currently distributed
+                                <em>free to students at KNUST</em>, with a planned public release on
+                                Sketchfab and CGTrader.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- 03 FINAL PIECES — the showcase -->
+        <section class="ps-section ps-reveal">
+            <div class="ps-container">
+                <span class="ps-section-label">03 — Final Pieces</span>
+                <h2 class="ps-section-title">Characters built through this pipeline</h2>
+                <p class="ps-body-text">
+                    Each character starts from a real Ghanaian subject. Some are rendered faithfully.
+                    Others are pushed into <em>stylised territory</em> to show the range the pipeline
+                    supports. All are production-ready and export-ready.
+                </p>
+
+                <!--
+                    FINAL PIECES GRID — asymmetric editorial layout, 5 characters.
+                    For 4 characters, add class ps-final-4 to ps-final-grid.
+
+                    To add a character:
+                    1. Replace the placeholder <div> inside .ps-final-card with:
+                       <img src="./images/YOUR-CHARACTER.jpg" alt="Character name">
+                    2. Update ps-final-card-name and ps-final-card-type text.
+                    3. Update data-lightbox-src and data-lightbox-caption.
+                -->
+                <div class="ps-final-grid">
+
+                    <div class="ps-final-card ps-blur-in" data-blur-delay="0"
+                         data-lightbox-src="./images/delali.png"
+                         data-lightbox-caption="Delali — Realistic · Genesis 9">
+                        <img src="./images/delali.png" alt="Delali">
+                        <!-- <div class="ps-final-placeholder">Character 01</div>
+                        <div style="position:absolute;inset:0;background:linear-gradient(135deg,#1a0a05,#3a1a0a);"></div> -->
+                        <div class="ps-final-card-info">
+                            <span class="ps-final-card-name">Delali</span>
+                            <span class="ps-final-card-type">Realistic</span>
+                        </div>
+                    </div>
+
+                    <div class="ps-final-card ps-blur-in" data-blur-delay="0.07"
+                         data-lightbox-src="./images/character-02-full.jpg"
+                         data-lightbox-caption="Asantewaa — Stylised · Genesis 9">
+                        <img src="./images/btha-portrait.png" alt="Asantewaa">
+                        <div class="ps-final-placeholder">Character 02</div>
+                        <!-- <div style="position:absolute;inset:0;background:linear-gradient(135deg,#0a1a1a,#0a2a2a);"></div>  -->
+                        <div class="ps-final-card-info">
+                            <span class="ps-final-card-name">Asantewaa</span>
+                            <span class="ps-final-card-type">Stylised</span>
+                        </div>
+                    </div>
+
+                    <div class="ps-final-card ps-blur-in" data-blur-delay="0.12"
+                         data-lightbox-src="./images/ampadu.png"
+                         data-lightbox-caption="Ampadu — Realistic · Genesis 9">
+                        <img src="./images/ampadu.png" alt="Ampadu">
+                        <div class="ps-final-placeholder">Character 03</div>
+                        <!-- <div style="position:absolute;inset:0;background:linear-gradient(135deg,#0f1a2a,#1a2a3a);"></div> -->
+                        <div class="ps-final-card-info">
+                            <span class="ps-final-card-name">Ampadu</span>
+                            <span class="ps-final-card-type">Realistic</span>
+                        </div>
+                    </div>
+
+                    <div class="ps-final-card ps-blur-in" data-blur-delay="0.17"
+                         data-lightbox-src="./images/akwaaba.png"
+                         data-lightbox-caption="Akwaaba — Realistic · Genesis 9">
+                        <img src="./images/akwaaba.png" alt="Akwaaba">
+                        <div class="ps-final-placeholder">Character 04</div>
+                        <!-- <div style="position:absolute;inset:0;background:linear-gradient(135deg,#1a0a0f,#2a1a1a);"></div> -->
+                        <div class="ps-final-card-info">
+                            <span class="ps-final-card-name">Akwaaba</span>
+                            <span class="ps-final-card-type">Realistic</span>
+                        </div>
+                    </div>
+
+                    <div class="ps-final-card ps-blur-in" data-blur-delay="0.22"
+                         data-lightbox-src="./images/yaa.png"
+                         data-lightbox-caption="Yaa — Realistic · Genesis 9">
+                        <img src="./images/yaa.png" alt="Yaa">
+                        <div class="ps-final-placeholder">Character 05</div>
+                        <!-- <div style="position:absolute;inset:0;background:linear-gradient(135deg,#0a0a1a,#1a1a2a);"></div> -->
+                        <div class="ps-final-card-info">
+                            <span class="ps-final-card-name">Yaa</span>
+                            <span class="ps-final-card-type">Realistic</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- 04 BEFORE / AFTER -->
+        <section class="ps-section ps-reveal">
+            <div class="ps-container">
+                <span class="ps-section-label">04 — Before & After</span>
+                <h2 class="ps-section-title">Reference photo vs finished character</h2>
+                <p class="ps-body-text">
+                    The goal at shape transfer is a <strong>one-to-one proportion match</strong> before
+                    texturing begins. Drag the slider to see how close the Genesis 9 morph
+                    gets to the <em>real subject's front-view reference photo</em>.
+                </p>
+                <div class="ps-ba-wrap">
+                    <div class="ps-ba-sizer">
+                        <div class="ps-ba-inner" id="psBaInner">
+                            <!-- BEFORE panel: sits beneath as the base layer -->
+                            <div class="ps-ba-before">
+                                <img src="./images/character-reference-front.png" alt="Reference photo">
+                                <span class="ps-ba-badge">Reference Photo</span>
+                            </div>
+                            <!-- AFTER panel: clipped from the left — reveals right portion -->
+                            <div class="ps-ba-after" id="psBaAfter">
+                                <img src="./images/character-mesh.png" alt="Mesh">
+                                <span class="ps-ba-badge">Mesh</span>
+                            </div>
+                            <div class="ps-ba-divider" id="psBaDivider"></div>
+                            <div class="ps-ba-handle" id="psBaHandle"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 05 3D VIEWER -->
+        <section class="ps-section ps-reveal">
+            <div class="ps-container">
+                <span class="ps-section-label">05 — 3D Viewer</span>
+                <h2 class="ps-section-title">Explore the character in 3D</h2>
+                <p class="ps-body-text">
+                    Rotate, zoom, and inspect the topology and textures directly in your browser.
+                </p>
+                <div class="ps-3d-wrap">
+                    <div class="ps-3d-ratio">
+                        <iframe
+                            title="Character 3D Viewer"
+                            src="https://sketchfab.com/models/YOUR_SKETCHFAB_MODEL_ID/embed"
+                            allow="autoplay; fullscreen; xr-spatial-tracking"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 06 VIDEO -->
+        <section class="ps-section ps-reveal">
+            <div class="ps-container">
+                <span class="ps-section-label">06 — Process Video</span>
+                <h2 class="ps-section-title">The full pipeline, start to finish</h2>
+                <p class="ps-body-text">
+                    A real-time walkthrough of one complete character going through every stage
+                    of the pipeline, from photography session to final export.
+                </p>
+                <div class="ps-video-wrap" data-video-url="./videos/delali-photogrammetry-process.mp4">
+                    <div class="ps-video-ratio">
+                        <div class="ps-video-inner">
+                            <img src="./images/delali-process-thumbnail.png" alt="Pipeline walkthrough">
+                            <!-- <div style="position:absolute;inset:0;background:linear-gradient(135deg,#0f3460,#1a1a2e);"></div> -->
+                            <div class="ps-video-play">&#9654;</div>
+                            <span class="ps-video-label">Pipeline Walkthrough</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 07 DISTRIBUTION & IMPACT -->
+        <section class="ps-section ps-reveal">
+            <div class="ps-container">
+                <span class="ps-section-label">07 — Distribution & Impact</span>
+                <h2 class="ps-section-title">Who these are for</h2>
+                <p class="ps-body-text">
+                    These characters are distributed <strong>free to students at KNUST</strong>.
+                    The goal is to put authentic Ghanaian assets in the hands of the next generation
+                    of digital artists from day one, so they never have to darken a foreign stock
+                    image to tell a local story.
+                </p>
+                <p class="ps-body-text">
+                    The longer-term plan is a public release on <strong>Sketchfab and CGTrader</strong>,
+                    feeding directly into the broader <em>African digital assets platform</em> project.
+                    These characters are its proof of concept.
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- PROJECT NAVIGATION
+         This is the FIRST project: prev = back to all projects (uses --green on hover).
+         Next project uses --project-accent on hover.
+         For middle projects: remove ps-nav-back from the prev card. -->
+    <div class="ps-project-nav ps-reveal">
+        <a href="projects.html" class="ps-nav-card ps-nav-prev ps-nav-back">
+            <div class="ps-nav-thumb"></div>
+            <div class="ps-nav-content">
+                <span class="ps-nav-dir">All Projects</span>
+                <span class="ps-nav-title">Back to Projects</span>
+                <span class="ps-nav-arrow">&#8592;</span>
+            </div>
+        </a>
+        <a href="./mybusinessgh.html" class="ps-nav-card ps-nav-next">
+            <div class="ps-nav-thumb">
+                <!-- <img src="./images/mybusinessgh-thumb.png" alt=""> -->
+            </div>
+            <div class="ps-nav-content">
+                <span class="ps-nav-dir">Next Project</span>
+                <span class="ps-nav-title">MyBusinessGH</span>
+                <span class="ps-nav-arrow">&#8594;</span>
+            </div>
+        </a>
+    </div>
+
+    <div class="ps-lightbox" id="psLightbox">
+        <div class="ps-lightbox-inner" id="psLightboxInner">
+            <button class="ps-lightbox-close" id="psLightboxClose">&#10005;</button>
+            <button class="ps-lightbox-prev" id="psLightboxPrev">&#8249;</button>
+            <button class="ps-lightbox-next" id="psLightboxNext">&#8250;</button>
+            <img id="psLightboxImg" src="" alt="">
+            <span class="ps-lightbox-caption" id="psLightboxCaption"></span>
+        </div>
+    </div>
+
+    <button id="back-to-top" aria-label="Back to top">
+        <svg class="progress-ring" width="64" height="64">
+            <circle class="progress-ring__circle" stroke-dasharray="188.5 188.5" stroke-dashoffset="188.5" cx="32" cy="32" r="30"></circle>
+        </svg>
+        &#8593;
+    </button>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="work.html">Work</a></li>
+                        <li><a href="projects.html">Projects</a></li>
+                        <li><a href="tutorials.html">Tutorials</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="cv.html">CV</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section social-section">
+                    <h4>Let's Connect</h4>
+                    <div class="social-icons">
+                        <a href="https://www.behance.net/eugeneantwi" target="_blank" rel="noopener" title="Behance">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M22 7h-7v-2h7v2zm1.726 10c-.442 1.297-2.029 3-5.101 3-3.074 0-5.564-1.729-5.564-5.675 0-3.91 2.325-5.92 5.466-5.92 3.082 0 4.964 1.782 5.375 4.426.078.506.109 1.188.095 2.14h-8.027c.13 3.211 3.483 3.312 4.588 2.029h3.168zm-7.686-4h4.965c-.105-1.547-1.136-2.219-2.477-2.219-1.466 0-2.277.768-2.488 2.219zm-9.574 6.988h-6.466v-14.967h6.953c5.476.081 5.58 5.444 2.72 6.906 3.461 1.26 3.577 8.061-3.207 8.061zm-3.466-8.988h3.584c2.508 0 2.906-3-.312-3h-3.272v3zm3.391 3h-3.391v3.016h3.341c3.055 0 2.868-3.016.05-3.016z"/></svg>
+                        </a>
+                        <a href="https://www.linkedin.com/in/eugene-antwi-067a82197/" target="_blank" rel="noopener" title="LinkedIn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                        </a>
+                        <a href="https://youtube.com/@proeugenelabs?si=oMljuUyEPGHShmjL" target="_blank" rel="noopener" title="YouTube">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
+                        </a>
+                        <a href="https://www.instagram.com/pro.youjin/" target="_blank" rel="noopener" title="Instagram">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                        </a>
+                        <a href="https://eugeneantwi7.artstation.com/" target="_blank" rel="noopener" title="ArtStation">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M0 17.723l2.027 3.505h.001a2.424 2.424 0 0 0 2.164 1.333h13.457l-2.792-4.838H0zm24 .025c0-.484-.143-.935-.388-1.314L15.728 2.728a2.424 2.424 0 0 0-2.142-1.289H9.419L21.598 22.54l1.92-3.325c.378-.637.482-.919.482-1.467zm-11.129-3.462L7.428 4.858l-5.444 9.428h10.887z"/></svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-section footer-logo-section">
+                    <img src="./images/eugene-antwi-logo-nav.svg" alt="Eugene Antwi Logo" class="footer-logo-icon">
+                    <div class="footer-logo-text">EUGENE ANTWI</div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Eugene Ampadu Antwi. All rights reserved.</p>
+                <p>Designer | Animator | Educator</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="./js/preloader.js"></script>
+    <script src="./js/navbar.js"></script>
+    <script src="./js/lightrays.js"></script>
+    <script src="./js/scroll-to-top.js"></script>
+    <script src="./js/click-spark.js"></script>
+    <script src="./js/skeleton.js"></script>
+    <script src="./js/project-single.js"></script>
+
+</body>
+</html>

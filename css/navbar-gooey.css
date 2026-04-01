@@ -1,0 +1,94 @@
+/* ===== MORPHING PILL NAV EFFECT =====
+   Desktop only — mobile dropdown untouched
+   No filter trick — works on glass/transparent navbars
+   ============================= */
+
+/* ===== WHITE PILL ===== */
+.gnav-pill {
+    position: absolute;
+    border-radius: 100vw;
+    background: white;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 1;
+    /* transition set dynamically by JS */
+}
+
+/* ===== PARTICLE CONTAINER ===== */
+.gnav-particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+    z-index: 10;
+    overflow: visible;
+}
+
+/* ===== PARTICLES ===== */
+.gnav-particle,
+.gnav-point {
+    display: block;
+    opacity: 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    transform-origin: center;
+}
+
+.gnav-particle {
+    position: absolute;
+    top:  -10px;
+    left: -10px;
+    animation: gnav-particle-move calc(var(--time, 1.2s)) ease 1 -350ms;
+}
+
+.gnav-point {
+    background: var(--color, white);
+    opacity: 1;
+    animation: gnav-point-scale calc(var(--time, 1.2s)) ease 1 -350ms;
+}
+
+@keyframes gnav-particle-move {
+    0% {
+        transform: rotate(0deg) translate(var(--start-x), var(--start-y));
+        opacity: 1;
+        animation-timing-function: cubic-bezier(0.55, 0, 1, 0.45);
+    }
+    70% {
+        transform: rotate(calc(var(--rotate) * 0.5))
+                   translate(calc(var(--end-x) * 1.2), calc(var(--end-y) * 1.2));
+        opacity: 1;
+        animation-timing-function: ease;
+    }
+    85% {
+        transform: rotate(calc(var(--rotate) * 0.66))
+                   translate(var(--end-x), var(--end-y));
+        opacity: 1;
+    }
+    100% {
+        transform: rotate(calc(var(--rotate) * 1.2))
+                   translate(calc(var(--end-x) * 0.5), calc(var(--end-y) * 0.5));
+        opacity: 0;
+    }
+}
+
+@keyframes gnav-point-scale {
+    0%   { transform: scale(0); opacity: 0; animation-timing-function: cubic-bezier(0.55, 0, 1, 0.45); }
+    25%  { transform: scale(calc(var(--scale) * 0.25)); }
+    38%  { opacity: 1; }
+    65%  { transform: scale(var(--scale)); opacity: 1; animation-timing-function: ease; }
+    85%  { transform: scale(var(--scale)); opacity: 1; }
+    100% { transform: scale(0); opacity: 0; }
+}
+
+/* ===== DESKTOP ONLY ===== */
+@media (max-width: 768px) {
+    .gnav-pill,
+    .gnav-particles,
+    .gnav-particle,
+    .gnav-point {
+        display: none !important;
+    }
+}

@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en" style="--project-accent: #F5A623;">
+<!--
+    PROJECT: MyBusinessGH
+    Accent:  #F5A623  (brand golden yellow)
+    Filter:  branding design
+    To change accent update the ONE value on <html> above.
+-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyBusinessGH | Eugene Antwi</title>
+    <meta name="description" content="Mascot design, logo redesign, and UI direction for MyBusinessGH — a Ghanaian invoice and record-keeping app currently in testing on the Play Store.">
+    <meta name="keywords" content="Eugene Antwi, MyBusinessGH, mascot design, logo redesign, DAZ Studio, Ghanaian app, character design">
+    <meta name="author" content="Eugene Antwi">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://eugene-antwi.com/mybusinessgh.html">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://eugene-antwi.com/mybusinessgh.html">
+    <meta property="og:title" content="MyBusinessGH | Eugene Antwi">
+    <meta property="og:description" content="Mascot design, logo redesign, and UI direction for MyBusinessGH.">
+    <meta property="og:image" content="https://eugene-antwi.com/images/mybusinessgh-og.png">
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://eugene-antwi.com/mybusinessgh.html">
+    <meta property="twitter:title" content="MyBusinessGH | Eugene Antwi">
+    <meta property="twitter:description" content="Mascot design, logo redesign, and UI direction for MyBusinessGH.">
+    <meta property="twitter:image" content="https://eugene-antwi.com/images/mybusinessgh-og.png">
+    <link rel="icon" href="./images/eugene-antwi-favicon-1.svg" type="image/svg">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VC30KXRECG"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date()); gtag('config', 'G-VC30KXRECG');
+    </script>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sugar+Snow&display=swap" rel="stylesheet">
+
+    <!-- Site CSS -->
+    <link rel="stylesheet" href="./css/preloader.css">
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="./css/navbar.css">
+    <link rel="stylesheet" href="./css/footer.css">
+    <link rel="stylesheet" href="./css/scroll-to-top.css">
+    <link rel="stylesheet" href="./css/click-spark.css">
+    <link rel="stylesheet" href="./css/skeleton.css">
+    <link rel="stylesheet" href="./css/project-single.css">
+
+    <!-- Hero slideshow images — update paths when final renders are ready -->
+    <script>
+        window.PS_SLIDES = [
+            './images/mybusinessgh-hero-01.png',
+            './images/mybusinessgh-hero-02.png',
+            './images/mybusinessgh-hero-03.png',
+        ];
+    </script>
+</head>
+
+<body>
+
+    <!-- PRELOADER -->
+    <div class="site-preloader" id="sitePreloader">
+        <div class="preloader-logo">
+            <img src="./images/eugene-antwi-logo-nav.svg" alt="Eugene Antwi Logo">
+        </div>
+        <div class="preloader-leds">
+            <div class="led-indicator led-green"  data-led="1"></div>
+            <div class="led-indicator led-purple" data-led="2"></div>
+            <div class="led-indicator led-blue"   data-led="3"></div>
+            <div class="led-indicator led-cyan"   data-led="4"></div>
+        </div>
+    </div>
+
+    <!-- NAVBAR -->
+    <header class="site-header">
+        <div class="navbar-wrapper">
+            <nav class="navbar">
+                <a href="index.html" class="logo-container">
+                    <img src="./images/eugene-antwi-logo-nav.svg" alt="Eugene Antwi Logo" class="logo-icon">
+                    <span class="logo-text">EUGENE ANTWI</span>
+                </a>
+                <div class="nav-container">
+                    <ul class="nav-links" id="navLinks">
+                        <li class="nav-item"                data-page="index">   <a href="index.html"    class="nav-link">Home</a></li>
+                        <li class="nav-item"                data-page="work">    <a href="work.html"     class="nav-link">Work</a></li>
+                        <li class="nav-item active subpage" data-page="projects"><a href="projects.html" class="nav-link">Projects</a></li>
+                        <li class="nav-item"                data-page="about">   <a href="about.html"    class="nav-link">About</a></li>
+                    </ul>
+                </div>
+                <button class="mobile-menu-toggle" aria-label="Toggle menu" id="mobileMenuToggle">
+                    <span></span><span></span><span></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="ps-hero">
+        <div class="ps-hero-grid" id="psHeroGrid"></div>
+        <div class="ps-hero-overlay"></div>
+        <div class="ps-dots" id="psHeroDots"></div>
+        <div class="ps-hero-content">
+            <span class="ps-hero-tag">Mascot Design · Branding · UI Direction</span>
+            <h1 class="ps-hero-title">
+                My<em>Business</em><br>GH
+            </h1>
+            <div class="ps-hero-meta">
+                <div>
+                    <span class="ps-hero-meta-label">Status</span>
+                    <span class="ps-hero-meta-value">In Progress</span>
+                </div>
+                <div>
+                    <span class="ps-hero-meta-label">Started</span>
+                    <span class="ps-hero-meta-value">2025</span>
+                </div>
+                <div>
+                    <span class="ps-hero-meta-label">Role</span>
+                    <span class="ps-hero-meta-value">Mascot Designer · Brand Designer</span>
+                </div>
+                <div>
+                    <span class="ps-hero-meta-label">Client</span>
+                    <span class="ps-hero-meta-value">MyBusinessGH</span>
+                </div>
+            </div>
+            <div class="ps-hero-tools">
+                <span class="ps-hero-tool">DAZ Studio</span>
+                <span class="ps-hero-tool">Cinema 4D</span>
+                <span class="ps-hero-tool">Illustrator</span>
+                <span class="ps-hero-tool">Photoshop</span>
+                <span class="ps-hero-tool">HTML · CSS · JS</span>
+            </div>
+        </div>
+    </section>
+
+    <main class="ps-main">
+
+        <!-- 01 THE BRIEF -->
+        <section class="ps-section ps-reveal">
+            <div class="ps-container">
+                <span class="ps-section-label">01 — The Brief</span>
+                <h2 class="ps-section-title">A Ghanaian business app that needed a face</h2>
+                <p class="ps-body-text">
+                    MyBusinessGH is an invoice and record-keeping app built for small business owners
+                    in Ghana, currently in testing on the Google Play Store. The product works.
+                    What it needed was a <strong>visual identity strong enough to carry it into market</strong>
+                    — something people would recognise, connect with, and trust.
+                </p>
+                <p class="ps-body-text">
+                    I was brought in to design a mascot for advertising and marketing materials.
+                    That brief quickly expanded: the logo needed a rethink, the app icon needed
+                    a proper system, and eventually the UI itself became part of the conversation.
+                    This page documents the work so far — the mascot, the logo redesign,
+                    and the UI direction still in progress.
+                </p>
+                <div class="ps-meta-grid">
+                    <div class="ps-meta-cell">
+                        <span class="ps-meta-cell-label">Platform</span>
+                        <span class="ps-meta-cell-value">Android (Play Store)</span>
+                    </div>
+                    <div class="ps-meta-cell">
+                        <span class="ps-meta-cell-label">Product Type</span>
+                        <span class="ps-meta-cell-value">Invoice & Records App</span>
+                    </div>
+                    <div class="ps-meta-cell">
+                        <span class="ps-meta-cell-label">My Scope</span>
+                        <span class="ps-meta-cell-value">Mascot · Logo · UI</span>
+                    </div>
+                    <div class="ps-meta-cell">
+                        <span class="ps-meta-cell-label">Status</span>
+                        <span class="ps-meta-cell-value">
+                            <span class="ps-status-led active" aria-label="Active"></span>
+                            Active
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 02 MASCOT DESIGN -->
+        <section class="ps-section ps-reveal">
+            <div class="ps-container">
+                <span class="ps-section-label">02 — Mascot Design</span>
+                <h2 class="ps-section-title">Built in 3D, shaded to look 2D</h2>
+                <p class="ps-body-text">
+                    The mascot needed to feel Ghanaian, approachable, and professional — someone a
+                    small business owner would trust as a guide through the app. The direction: a
+                    young Ghanaian woman in a branded polo, confident but warm. Not a generic clipart
+                    character. An actual character with weight, texture, and presence.
+                </p>
+                <p class="ps-body-text">
+                    She was built in <strong>DAZ Studio</strong> and rendered with a custom toon
+                    shader stack that produces a clean 2D illustration look without drawing every
+                    frame by hand. The advantage: the client gets a character they can re-pose and
+                    re-render for any campaign without commissioning new artwork each time.
+                </p>
+            </div>
+
+            <!-- Mascot full body + close-up -->
+            <div class="ps-container">
+                <div class="ps-two-col">
+                    <div class="ps-media-block">
+                        <img
+                            src="./images/mybusinessgh_avatar_full.png"
+                            alt="MyBusinessGH mascot full body render"
+                            class="ps-img ps-lightbox-trigger"
+                            loading="lazy"
+                        >
+                        <span class="ps-caption">Full body — T-pose reference render</span>
+                    </div>
+                    <div class="ps-media-block">
+                        <img
+                            src="./images/mybusinessgh_avatar.png"
+                            alt="MyBusinessGH mascot face close-up"
+                            class="ps-img ps-lightbox-trigger"
+                            loading="lazy"
+                        >
+                        <span class="ps-caption">Face close-up — expression and skin detail pass</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Character design decisions -->
+            <div class="ps-container">
+                <div class="ps-callout">
+                    <h3 class="ps-callout-title">Character Design Decisions</h3>
+                    <div class="ps-callout-grid">
+                        <div class="ps-callout-item">
+                            <span class="ps-callout-label">Hair</span>
+                            <span class="ps-callout-value">Space buns with gold ties — energetic, modern, connects to Ghanaian youth culture without being a stereotype</span>
+                        </div>
+                        <div class="ps-callout-item">
+                            <span class="ps-callout-label">Outfit</span>
+                            <span class="ps-callout-value">Branded polo in royal blue with gold trim — maps directly to brand colors, reads professional without being corporate</span>
+                        </div>
+                        <div class="ps-callout-item">
+                            <span class="ps-callout-label">Skin Tone</span>
+                            <span class="ps-callout-value">Deep brown with texture preserved under toon shading — genuine representation, not a default recolour</span>
+                        </div>
+                        <div class="ps-callout-item">
+                            <span class="ps-callout-label">Shading Pipeline</span>
+                            <span class="ps-callout-value">DAZ Studio base, Cinema 4D toon renderer — 2D illustration quality, fully re-poseable for future campaigns</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pose gallery -->
+            <div class="ps-container">
+                <h3 class="ps-subsection-title">Turnaround · Expressions · Action Poses</h3>
+                <p class="ps-body-text">
+                    Four-angle turnaround, expression sheet, and action poses for advertising use.
+                    Final renders coming once the client sign-off is complete.
+                </p>
+                <div class="ps-gallery-grid ps-gallery-4">
+                    <div class="ps-gallery-placeholder"><span>Front</span></div>
+                    <div class="ps-gallery-placeholder"><span>Side</span></div>
+                    <div class="ps-gallery-placeholder"><span>Back</span></div>
+                    <div class="ps-gallery-placeholder"><span>3/4 View</span></div>
+                </div>
+                <div class="ps-gallery-grid ps-gallery-4" style="margin-top: 1rem;">
+                    <div class="ps-gallery-placeholder"><span>Happy</span></div>
+                    <div class="ps-gallery-placeholder"><span>Confident</span></div>
+                    <div class="ps-gallery-placeholder"><span>Explaining</span></div>
+                    <div class="ps-gallery-placeholder"><span>Celebrating</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 03 LOGO & APP ICON -->
+        <section class="ps-section ps-reveal">
+            <div class="ps-container">
+                <span class="ps-section-label">03 — Logo & App Icon</span>
+                <h2 class="ps-section-title">From a placeholder icon to a proper logo system</h2>
+                <p class="ps-body-text">
+                    The original app icon was a flat blue square with a handwritten "my" in yellow.
+                    Functional enough to ship the first build, but not something that could carry
+                    the brand into advertising. No hierarchy, no adaptability, no system.
+                </p>
+                <p class="ps-body-text">
+                    The redesign builds two icon variants, a horizontal lockup, and both light
+                    and dark versions of each. The <strong>"my" pill badge</strong> becomes a
+                    recognisable standalone mark that works at any scale — from a 48px app icon
+                    to a banner. The wordmark pairs it cleanly with "BusinessGH" at a weight
+                    that reads confident without losing the brand's approachable tone.
+                </p>
+            </div>
+
+            <!-- Before / after -->
+            <div class="ps-container">
+                <div class="ps-compare-row">
+                    <div class="ps-compare-block">
+                        <span class="ps-compare-label before">Original</span>
+                        <div class="ps-media-block">
+                            <img
+                                src="./images/app_old_logo.png"
+                                alt="Original MyBusinessGH app icon"
+                                class="ps-img ps-lightbox-trigger ps-compare-img"
+                                loading="lazy"
+                            >
+                        </div>
+                        <span class="ps-caption">Flat, no hierarchy, no scalable system</span>
+                    </div>
+                    <div class="ps-compare-divider" aria-hidden="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </div>
+                    <div class="ps-compare-block">
+                        <span class="ps-compare-label after">Redesign</span>
+                        <div class="ps-media-block">
+                            <img
+                                src="./images/MyBusinessGH_-_Logo_Set.png"
+                                alt="MyBusinessGH full logo system redesign"
+                                class="ps-img ps-lightbox-trigger ps-compare-img"
+                                loading="lazy"
+                            >
+                        </div>
+                        <span class="ps-caption">Full system — two icon variants, horizontal lockup, light and dark</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- App icon in context -->
+            <div class="ps-container">
+                <h3 class="ps-subsection-title">App Icon in Context</h3>
+                <p class="ps-body-text">
+                    Device mockups showing both icon variants across light and dark system themes.
+                    Coming once the final icon export files are prepared.
+                </p>
+                <div class="ps-gallery-grid ps-gallery-3">
+                    <div class="ps-gallery-placeholder"><span>Light Mode</span></div>
+                    <div class="ps-gallery-placeholder"><span>Dark Mode</span></div>
+                    <div class="ps-gallery-placeholder"><span>On Device</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 04 UI DIRECTION -->
+        <section class="ps-section ps-reveal">
+            <div class="ps-container">
+                <span class="ps-section-label">04 — UI Redesign</span>
+                <h2 class="ps-section-title">Bringing the brand into every screen — in progress</h2>
+                <p class="ps-body-text">
+                    With the mascot and logo system underway, the conversation moved to the app UI
+                    itself. The current interface does the job but doesn't reflect the quality of
+                    the brand being built around it. The goal is to bring the visual language —
+                    the brand blue, the gold, the character — into every screen of the app.
+                </p>
+                <p class="ps-body-text">
+                    The direction: cleaner hierarchy, stronger use of brand colors, UI elements
+                    that feel native to Ghanaian small business workflows rather than adapted from
+                    generic fintech templates. The mascot will appear at key moments in the
+                    onboarding experience.
+                </p>
+            </div>
+
+            <!-- UI before/after placeholders -->
+            <div class="ps-container">
+                <div class="ps-gallery-grid ps-gallery-3">
+                    <div class="ps-gallery-placeholder"><span>Dashboard — Before</span></div>
+                    <div class="ps-gallery-placeholder"><span>Dashboard — Redesign</span></div>
+                    <div class="ps-gallery-placeholder"><span>Invoice Screen</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 05 WHAT'S NEXT -->
+        <section class="ps-section ps-reveal">
+            <div class="ps-container">
+                <span class="ps-section-label">05 — What's Next</span>
+                <h2 class="ps-section-title">Still in motion</h2>
+                <p class="ps-body-text">
+                    The mascot is built and in review. The logo system is in final refinement.
+                    In order, here is what comes next:
+                </p>
+
+                <div class="ps-pipeline">
+                    <div class="ps-pipeline-step ps-step-text-only">
+                        <div class="ps-step-text">
+                            <span class="ps-step-num">01 — Expressions & Action Poses</span>
+                            <div class="ps-step-title">Expand the character library</div>
+                            <p class="ps-step-desc">
+                                Full expression sheet and a set of action poses for advertising —
+                                pointing, celebrating, explaining, working at a desk. Each pose
+                                designed for a specific marketing use case so the client
+                                has ready-made assets from day one.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="ps-pipeline-step ps-step-text-only">
+                        <div class="ps-step-text">
+                            <span class="ps-step-num">02 — Logo System Finalisation</span>
+                            <div class="ps-step-title">Lock the brand assets</div>
+                            <p class="ps-step-desc">
+                                Final vector files, usage guidelines, and a complete export package
+                                — SVG, PNG at all required sizes, app icon specs for both
+                                Play Store and a future iOS submission.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="ps-pipeline-step ps-step-text-only">
+                        <div class="ps-step-text">
+                            <span class="ps-step-num">03 — Full UI Redesign</span>
+                            <div class="ps-step-title">Bring the brand into every screen</div>
+                            <p class="ps-step-desc">
+                                Complete UI redesign in Figma covering the dashboard, invoice
+                                creation, records view, and onboarding flow. The mascot appears
+                                at key onboarding moments, making the first-use experience
+                                feel guided rather than abandoned.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- PREV / NEXT NAVIGATION -->
+    <div class="ps-project-nav ps-reveal">
+        <a href="./character-creation.html" class="ps-nav-card ps-nav-prev">
+            <div class="ps-nav-thumb">
+                <!-- <img src="./images/character-creation-thumb.png" alt=""> -->
+            </div>
+            <div class="ps-nav-content">
+                <span class="ps-nav-dir">Previous Project</span>
+                <span class="ps-nav-title">Digital Character Creation</span>
+                <span class="ps-nav-arrow">&#8592;</span>
+            </div>
+        </a>
+        <a href="./auto-pbr-mapper.html" class="ps-nav-card ps-nav-next">
+            <div class="ps-nav-thumb">
+                <!-- <img src="./images/auto-pbr-mapper-thumb.png" alt=""> -->
+            </div>
+            <div class="ps-nav-content">
+                <span class="ps-nav-dir">Next Project</span>
+                <span class="ps-nav-title">Auto PBR Mapper</span>
+                <span class="ps-nav-arrow">&#8594;</span>
+            </div>
+        </a>
+    </div>
+
+    <!-- LIGHTBOX -->
+    <div class="ps-lightbox" id="psLightbox">
+        <div class="ps-lightbox-inner" id="psLightboxInner">
+            <button class="ps-lightbox-close" id="psLightboxClose">&#10005;</button>
+            <button class="ps-lightbox-prev" id="psLightboxPrev">&#8249;</button>
+            <button class="ps-lightbox-next" id="psLightboxNext">&#8250;</button>
+            <img id="psLightboxImg" src="" alt="">
+            <span class="ps-lightbox-caption" id="psLightboxCaption"></span>
+        </div>
+    </div>
+
+    </main>
+
+    <!-- SCROLL TO TOP -->
+    <button id="back-to-top" aria-label="Back to top">
+        <svg class="progress-ring" width="64" height="64">
+            <circle class="progress-ring__circle" stroke-dasharray="188.5 188.5" stroke-dashoffset="188.5" cx="32" cy="32" r="30"></circle>
+        </svg>
+        &#8593;
+    </button>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="work.html">Work</a></li>
+                        <li><a href="projects.html">Projects</a></li>
+                        <li><a href="tutorials.html">Tutorials</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="cv.html">CV</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section social-section">
+                    <h4>Let's Connect</h4>
+                    <div class="social-icons">
+                        <a href="https://www.behance.net/eugeneantwi" target="_blank" rel="noopener" title="Behance">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M22 7h-7v-2h7v2zm1.726 10c-.442 1.297-2.029 3-5.101 3-3.074 0-5.564-1.729-5.564-5.675 0-3.91 2.325-5.92 5.466-5.92 3.082 0 4.964 1.782 5.375 4.426.078.506.109 1.188.095 2.14h-8.027c.13 3.211 3.483 3.312 4.588 2.029h3.168zm-7.686-4h4.965c-.105-1.547-1.136-2.219-2.477-2.219-1.466 0-2.277.768-2.488 2.219zm-9.574 6.988h-6.466v-14.967h6.953c5.476.081 5.58 5.444 2.72 6.906 3.461 1.26 3.577 8.061-3.207 8.061zm-3.466-8.988h3.584c2.508 0 2.906-3-.312-3h-3.272v3zm3.391 3h-3.391v3.016h3.341c3.055 0 2.868-3.016.05-3.016z"/></svg>
+                        </a>
+                        <a href="https://www.linkedin.com/in/eugene-antwi-067a82197/" target="_blank" rel="noopener" title="LinkedIn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                        </a>
+                        <a href="https://youtube.com/@proeugenelabs?si=oMljuUyEPGHShmjL" target="_blank" rel="noopener" title="YouTube">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
+                        </a>
+                        <a href="https://www.instagram.com/pro.youjin/" target="_blank" rel="noopener" title="Instagram">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                        </a>
+                        <a href="https://eugeneantwi7.artstation.com/" target="_blank" rel="noopener" title="ArtStation">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M0 17.723l2.027 3.505h.001a2.424 2.424 0 0 0 2.164 1.333h13.457l-2.792-4.838H0zm24 .025c0-.484-.143-.935-.388-1.314L15.728 2.728a2.424 2.424 0 0 0-2.142-1.289H9.419L21.598 22.54l1.92-3.325c.378-.637.482-.919.482-1.467zm-11.129-3.462L7.428 4.858l-5.444 9.428h10.887z"/></svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-section footer-logo-section">
+                    <img src="./images/eugene-antwi-logo-nav.svg" alt="Eugene Antwi Logo" class="footer-logo-icon">
+                    <div class="footer-logo-text">EUGENE ANTWI</div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Eugene Ampadu Antwi. All rights reserved.</p>
+                <p>Designer | Animator | Educator</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script src="./js/preloader.js"></script>
+    <script src="./js/navbar.js"></script>
+    <script src="./js/lightrays.js"></script>
+    <script src="./js/scroll-to-top.js"></script>
+    <script src="./js/click-spark.js"></script>
+    <script SRC="./js/skeleton.js"></script>
+    <script src="./js/under-construction.js"></script>
+    <script src="./js/project-single.js"></script>
+</body>
+</html>

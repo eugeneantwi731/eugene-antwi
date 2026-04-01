@@ -1,64 +1,166 @@
-/* ===== CV PAGE STYLES ===== */
+/* ===== CV PAGE STYLES — REDESIGNED ===== */
+/* Uses existing site variables from styles.css */
 
-/* ===== CV HEADER SECTION ===== */
-.cv-header-section {
+/* ============================================================
+   CV HERO
+   ============================================================ */
+
+.cv-hero {
     position: relative;
     width: 100%;
-    padding: 120px 20px 60px;
+    padding: 140px 20px 80px;
     background: var(--bg-dark);
+    overflow: hidden;
 }
 
-.cv-header-content {
+/* Subtle vertical lines in the bg — echoes the site's light ray aesthetic */
+.cv-hero-bg-lines {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.cv-hero-bg-lines span {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: var(--border-subtle);
+    opacity: 0.5;
+}
+
+.cv-hero-bg-lines span:nth-child(1) { left: 10%; }
+.cv-hero-bg-lines span:nth-child(2) { left: 30%; }
+.cv-hero-bg-lines span:nth-child(3) { left: 50%; }
+.cv-hero-bg-lines span:nth-child(4) { left: 70%; }
+.cv-hero-bg-lines span:nth-child(5) { left: 90%; }
+
+.cv-hero .container {
+    position: relative;
+    z-index: 1;
+}
+
+.cv-hero-inner {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 30px;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 40px;
     flex-wrap: wrap;
 }
 
-.cv-page-title {
+/* LEFT — Name + contact */
+.cv-hero-left {
+    flex: 1;
+    min-width: 300px;
+}
+
+.cv-hero-label {
+    display: inline-block;
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 16px;
+    padding: 4px 12px;
+    border: 1px solid rgba(36, 255, 114, 0.25);
+    border-radius: 2px;
+}
+
+.cv-hero-name {
     font-family: 'Sugar Snow', cursive;
-    font-size: 4rem;
+    font-size: 5.5rem;
     color: var(--text-light);
-    margin: 0;
+    line-height: 1.05;
+    margin-bottom: 20px;
     font-weight: normal;
 }
 
-.cv-download-wrapper {
+.cv-hero-roles {
     display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+
+.cv-role-tag {
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.938rem;
+    color: var(--text-gray);
+    font-weight: 400;
+}
+
+.cv-role-sep {
+    color: var(--border-subtle);
+    font-size: 1rem;
+}
+
+.cv-hero-contact {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.cv-contact-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 14px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border-subtle);
+    border-radius: 4px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.813rem;
+    color: var(--text-gray);
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.cv-contact-pill svg {
+    flex-shrink: 0;
+    stroke: var(--green);
+}
+
+.cv-contact-pill:hover {
+    border-color: var(--green);
+    color: var(--text-light);
+    background: rgba(36, 255, 114, 0.05);
+}
+
+/* RIGHT — Download + stats */
+.cv-hero-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 24px;
+    min-width: 240px;
 }
 
 .cv-download-btn {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
-    gap: 12px;
-    padding: 18px 48px;
+    gap: 16px;
+    padding: 16px 24px;
     background: linear-gradient(135deg, #8B5CF6 0%, #4A9EFF 40%, #00D9FF 70%, #24FF72 100%);
     border: none;
+    border-radius: 6px;
     color: var(--text-light);
-    font-size: 1.125rem;
-    font-weight: 600;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: all 0.4s ease;
     text-decoration: none;
+    transition: all 0.4s ease;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 8px 25px rgba(139, 92, 246, 0.15);
 }
 
 .cv-download-btn::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0;
     background: linear-gradient(135deg, #24FF72 0%, #00D9FF 30%, #4A9EFF 60%, #8B5CF6 100%);
     opacity: 0;
     transition: opacity 0.4s ease;
-    z-index: -1;
 }
 
 .cv-download-btn:hover::before {
@@ -66,499 +168,624 @@
 }
 
 .cv-download-btn:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 35px rgba(74, 158, 255, 0.2);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(36, 255, 114, 0.15);
 }
 
-.cv-download-btn svg {
-    width: 24px;
-    height: 24px;
-    transition: transform 0.4s ease;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
-}
-
-.cv-download-btn:hover svg {
-    transform: translateY(3px) scale(1.1);
-}
-
-/* ===== CV CONTENT SECTION ===== */
-.cv-content-section {
+.cv-download-icon-wrap {
     position: relative;
-    width: 100%;
-    padding: 40px 20px 80px;
-    background: var(--bg-dark);
-}
-
-/* ===== CV SECTIONS ===== */
-.cv-section {
-    margin-bottom: 60px;
-}
-
-.cv-section-title {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    font-family: 'Sugar Snow', cursive;
-    font-size: 2.5rem;
-    color: var(--text-light);
-    margin-bottom: 30px;
-    font-weight: normal;
-    position: relative;
-    padding-bottom: 15px;
-}
-
-.cv-section-title::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 60px;
-    height: 3px;
-    background: var(--green);
-    transition: background 0.3s ease;
-}
-
-.title-icon {
+    z-index: 1;
     display: flex;
     align-items: center;
     justify-content: center;
     width: 40px;
     height: 40px;
-    min-width: 40px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    flex-shrink: 0;
 }
 
-.title-icon svg {
+.cv-download-icon-wrap svg {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.3s ease;
+}
+
+.cv-download-btn:hover .cv-download-icon-wrap svg {
+    transform: translateY(3px);
+}
+
+.cv-download-text {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.cv-download-main {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+.cv-download-sub {
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 400;
+    opacity: 0.75;
+    margin-top: 2px;
+}
+
+/* Quick stats strip */
+.cv-quick-stats {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border-subtle);
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.cv-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 14px 20px;
+    gap: 2px;
+}
+
+.cv-stat-num {
+    font-family: 'Sugar Snow', cursive;
+    font-size: 1.75rem;
+    color: var(--green);
+    line-height: 1;
+}
+
+.cv-stat-label {
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.688rem;
+    color: var(--text-dim);
+    text-align: center;
+    white-space: nowrap;
+    letter-spacing: 0.05em;
+}
+
+.cv-stat-divider {
+    width: 1px;
+    height: 40px;
+    background: var(--border-subtle);
+    flex-shrink: 0;
+}
+
+
+/* ============================================================
+   CV BODY
+   ============================================================ */
+
+.cv-body-section {
     width: 100%;
-    height: 100%;
+    padding: 20px 20px 100px;
+    background: var(--bg-dark);
+}
+
+
+/* ============================================================
+   CV BLOCK (section)
+   ============================================================ */
+
+.cv-block {
+    margin-bottom: 70px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-subtle);
+}
+
+.cv-block:first-child {
+    border-top: none;
+}
+
+.cv-block-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 32px;
+}
+
+.cv-block-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+    border: 1px solid rgba(36, 255, 114, 0.3);
+    border-radius: 4px;
+    background: rgba(36, 255, 114, 0.05);
+}
+
+.cv-block-icon svg {
+    width: 18px;
+    height: 18px;
     stroke: var(--green);
-    transition: stroke 0.3s ease;
 }
 
-.cv-section-content {
-    padding-left: 55px;
+.cv-block-title {
+    font-family: 'Sugar Snow', cursive;
+    font-size: 2rem;
+    color: var(--text-light);
+    font-weight: normal;
+    margin: 0;
+    position: relative;
+    padding-bottom: 10px;
 }
 
-.cv-section-content > p {
-    font-size: 1.125rem;
-    line-height: 1.8;
+.cv-block-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 2px;
+    background: var(--green);
+    transition: width 0.3s ease;
+}
+
+.cv-block:hover .cv-block-title::after {
+    width: 80px;
+}
+
+.cv-block-body {
+    padding-left: 52px;
+}
+
+/* Profile text */
+.cv-profile-text {
+    font-size: 1.05rem;
+    line-height: 1.85;
     color: var(--text-gray);
+    max-width: 860px;
     margin: 0;
 }
 
-/* ===== EXPERIENCE ITEMS ===== */
-.cv-experience-item {
+
+/* ============================================================
+   CV ENTRY (job / role)
+   ============================================================ */
+
+.cv-entry {
     position: relative;
-    margin-bottom: 40px;
-    padding-left: 30px;
-    border-left: 2px solid var(--border-subtle);
+    margin-bottom: 44px;
+    padding-left: 28px;
+    border-left: 1px solid var(--border-subtle);
 }
 
-.cv-experience-item::before {
+.cv-entry::before {
     content: '';
     position: absolute;
-    left: -6px;
-    top: 5px;
-    width: 10px;
-    height: 10px;
+    left: -5px;
+    top: 7px;
+    width: 9px;
+    height: 9px;
     background: var(--green);
     border-radius: 50%;
     transition: all 0.3s ease;
+    box-shadow: 0 0 0 0 rgba(36, 255, 114, 0);
 }
 
-.cv-experience-item:hover::before {
-    width: 14px;
-    height: 14px;
-    left: -8px;
-    box-shadow: 0 0 15px var(--green);
+.cv-entry:hover::before {
+    box-shadow: 0 0 12px rgba(36, 255, 114, 0.5);
 }
 
-.cv-experience-item:last-child {
+.cv-entry:last-child {
     margin-bottom: 0;
 }
 
-.experience-header {
+.cv-entry-header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     gap: 20px;
-    margin-bottom: 15px;
+    margin-bottom: 14px;
     flex-wrap: wrap;
 }
 
-.experience-title-group {
+.cv-entry-left {
     flex: 1;
-    min-width: 250px;
+    min-width: 240px;
 }
 
-.experience-title {
-    font-size: 1.375rem;
-    color: var(--text-light);
-    margin-bottom: 5px;
+.cv-entry-title {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.125rem;
     font-weight: 600;
+    color: var(--text-light);
+    margin: 0 0 5px;
 }
 
-.experience-company {
-    font-size: 1rem;
+.cv-entry-org {
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.938rem;
     color: var(--text-gray);
     margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.cv-freelance-tag {
+    display: inline-block;
+    font-size: 0.688rem;
+    padding: 2px 7px;
+    background: rgba(36, 255, 114, 0.08);
+    border: 1px solid rgba(36, 255, 114, 0.2);
+    color: var(--green);
+    border-radius: 2px;
+    letter-spacing: 0.05em;
     font-weight: 500;
 }
 
-.experience-date {
-    font-size: 0.938rem;
-    color: var(--green);
-    font-weight: 600;
-    white-space: nowrap;
-    transition: color 0.3s ease;
+.cv-entry-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+    flex-shrink: 0;
 }
 
-.experience-details {
+.cv-entry-date {
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.875rem;
+    color: var(--green);
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.cv-entry-loc {
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.813rem;
+    color: var(--text-dim);
+    white-space: nowrap;
+}
+
+.cv-entry-list {
     list-style: none;
     padding: 0;
     margin: 0;
 }
 
-.experience-details li {
+.cv-entry-list li {
     position: relative;
-    padding-left: 25px;
-    margin-bottom: 12px;
-    font-size: 1rem;
-    line-height: 1.7;
+    padding-left: 22px;
+    margin-bottom: 10px;
+    font-size: 0.969rem;
+    line-height: 1.75;
     color: var(--text-gray);
 }
 
-.experience-details li::before {
+.cv-entry-list li::before {
     content: '▸';
     position: absolute;
     left: 0;
     color: var(--green);
-    font-size: 1rem;
+    font-size: 0.875rem;
+    top: 1px;
     transition: color 0.3s ease;
 }
 
-.experience-details li:last-child {
+.cv-entry-list li:last-child {
     margin-bottom: 0;
 }
 
-/* ===== COMPETENCIES GRID ===== */
-.competencies-grid {
+
+/* ============================================================
+   SKILLS — two column layout
+   ============================================================ */
+
+.cv-skills-two-col {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: 1fr 1fr;
     gap: 30px;
 }
 
-.competency-item {
-    background: rgba(255, 255, 255, 0.03);
+.cv-skills-group {
+    background: rgba(255, 255, 255, 0.02);
     border: 1px solid var(--border-subtle);
-    border-radius: 8px;
-    padding: 25px;
-    transition: all 0.3s ease;
+    border-radius: 6px;
+    padding: 24px;
 }
 
-.competency-item:hover {
-    background: rgba(255, 255, 255, 0.05);
-    border-color: var(--green);
-    transform: translateY(-3px);
-}
-
-.competency-title {
-    font-size: 1.25rem;
-    color: var(--text-light);
-    margin-bottom: 12px;
+.cv-skills-group-title {
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.75rem;
     font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin: 0 0 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border-subtle);
 }
 
-.competency-desc {
-    font-size: 0.938rem;
-    line-height: 1.7;
-    color: var(--text-gray);
-    margin: 0;
+.cv-skill-item {
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
 }
 
-/* ===== SKILLS GRID ===== */
-.skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 25px;
-}
-
-.skill-category {
-    background: rgba(255, 255, 255, 0.03);
-    border-left: 3px solid var(--green);
-    padding: 20px;
-    border-radius: 4px;
-    transition: all 0.3s ease;
-}
-
-.skill-category:hover {
-    background: rgba(255, 255, 255, 0.05);
-    transform: translateX(5px);
-}
-
-.skill-category-title {
-    font-size: 1.125rem;
-    color: var(--text-light);
-    margin-bottom: 10px;
-    font-weight: 600;
-}
-
-.skill-category p {
-    font-size: 0.938rem;
-    line-height: 1.7;
-    color: var(--text-gray);
-    margin: 0;
-}
-
-/* ===== EDUCATION ===== */
-.education-item,
-.professional-dev {
-    margin-bottom: 30px;
-}
-
-.education-item:last-child,
-.professional-dev:last-child {
+.cv-skill-item:last-child {
     margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
 }
 
-.education-degree {
-    font-size: 1.375rem;
-    color: var(--text-light);
-    margin-bottom: 8px;
-    font-weight: 600;
-}
-
-.education-school {
-    font-size: 1.125rem;
-    color: var(--text-gray);
-    margin-bottom: 5px;
-    font-weight: 500;
-}
-
-.education-details {
+.cv-skill-name {
+    font-family: 'Roboto', sans-serif;
     font-size: 0.938rem;
-    color: var(--text-dim);
+    font-weight: 600;
+    color: var(--text-light);
+    margin: 0 0 5px;
+}
+
+.cv-skill-detail {
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.875rem;
+    line-height: 1.65;
+    color: var(--text-gray);
     margin: 0;
 }
 
-.cert-list {
+
+/* ============================================================
+   EDUCATION
+   ============================================================ */
+
+.cv-edu-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    align-items: start;
+}
+
+.cv-edu-main {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-subtle);
+    border-radius: 6px;
+    padding: 24px;
+}
+
+.cv-edu-certs {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-subtle);
+    border-radius: 6px;
+    padding: 24px;
+}
+
+.cv-cert-list {
     list-style: none;
     padding: 0;
-    margin-top: 15px;
+    margin: 0;
 }
 
-.cert-list li {
-    position: relative;
-    padding-left: 25px;
-    margin-bottom: 10px;
-    font-size: 1rem;
-    line-height: 1.6;
+.cv-cert-list li {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    margin-bottom: 14px;
+    font-size: 0.9rem;
+    line-height: 1.65;
     color: var(--text-gray);
 }
 
-.cert-list li::before {
-    content: '✓';
-    position: absolute;
-    left: 0;
-    color: var(--green);
-    font-size: 1.125rem;
-    font-weight: bold;
-}
-
-.cert-list li:last-child {
+.cv-cert-list li:last-child {
     margin-bottom: 0;
 }
 
-/* ===== REFERENCES GRID ===== */
-.references-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
+.cv-cert-check {
+    color: var(--green);
+    font-size: 1rem;
+    font-weight: bold;
+    flex-shrink: 0;
+    margin-top: 1px;
 }
 
-.reference-item {
+.cv-cert-source {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    margin-top: 2px;
+}
+
+
+/* ============================================================
+   REFERENCES
+   ============================================================ */
+
+.cv-refs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.cv-ref-card {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid var(--border-subtle);
-    border-radius: 8px;
-    padding: 25px;
+    border-radius: 6px;
+    padding: 22px;
     transition: all 0.3s ease;
 }
 
-.reference-item:hover {
+.cv-ref-card:hover {
+    border-color: rgba(36, 255, 114, 0.3);
     background: rgba(255, 255, 255, 0.05);
-    border-color: var(--green);
-    transform: translateY(-3px);
+    transform: translateY(-2px);
 }
 
-.reference-name {
-    font-size: 1.25rem;
-    color: var(--text-light);
-    margin-bottom: 8px;
-    font-weight: 600;
-}
-
-.reference-title {
-    font-size: 1rem;
+.cv-ref-avatar {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    border-radius: 4px;
+    background: rgba(36, 255, 114, 0.1);
+    border: 1px solid rgba(36, 255, 114, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.813rem;
+    font-weight: 700;
     color: var(--green);
-    margin-bottom: 5px;
-    font-weight: 500;
+    letter-spacing: 0.05em;
 }
 
-.reference-org {
-    font-size: 0.938rem;
-    color: var(--text-gray);
-    margin-bottom: 12px;
-    line-height: 1.5;
+.cv-ref-info {
+    flex: 1;
+    min-width: 0;
 }
 
-.reference-contact {
+.cv-ref-name {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-light);
+    margin: 0 0 4px;
+}
+
+.cv-ref-role {
     font-size: 0.875rem;
-    color: var(--text-dim);
-    margin-bottom: 4px;
+    color: var(--green);
+    font-weight: 500;
+    margin: 0 0 3px;
 }
 
-.reference-contact:last-child {
+.cv-ref-org {
+    font-size: 0.838rem;
+    color: var(--text-gray);
+    margin: 0 0 10px;
+    line-height: 1.4;
+}
+
+.cv-ref-contact {
+    display: block;
+    font-size: 0.813rem;
+    color: var(--text-dim);
+    margin-bottom: 3px;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.cv-ref-contact:last-child {
     margin-bottom: 0;
 }
 
-/* ===== RESPONSIVE DESIGN ===== */
-
-@media (max-width: 1024px) {
-    .cv-header-section {
-        padding: 100px 20px 50px;
-    }
-
-    .cv-page-title {
-        font-size: 3.5rem;
-    }
-
-    .cv-section-title {
-        font-size: 2.25rem;
-    }
-
-    .cv-section-content {
-        padding-left: 40px;
-    }
+.cv-ref-contact:hover {
+    color: var(--green);
 }
 
-@media (max-width: 768px) {
-    .cv-header-section {
-        padding: 90px 15px 40px;
-    }
 
-    .cv-header-content {
-        flex-direction: column;
-        align-items: center;
-    }
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
 
-    .cv-page-title {
-        font-size: 3rem;
-        text-align: center;
+@media (max-width: 1024px) {
+    .cv-hero-name {
+        font-size: 4.5rem;
     }
-
-    .cv-download-btn {
-        width: 100%;
-        max-width: 350px;
-        justify-content: center;
-    }
-
-    .cv-section-title {
-        font-size: 2rem;
-    }
-
-    .cv-section-content {
-        padding-left: 0;
-    }
-
-    .experience-header {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .experience-date {
-        align-self: flex-start;
-    }
-
-    .competencies-grid,
-    .skills-grid,
-    .references-grid {
+    .cv-skills-two-col,
+    .cv-edu-row {
         grid-template-columns: 1fr;
     }
 }
 
-@media (max-width: 480px) {
-    .cv-header-section {
-        padding: 80px 10px 30px;
+@media (max-width: 768px) {
+    .cv-hero {
+        padding: 110px 20px 60px;
     }
-
-    .cv-page-title {
-        font-size: 2.5rem;
+    .cv-hero-name {
+        font-size: 3.5rem;
     }
-
-    .cv-section-title {
-        font-size: 1.75rem;
-        gap: 10px;
+    .cv-hero-inner {
+        flex-direction: column;
+        align-items: flex-start;
     }
-
-    .title-icon {
-        width: 32px;
-        height: 32px;
-        min-width: 32px;
+    .cv-hero-right {
+        align-items: flex-start;
+        width: 100%;
     }
-
-    .experience-title {
-        font-size: 1.25rem;
-    }
-
     .cv-download-btn {
-        padding: 16px 32px;
-        font-size: 1rem;
+        width: 100%;
+        max-width: 320px;
+    }
+    .cv-quick-stats {
+        width: 100%;
+        max-width: 320px;
+    }
+    .cv-block-body {
+        padding-left: 0;
+    }
+    .cv-entry-header {
+        flex-direction: column;
+        gap: 8px;
+    }
+    .cv-entry-meta {
+        align-items: flex-start;
+    }
+    .cv-refs-grid {
+        grid-template-columns: 1fr;
+    }
+    .cv-block-title {
+        font-size: 1.625rem;
     }
 }
 
-/* ===== PRINT STYLES ===== */
+@media (max-width: 480px) {
+    .cv-hero-name {
+        font-size: 2.75rem;
+    }
+    .cv-hero-contact {
+        flex-direction: column;
+    }
+    .cv-contact-pill {
+        width: 100%;
+        max-width: 300px;
+    }
+    .cv-stat {
+        padding: 12px 14px;
+    }
+    .cv-stat-num {
+        font-size: 1.375rem;
+    }
+}
+
+/* ============================================================
+   PRINT
+   ============================================================ */
+
 @media print {
     .site-header,
-    .cv-download-wrapper,
+    .cv-download-btn,
+    .cv-hero-bg-lines,
     .site-footer,
     #back-to-top {
         display: none !important;
     }
-
-    .cv-content-section {
-        padding: 20px 0;
-    }
-
-    .cv-section {
-        page-break-inside: avoid;
-    }
-
-    .cv-experience-item {
-        page-break-inside: avoid;
-    }
-
     body {
         background: white;
         color: black;
     }
-
-    .cv-section-title,
-    .experience-title,
-    .competency-title,
-    .skill-category-title,
-    .education-degree,
-    .reference-name {
+    .cv-block-title,
+    .cv-entry-title,
+    .cv-ref-name,
+    .cv-skill-name {
         color: black;
     }
-
-    .cv-contact-item,
-    .experience-company,
-    .experience-details li,
-    .competency-desc,
-    .skill-category p,
-    .education-school,
-    .reference-title,
-    .reference-org,
-    .reference-contact {
+    .cv-profile-text,
+    .cv-entry-list li,
+    .cv-skill-detail,
+    .cv-ref-org {
         color: #333;
     }
 }

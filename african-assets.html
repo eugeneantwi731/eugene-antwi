@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en" style="--project-accent: #7EC8E3;">
+<!--
+    PROJECT: African Assets Platform
+    Accent:  #7EC8E3  (sky blue)
+    To change accent, update the ONE value on <html> above.
+-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>African Assets Platform | Eugene Antwi</title>
+    <meta name="description" content="Designing a digital marketplace built specifically for African 3D assets — a platform where African creatives can find, share, and sell authentic cultural content.">
+    <meta name="keywords" content="Eugene Antwi, African assets, 3D marketplace, UX design, product design, African digital platform, Ghana">
+    <meta name="author" content="Eugene Antwi">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://eugene-antwi.com/african-assets.html">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://eugene-antwi.com/african-assets.html">
+    <meta property="og:title" content="African Assets Platform | Eugene Antwi">
+    <meta property="og:description" content="Designing a digital marketplace built specifically for African 3D assets and creative resources.">
+    <meta property="og:image" content="https://eugene-antwi.com/images/african-assets-og.png">
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://eugene-antwi.com/african-assets.html">
+    <meta property="twitter:title" content="African Assets Platform | Eugene Antwi">
+    <meta property="twitter:description" content="Designing a digital marketplace built specifically for African 3D assets and creative resources.">
+    <meta property="twitter:image" content="https://eugene-antwi.com/images/african-assets-og.png">
+    <link rel="icon" href="./images/eugene-antwi-favicon-1.svg" type="image/svg">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VC30KXRECG"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date()); gtag('config', 'G-VC30KXRECG');
+    </script>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sugar+Snow&display=swap" rel="stylesheet">
+
+    <!-- Site CSS -->
+    <link rel="stylesheet" href="./css/preloader.css">
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="./css/navbar.css">
+    <link rel="stylesheet" href="./css/scroll-to-top.css">
+    <link rel="stylesheet" href="./css/click-spark.css">
+    <link rel="stylesheet" href="./css/footer.css">
+    <link rel="stylesheet" href="./css/skeleton.css">
+    <link rel="stylesheet" href="./css/project-single.css">
+
+    <!--
+        HERO SLIDESHOW IMAGES
+        Replace paths with actual images.
+        Each image renders as ONE complete picture across all tiles.
+        Minimum 2, recommended 3-4.
+    -->
+    <script>
+        window.PS_SLIDES = [
+            './images/african-assets-hero-1.jpg',
+            './images/african-assets-hero-2.jpg',
+            './images/african-assets-hero-3.jpg',
+        ];
+    </script>
+</head>
+
+<body>
+
+    <!-- PRELOADER -->
+    <div class="site-preloader" id="sitePreloader">
+        <div class="preloader-logo">
+            <img src="./images/eugene-antwi-logo-nav.svg" alt="Eugene Antwi Logo">
+        </div>
+        <div class="preloader-leds">
+            <div class="led-indicator led-green"  data-led="1"></div>
+            <div class="led-indicator led-purple" data-led="2"></div>
+            <div class="led-indicator led-blue"   data-led="3"></div>
+            <div class="led-indicator led-cyan"   data-led="4"></div>
+        </div>
+    </div>
+
+    <!-- NAVBAR -->
+    <header class="site-header">
+        <div class="navbar-wrapper">
+            <nav class="navbar">
+                <a href="index.html" class="logo-container">
+                    <img src="./images/eugene-antwi-logo-nav.svg" alt="Eugene Antwi Logo" class="logo-icon">
+                    <span class="logo-text">EUGENE ANTWI</span>
+                </a>
+                <div class="nav-container">
+                    <ul class="nav-links" id="navLinks">
+                        <li class="nav-item"        data-page="index">   <a href="index.html"    class="nav-link">Home</a></li>
+                        <li class="nav-item"        data-page="work">    <a href="work.html"     class="nav-link">Work</a></li>
+                        <li class="nav-item active subpage" data-page="projects"><a href="projects.html" class="nav-link">Projects</a></li>
+                        <li class="nav-item"        data-page="about">   <a href="about.html"    class="nav-link">About</a></li>
+                    </ul>
+                </div>
+                <button class="mobile-menu-toggle" aria-label="Toggle menu" id="mobileMenuToggle">
+                    <span></span><span></span><span></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="ps-hero">
+        <div class="ps-hero-grid" id="psHeroGrid"></div>
+        <div class="ps-hero-overlay"></div>
+        <div class="ps-dots" id="psHeroDots"></div>
+        <div class="ps-hero-content">
+            <span class="ps-hero-tag">UX Design · Product Design</span>
+            <h1 class="ps-hero-title">
+                African<br>
+                <em>Assets</em><br>
+                Platform
+            </h1>
+            <div class="ps-hero-meta">
+                <div>
+                    <span class="ps-hero-meta-label">Status</span>
+                    <span class="ps-hero-meta-value">In Progress</span>
+                </div>
+                <div>
+                    <span class="ps-hero-meta-label">Started</span>
+                    <span class="ps-hero-meta-value">2025</span>
+                </div>
+                <div>
+                    <span class="ps-hero-meta-label">Role</span>
+                    <span class="ps-hero-meta-value">Product Designer</span>
+                </div>
+                <div>
+                    <span class="ps-hero-meta-label">Type</span>
+                    <span class="ps-hero-meta-value">UX / Platform Design</span>
+                </div>
+            </div>
+            <div class="ps-hero-tools">
+                <span class="ps-hero-tool">Figma</span>
+                <span class="ps-hero-tool">FigJam</span>
+                <span class="ps-hero-tool">Prototyping</span>
+                <span class="ps-hero-tool">UX Research</span>
+                <span class="ps-hero-tool">Design Systems</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN CONTENT -->
+    <main class="ps-main">
+
+        <!-- ============================================================
+             01 — THE PROBLEM
+        ============================================================ -->
+        <section class="ps-section ps-reveal">
+            <div class="ps-container">
+                <span class="ps-section-label">01 — The Problem</span>
+                <h2 class="ps-section-title">African creatives are building with borrowed resources</h2>
+                <p class="ps-body-text">
+                    Platforms like Sketchfab, CGTrader, and TurboSquid have served the global
+                    3D community for years. But if you are an animator, game developer, or architect
+                    in Africa trying to source <strong>culturally accurate 3D assets</strong>, traditional
+                    compounds, Kente patterns, Ghanaian market scenes, you are mostly out of luck.
+                    What exists is either wrong, generic, or made by outsiders.
+                </p>
+                <p class="ps-body-text">
+                    The Digital Character Creation project exposed this gap directly. Those characters
+                    needed a home. A <em>dedicated distribution platform</em> built for African assets,
+                    by someone who understands what African creators actually need, does not exist yet.
+                    This project is the design work to build that platform.
+                </p>
+
+                <!-- Problem stats — meta grid -->
+                <div class="ps-meta-grid ps-meta-4">
+                    <div class="ps-meta-item">
+                        <span class="ps-meta-label">Gap</span>
+                        <span class="ps-meta-value">No dedicated African 3D asset store exists</span>
+                    </div>
+                    <div class="ps-meta-item">
+                        <span class="ps-meta-label">Audience</span>
+                        <span class="ps-meta-value">Animators, game devs, architects across Africa</span>
+                    </div>
+                    <div class="ps-meta-item">
+                        <span class="ps-meta-label">Supply</span>
+                        <span class="ps-meta-value">Starting with the Character Creation library</span>
+                    </div>
+                    <div class="ps-meta-item">
+                        <span class="ps-meta-label">Goal</span>
+                        <span class="ps-meta-value">A marketplace that grows with its community</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+             02 — THE VISION
+        ============================================================ -->
+        <section class="ps-section ps-reveal">
+            <div class="ps-container">
+                <span class="ps-section-label">02 — The Vision</span>
+                <h2 class="ps-section-title">What the platform actually does</h2>
+                <p class="ps-body-text">
+                    The African Assets Platform is a <strong>curated digital marketplace</strong>
+                    for 3D models, textures, HDRIs, and reference packs rooted in African contexts.
+                    Anyone can browse and download. Verified creators can upload and sell.
+                    The character library from the Digital Character Creation project is the
+                    <em>first content seed</em> that launches the catalogue.
+                </p>
+
+                <!-- Pipeline-style cards showing the platform's core flows -->
+                <div class="ps-pipeline-grid">
+
+                    <div class="ps-pipeline-card" style="transform: rotate(-1deg);">
+                        <span class="ps-pipeline-num">01</span>
+                        <div class="ps-pipeline-title">Browse</div>
+                        <div class="ps-pipeline-desc">Filter by category, region, file format, and licence type. Every asset has a <strong>3D preview</strong> so creators know what they are getting before downloading.</div>
+                    </div>
+
+                    <div class="ps-pipeline-card" style="transform: rotate(0.8deg);">
+                        <span class="ps-pipeline-num">02</span>
+                        <div class="ps-pipeline-title">Download</div>
+                        <div class="ps-pipeline-desc">Free assets available immediately. Paid assets via a <em>simple one-click purchase</em>. All assets include a licence card specifying commercial use rights.</div>
+                    </div>
+
+                    <div class="ps-pipeline-card" style="transform: rotate(-1.4deg);">
+                        <span class="ps-pipeline-num">03</span>
+                        <div class="ps-pipeline-title">Upload</div>
+                        <div class="ps-pipeline-desc">Verified creators submit assets through a <strong>guided upload flow</strong> that auto-generates preview renders and extracts metadata from the file.</div>
+                    </div>
+
+                    <div class="ps-pipeline-card" style="transform: rotate(1.2deg);">
+                        <span class="ps-pipeline-num">04</span>
+                        <div class="ps-pipeline-title">Curate</div>
+                        <div class="ps-pipeline-desc">A lightweight editorial layer flags assets as <em>Community Pick</em> or <em>Staff Pick</em>. Quality stays consistent without gatekeeping new creators.</div>
+                    </div>
+
+                    <div class="ps-pipeline-card" style="transform: rotate(-0.7deg);">
+                        <span class="ps-pipeline-num">05</span>
+                        <div class="ps-pipeline-title">Earn</div>
+                        <div class="ps-pipeline-desc">Creators set their own price. The platform takes a <strong>flat 20% cut</strong> on paid assets — lower than every major competitor — to keep more money with African creators.</div>
+                    </div>
+
+                    <div class="ps-pipeline-card" style="transform: rotate(0.5deg);">
+                        <span class="ps-pipeline-num">06</span>
+                        <div class="ps-pipeline-title">Grow</div>
+                        <div class="ps-pipeline-desc">A <em>community layer</em> — creator profiles, asset collections, and follow feeds — turns the marketplace into a network, not just a download folder.</div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+             03 — RESEARCH & DISCOVERY
+        ============================================================ -->
+        <section class="ps-section ps-reveal">
+            <div class="ps-container">
+                <span class="ps-section-label">03 — Research and Discovery</span>
+                <h2 class="ps-section-title">Who is this actually for, and what do they need?</h2>
+                <p class="ps-body-text">
+                    Before wireframes, the work started with conversations. Five informal interviews
+                    with 3D artists and animation students at KNUST, three with independent game
+                    developers in Accra. The questions were simple: where do you get assets today,
+                    what frustrates you about it, and what would make you switch.
+                </p>
+                <p class="ps-body-text">
+                    Two things came up in every single conversation. First, <strong>trust</strong>:
+                    artists want to know an asset will work in their pipeline before they pay for it.
+                    A static thumbnail is not enough. Second, <strong>licence clarity</strong>:
+                    the ambiguity of "free for commercial use" on international sites has burned
+                    people before. They want a simple, readable licence card — not a legal document.
+                </p>
+
+                <!-- Research output image grid -->
+                <div class="ps-image-grid">
+
+                    <div class="ps-img-card ps-blur-in" data-blur-delay="0"
+                         data-lightbox-src="./images/african-assets-research-affinity.jpg"
+                         data-lightbox-caption="Affinity map from user interviews">
+                        <div class="ps-img-ratio" style="--ratio: 62%">
+                            <div style="position:absolute;inset:0;background:linear-gradient(135deg,#051a2a,#0a3a50);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.15);font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;">Affinity Map</div>
+                        </div>
+                        <div class="ps-img-overlay">+</div>
+                        <span class="ps-img-label">Affinity Map</span>
+                    </div>
+
+                    <div class="ps-img-card ps-blur-in" data-blur-delay="0.06"
+                         data-lightbox-src="./images/african-assets-research-competitive.jpg"
+                         data-lightbox-caption="Competitive analysis — Sketchfab, CGTrader, TurboSquid, ArtStation">
+                        <div class="ps-img-ratio" style="--ratio: 62%">
+                            <div style="position:absolute;inset:0;background:linear-gradient(135deg,#0a1a30,#0d2a45);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.15);font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;">Competitive Analysis</div>
+                        </div>
+                        <div class="ps-img-overlay">+</div>
+                        <span class="ps-img-label">Competitive Analysis</span>
+                    </div>
+
+                    <div class="ps-img-card ps-blur-in" data-blur-delay="0.12"
+                         data-lightbox-src="./images/african-assets-personas.jpg"
+                         data-lightbox-caption="User personas — The Student Creator and The Working Professional">
+                        <div class="ps-img-ratio" style="--ratio: 62%">
+                            <div style="position:absolute;inset:0;background:linear-gradient(135deg,#0a2030,#0d3040);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.15);font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;">User Personas</div>
+                        </div>
+                        <div class="ps-img-overlay">+</div>
+                        <span class="ps-img-label">User Personas</span>
+                    </div>
+
+                </div>
+
+                <!-- Key findings subgroup -->
+                <div class="ps-subgroup">
+                    <span class="ps-subgroup-label">Key Findings</span>
+                    <p class="ps-subgroup-desc">What the research consistently surfaced, distilled into four design requirements.</p>
+                    <div class="ps-meta-grid ps-meta-4">
+                        <div class="ps-meta-item">
+                            <span class="ps-meta-label">Finding 01</span>
+                            <span class="ps-meta-value">3D preview before purchase is non-negotiable</span>
+                        </div>
+                        <div class="ps-meta-item">
+                            <span class="ps-meta-label">Finding 02</span>
+                            <span class="ps-meta-value">Licence terms must be human-readable, not legal</span>
+                        </div>
+                        <div class="ps-meta-item">
+                            <span class="ps-meta-label">Finding 03</span>
+                            <span class="ps-meta-value">Low bandwidth context — file size matters as much as quality</span>
+                        </div>
+                        <div class="ps-meta-item">
+                            <span class="ps-meta-label">Finding 04</span>
+                            <span class="ps-meta-value">Creators want visible attribution, not just a sales number</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ============================================================
+             04 — IA & WIREFRAMES
+        ============================================================ -->
+        <section class="ps-section ps-reveal">
+            <div class="ps-container">
+                <span class="ps-section-label">04 — IA and Wireframes</span>
+                <h2 class="ps-section-title">Mapping the structure before the surface</h2>
+                <p class="ps-body-text">
+                    The information architecture came before any visual decisions. Three primary
+                    user flows were mapped: <strong>browsing and downloading</strong>,
+                    <strong>creator upload and publishing</strong>, and
+                    <strong>account and library management</strong>. The IA kept each flow
+                    under five steps from entry to completion.
+                </p>
+                <p class="ps-body-text">
+                    Wireframes stayed deliberately low-fidelity for the first two rounds —
+                    black-and-white, no colour, no icons. This forced decisions about
+                    <em>layout and hierarchy</em> to happen before aesthetic preferences
+                    could creep in and cloud the structural thinking.
+                </p>
+
+                <!-- Wireframe image grid — wide layout -->
+                <div class="ps-image-grid">
+
+                    <div class="ps-img-card ps-blur-in" data-blur-delay="0"
+                         style="grid-column: span 8;"
+                         data-lightbox-src="./images/african-assets-ia-map.jpg"
+                         data-lightbox-caption="Full information architecture map">
+                        <div class="ps-img-ratio" style="--ratio: 56.25%">
+                            <div style="position:absolute;inset:0;background:linear-gradient(135deg,#07202e,#0a3040);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.15);font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;">IA Map</div>
+                        </div>
+                        <div class="ps-img-overlay">+</div>
+                        <span class="ps-img-label">Information Architecture</span>
+                    </div>
+
+                    <div class="ps-img-card ps-blur-in" data-blur-delay="0.08"
+                         style="grid-column: span 4;"
+                         data-lightbox-src="./images/african-assets-wireframe-browse.jpg"
+                         data-lightbox-caption="Browse page wireframe — low fidelity round 1">
+                        <div class="ps-img-ratio" style="--ratio: 130%">
+                            <div style="position:absolute;inset:0;background:linear-gradient(135deg,#0a1a28,#0d2a3a);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.15);font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;">Browse WF</div>
+                        </div>
+                        <div class="ps-img-overlay">+</div>
+                        <span class="ps-img-label">Browse Wireframe</span>
+                    </div>
+
+                    <div class="ps-img-card ps-blur-in" data-blur-delay="0.12"
+                         style="grid-column: span 4;"
+                         data-lightbox-src="./images/african-assets-wireframe-asset.jpg"
+                         data-lightbox-caption="Asset detail page wireframe">
+                        <div class="ps-img-ratio" style="--ratio: 130%">
+                            <div style="position:absolute;inset:0;background:linear-gradient(135deg,#0a1a28,#0d2a3a);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.15);font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;">Asset Detail WF</div>
+                        </div>
+                        <div class="ps-img-overlay">+</div>
+                        <span class="ps-img-label">Asset Detail Wireframe</span>
+                    </div>
+
+                    <div class="ps-img-card ps-blur-in" data-blur-delay="0.16"
+                         style="grid-column: span 4;"
+                         data-lightbox-src="./images/african-assets-wireframe-upload.jpg"
+                         data-lightbox-caption="Creator upload flow wireframe">
+                        <div class="ps-img-ratio" style="--ratio: 130%">
+                            <div style="position:absolute;inset:0;background:linear-gradient(135deg,#0a1a28,#0d2a3a);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.15);font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;">Upload Flow WF</div>
+                        </div>
+                        <div class="ps-img-overlay">+</div>
+                        <span class="ps-img-label">Upload Flow Wireframe</span>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+             05 — UI DESIGN (screens)
+        ============================================================ -->
+        <section class="ps-section ps-reveal">
+            <div class="ps-container">
+                <span class="ps-section-label">05 — UI Design</span>
+                <h2 class="ps-section-title">Screens: from browse to purchase to creator profile</h2>
+                <p class="ps-body-text">
+                    The visual language pulls from two directions: the <strong>dark, focused
+                    UI conventions of professional creative tools</strong> (think Figma, Blender,
+                    Substance), and the <em>warmth and richness of West African visual culture</em>
+                    expressed through the accent palette and typography choices. The result is
+                    a platform that feels native to creative workflows, not like a generic e-commerce store.
+                </p>
+
+                <!-- Key screens grid -->
+                <div class="ps-image-grid">
+
+                    <div class="ps-img-card ps-blur-in" data-blur-delay="0"
+                         style="grid-column: span 12;"
+                         data-lightbox-src="./images/african-assets-ui-homepage.jpg"
+                         data-lightbox-caption="Homepage — hero, featured assets, category navigation">
+                        <div class="ps-img-ratio" style="--ratio: 56.25%">
+                            <div style="position:absolute;inset:0;background:linear-gradient(135deg,#051520,#0a2535);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.15);font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;">Homepage</div>
+                        </div>
+                        <div class="ps-img-overlay">+</div>
+                        <span class="ps-img-label">Homepage</span>
+                    </div>
+
+                    <div class="ps-img-card ps-blur-in" data-blur-delay="0.06"
+                         style="grid-column: span 7;"
+                         data-lightbox-src="./images/african-assets-ui-browse.jpg"
+                         data-lightbox-caption="Browse page — filter sidebar, asset grid, sort controls">
+                        <div class="ps-img-ratio" style="--ratio: 70%">
+                            <div style="position:absolute;inset:0;background:linear-gradient(135deg,#07182a,#0a2540);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.15);font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;">Browse Page</div>
+                        </div>
+                        <div class="ps-img-overlay">+</div>
+                        <span class="ps-img-label">Browse Page</span>
+                    </div>
+
+                    <div class="ps-img-card ps-blur-in" data-blur-delay="0.1"
+                         style="grid-column: span 5;"
+                         data-lightbox-src="./images/african-assets-ui-asset-detail.jpg"
+                         data-lightbox-caption="Asset detail page — 3D viewer, specs, licence card, download">
+                        <div class="ps-img-ratio" style="--ratio: 100%">
+                            <div style="position:absolute;inset:0;background:linear-gradient(135deg,#071a28,#0a2a3d);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.15);font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;">Asset Detail</div>
+                        </div>
+                        <div class="ps-img-overlay">+</div>
+                        <span class="ps-img-label">Asset Detail Page</span>
+                    </div>
+
+                    <div class="ps-img-card ps-blur-in" data-blur-delay="0.14"
+                         style="grid-column: span 5;"
+                         data-lightbox-src="./images/african-assets-ui-creator-profile.jpg"
+                         data-lightbox-caption="Creator profile — portfolio grid, stats, follow">
+                        <div class="ps-img-ratio" style="--ratio: 110%">
+                            <div style="position:absolute;inset:0;background:linear-gradient(135deg,#071820,#0a2535);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.15);font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;">Creator Profile</div>
+                        </div>
+                        <div class="ps-img-overlay">+</div>
+                        <span class="ps-img-label">Creator Profile</span>
+                    </div>
+
+                    <div class="ps-img-card ps-blur-in" data-blur-delay="0.18"
+                         style="grid-column: span 7;"
+                         data-lightbox-src="./images/african-assets-ui-upload.jpg"
+                         data-lightbox-caption="Upload flow — step 2 of 4, asset metadata and tags">
+                        <div class="ps-img-ratio" style="--ratio: 75%">
+                            <div style="position:absolute;inset:0;background:linear-gradient(135deg,#07202e,#0a3040);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.15);font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;">Upload Flow</div>
+                        </div>
+                        <div class="ps-img-overlay">+</div>
+                        <span class="ps-img-label">Upload Flow</span>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+             06 — DESIGN SYSTEM
+        ============================================================ -->
+        <section class="ps-section ps-reveal">
+            <div class="ps-container">
+                <span class="ps-section-label">06 — Design System</span>
+                <h2 class="ps-section-title">Colour, type, and the component library</h2>
+                <p class="ps-body-text">
+                    A consistent design system was built in Figma from the second round of
+                    hi-fi screens onwards. Every repeating element — asset cards, filter pills,
+                    licence badges, upload steps — was turned into a component with
+                    <strong>documented variants and states</strong>. This keeps the design
+                    scalable as new pages and features are added without visual drift.
+                </p>
+
+                <!-- Design system reference image — full width -->
+                <div class="ps-image-grid">
+
+                    <div class="ps-img-card ps-blur-in" data-blur-delay="0"
+                         style="grid-column: span 12;"
+                         data-lightbox-src="./images/african-assets-design-system-colours.jpg"
+                         data-lightbox-caption="Colour system — primary, secondary, semantic, and surface tokens">
+                        <div class="ps-img-ratio" style="--ratio: 40%">
+                            <div style="position:absolute;inset:0;background:linear-gradient(90deg,#05141e 0%,#07263a 30%,#0a3850 60%,#7EC8E3 100%);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.2);font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;">Colour System</div>
+                        </div>
+                        <div class="ps-img-overlay">+</div>
+                        <span class="ps-img-label">Colour System</span>
+                    </div>
+
+                    <div class="ps-img-card ps-blur-in" data-blur-delay="0.06"
+                         style="grid-column: span 6;"
+                         data-lightbox-src="./images/african-assets-design-system-components.jpg"
+                         data-lightbox-caption="Component library — asset card variants, filter pills, buttons">
+                        <div class="ps-img-ratio" style="--ratio: 75%">
+                            <div style="position:absolute;inset:0;background:linear-gradient(135deg,#07182a,#0a2a3d);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.15);font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;">Components</div>
+                        </div>
+                        <div class="ps-img-overlay">+</div>
+                        <span class="ps-img-label">Component Library</span>
+                    </div>
+
+                    <div class="ps-img-card ps-blur-in" data-blur-delay="0.12"
+                         style="grid-column: span 6;"
+                         data-lightbox-src="./images/african-assets-design-system-type.jpg"
+                         data-lightbox-caption="Typography — type scale, weights, and usage rules">
+                        <div class="ps-img-ratio" style="--ratio: 75%">
+                            <div style="position:absolute;inset:0;background:linear-gradient(135deg,#071a28,#0a2535);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.15);font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;">Typography</div>
+                        </div>
+                        <div class="ps-img-overlay">+</div>
+                        <span class="ps-img-label">Typography</span>
+                    </div>
+
+                </div>
+
+                <!-- Design system specs as meta grid -->
+                <div class="ps-subgroup">
+                    <span class="ps-subgroup-label">System Specs</span>
+                    <p class="ps-subgroup-desc">What the Figma design system covers.</p>
+                    <div class="ps-meta-grid ps-meta-4">
+                        <div class="ps-meta-item">
+                            <span class="ps-meta-label">Colour Tokens</span>
+                            <span class="ps-meta-value">Background, surface, border, brand, semantic states</span>
+                        </div>
+                        <div class="ps-meta-item">
+                            <span class="ps-meta-label">Typography</span>
+                            <span class="ps-meta-value">Space Grotesk headings, Inter body — 6-step type scale</span>
+                        </div>
+                        <div class="ps-meta-item">
+                            <span class="ps-meta-label">Components</span>
+                            <span class="ps-meta-value">32 components, each with interactive and disabled states</span>
+                        </div>
+                        <div class="ps-meta-item">
+                            <span class="ps-meta-label">Grid</span>
+                            <span class="ps-meta-value">12-column desktop, 4-column mobile, 8px base unit</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ============================================================
+             07 — PROTOTYPE (interactive embed placeholder)
+        ============================================================ -->
+        <section class="ps-section ps-reveal">
+            <div class="ps-container">
+                <span class="ps-section-label">07 — Interactive Prototype</span>
+                <h2 class="ps-section-title">Try the browse and download flow</h2>
+                <p class="ps-body-text">
+                    The Figma prototype below covers the core user journey: landing on the
+                    platform, browsing by category, opening an asset detail page, and completing
+                    a download. Replace the embed URL below with the live Figma share link
+                    when ready to publish.
+                </p>
+                <div class="ps-video-wrap">
+                    <div class="ps-video-ratio">
+                        <!--
+                            REPLACE: src with your Figma prototype embed URL
+                            Format: https://www.figma.com/embed?embed_host=share&url=YOUR_FIGMA_LINK
+                        -->
+                        <div class="ps-video-inner">
+                            <div style="position:absolute;inset:0;background:linear-gradient(135deg,#051520,#0a2a3d);"></div>
+                            <div class="ps-video-play">&#9654;</div>
+                            <span class="ps-video-label">Interactive Prototype — Coming Soon</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+             08 — OUTCOME & NEXT STEPS
+        ============================================================ -->
+        <section class="ps-section ps-reveal">
+            <div class="ps-container">
+                <span class="ps-section-label">08 — Outcome and Next Steps</span>
+                <h2 class="ps-section-title">Where the design work goes from here</h2>
+                <p class="ps-body-text">
+                    The design phase covers the full browsing, purchase, and creator experience
+                    across desktop and mobile. What comes next is the
+                    <strong>technical build</strong> — database schema, asset upload pipeline,
+                    CDN and storage strategy, and the payment integration for African markets
+                    (which has its own complexity: not everyone uses Stripe).
+                </p>
+                <p class="ps-body-text">
+                    The Digital Character Creation library feeds directly into this platform
+                    as the <em>first verified catalogue</em>. The two projects are designed
+                    together: the characters prove the asset production pipeline works,
+                    and the platform gives those assets a permanent, scalable home.
+                    <strong>The goal is to build infrastructure</strong> that African
+                    digital creators can rely on for the next decade.
+                </p>
+
+                <!-- Next steps meta grid -->
+                <div class="ps-meta-grid ps-meta-3">
+                    <div class="ps-meta-item">
+                        <span class="ps-meta-label">Next — Design</span>
+                        <span class="ps-meta-value">Mobile-first responsive pass and usability testing with KNUST students</span>
+                    </div>
+                    <div class="ps-meta-item">
+                        <span class="ps-meta-label">Next — Tech</span>
+                        <span class="ps-meta-value">Backend spec: storage, CDN, payment processing for West Africa</span>
+                    </div>
+                    <div class="ps-meta-item">
+                        <span class="ps-meta-label">Next — Content</span>
+                        <span class="ps-meta-value">Seed the catalogue with the first 20 character assets from the creation pipeline</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- PROJECT NAVIGATION -->
+    <div class="ps-project-nav ps-reveal">
+        <a href="./auto-pbr-mapper.html" class="ps-nav-card ps-nav-prev">
+            <div class="ps-nav-thumb">
+                <!-- <img src="./images/auto-pbr-mapper-thumb.png" alt=""> -->
+            </div>
+            <div class="ps-nav-content">
+                <span class="ps-nav-dir">Previous Project</span>
+                <span class="ps-nav-title">Auto PBR Mapper</span>
+                <span class="ps-nav-arrow">&#8592;</span>
+            </div>
+        </a>
+        <a href="./projects.html" class="ps-nav-card ps-nav-next ps-nav-back">
+            <div class="ps-nav-thumb"></div>
+            <div class="ps-nav-content">
+                <span class="ps-nav-dir">All Projects</span>
+                <span class="ps-nav-title">Back to Projects</span>
+                <span class="ps-nav-arrow">&#8594;</span>
+            </div>
+        </a>
+    </div>
+
+    <!-- LIGHTBOX -->
+    <div class="ps-lightbox" id="psLightbox">
+        <div class="ps-lightbox-inner" id="psLightboxInner">
+            <button class="ps-lightbox-close" id="psLightboxClose">&#10005;</button>
+            <button class="ps-lightbox-prev"  id="psLightboxPrev">&#8249;</button>
+            <button class="ps-lightbox-next"  id="psLightboxNext">&#8250;</button>
+            <img id="psLightboxImg" src="" alt="">
+            <span class="ps-lightbox-caption" id="psLightboxCaption"></span>
+        </div>
+    </div>
+
+    <!-- SCROLL TO TOP -->
+    <button id="back-to-top" aria-label="Back to top">
+        <svg class="progress-ring" width="64" height="64">
+            <circle class="progress-ring__circle" stroke-dasharray="188.5 188.5" stroke-dashoffset="188.5" cx="32" cy="32" r="30"></circle>
+        </svg>
+        &#8593;
+    </button>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="work.html">Work</a></li>
+                        <li><a href="projects.html">Projects</a></li>
+                        <li><a href="tutorials.html">Tutorials</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="cv.html">CV</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section social-section">
+                    <h4>Let's Connect</h4>
+                    <div class="social-icons">
+                        <a href="https://www.behance.net/eugeneantwi" target="_blank" rel="noopener" title="Behance">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M22 7h-7v-2h7v2zm1.726 10c-.442 1.297-2.029 3-5.101 3-3.074 0-5.564-1.729-5.564-5.675 0-3.91 2.325-5.92 5.466-5.92 3.082 0 4.964 1.782 5.375 4.426.078.506.109 1.188.095 2.14h-8.027c.13 3.211 3.483 3.312 4.588 2.029h3.168zm-7.686-4h4.965c-.105-1.547-1.136-2.219-2.477-2.219-1.466 0-2.277.768-2.488 2.219zm-9.574 6.988h-6.466v-14.967h6.953c5.476.081 5.58 5.444 2.72 6.906 3.461 1.26 3.577 8.061-3.207 8.061zm-3.466-8.988h3.584c2.508 0 2.906-3-.312-3h-3.272v3zm3.391 3h-3.391v3.016h3.341c3.055 0 2.868-3.016.05-3.016z"/></svg>
+                        </a>
+                        <a href="https://www.linkedin.com/in/eugene-antwi-067a82197/" target="_blank" rel="noopener" title="LinkedIn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                        </a>
+                        <a href="https://youtube.com/@proeugenelabs?si=oMljuUyEPGHShmjL" target="_blank" rel="noopener" title="YouTube">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
+                        </a>
+                        <a href="https://www.instagram.com/pro.youjin/" target="_blank" rel="noopener" title="Instagram">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                        </a>
+                        <a href="https://eugeneantwi7.artstation.com/" target="_blank" rel="noopener" title="ArtStation">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M0 17.723l2.027 3.505h.001a2.424 2.424 0 0 0 2.164 1.333h13.457l-2.792-4.838H0zm24 .025c0-.484-.143-.935-.388-1.314L15.728 2.728a2.424 2.424 0 0 0-2.142-1.289H9.419L21.598 22.54l1.92-3.325c.378-.637.482-.919.482-1.467zm-11.129-3.462L7.428 4.858l-5.444 9.428h10.887z"/></svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-section footer-logo-section">
+                    <img src="./images/eugene-antwi-logo-nav.svg" alt="Eugene Antwi Logo" class="footer-logo-icon">
+                    <div class="footer-logo-text">EUGENE ANTWI</div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Eugene Ampadu Antwi. All rights reserved.</p>
+                <p>Designer | Animator | Educator</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script src="./js/preloader.js"></script>
+    <script src="./js/navbar.js"></script>
+    <script src="./js/lightrays.js"></script>
+    <script src="./js/scroll-to-top.js"></script>
+    <script src="./js/click-spark.js"></script>
+    <script src="./js/skeleton.js"></script>
+    <script src="./js/project-single.js"></script>
+
+</body>
+</html>

@@ -148,6 +148,33 @@
     background: var(--green);
 }
 
+
+/* ===== SUBPAGE BACK INDICATOR =====
+   On curated project pages, the active Projects pill
+   shows a left arrow prefix signalling it's a back action.
+===================================== */
+.nav-item.active.subpage .nav-link {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.nav-item.active.subpage .nav-link::before {
+    content: '';
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%230a0a0f' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='19' y1='12' x2='5' y2='12'/%3E%3Cpolyline points='12 19 5 12 12 5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: contain;
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    flex-shrink: 0;
+}
+
+.nav-item.active.subpage:hover .nav-link::before {
+    transform: translateX(-3px);
+}
+
 /* ===== RESPONSIVE ===== */
 
 @media (max-width: 968px) {

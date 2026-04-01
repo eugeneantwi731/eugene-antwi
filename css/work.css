@@ -113,7 +113,7 @@ main {
 .showreel-play-button svg {
     width: 35px;
     height: 35px;
-    fill: var(--text-light, #ffffff);
+    fill: var(--bg-dark, #ffffff);
     margin-left: 3px;
 }
 
