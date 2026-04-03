@@ -2,30 +2,47 @@
     'use strict';
 
     /* ============================================================
-       FEATURED CARD FLIP SLIDESHOW
-       Transition triggered by: auto timer OR dot buttons only.
-       Clicking the card itself navigates to the project page.
+       FEATURED FLIP SLIDESHOW
+       PROJ_FEATURED_SLIDES is now an array of objects — each object
+       is one complete project entry: image, href, accent, title,
+       desc, tags, tools, status, date, index.
+
+       Content transition order:
+         1. goTo() called            — fade content OUT (content-out class)
+         2. At maxDelay / 2          — swap all text, href, accent to new slide
+         3. After flip completes     — fade content IN (remove content-out)
     ============================================================ */
     function initFeaturedFlip() {
-        const grid   = document.getElementById('projFeatGrid');
-        const dotsEl = document.getElementById('projFeatDots');
-        const cardEl = document.querySelector('.proj-featured-card');
+        const grid       = document.getElementById('projFeatGrid');
+        const dotsEl     = document.getElementById('projFeatDots');
+        const cardEl     = document.getElementById('featCard');
+        const contentEl  = document.getElementById('featContent');
+        const titleEl    = document.getElementById('featTitle');
+        const descEl     = document.getElementById('featDesc');
+        const tagsEl     = document.getElementById('featTags');
+        const toolsEl    = document.getElementById('featTools');
+        const statusLed  = document.getElementById('featStatusLed');
+        const statusText = document.getElementById('featStatusText');
+        const dateEl     = document.getElementById('featDate');
+        const indexEl    = document.getElementById('featIndex');
 
-        if (!grid) return;
+        if (!grid || !cardEl) return;
 
         const COLS        = 10;
         const ROWS        = 5;
-        const INTERVAL    = 3400;
+        const INTERVAL    = 4000;
         const FLIP_DUR    = 400;
         const WAVE_SPREAD = 620;
         const JITTER_ROW  = 10;
         const JITTER_RAND = 45;
 
+        /* Fallback if PROJ_FEATURED_SLIDES is missing or malformed */
         const fallback = [
-            'linear-gradient(135deg, #1a0a05 0%, #3a1a0a 100%)',
-            'linear-gradient(135deg, #0a1240 0%, #1A3EBF 100%)',
-            'linear-gradient(135deg, #051a10 0%, #0d3320 100%)',
+            { image: 'linear-gradient(135deg,#1a0a05,#3a1a0a)', href: '#', accent: '#E8A87C', status: 'active',    date: '2024', index: '01', title: 'Project One',   desc: '',  tags: [], tools: [] },
+            { image: 'linear-gradient(135deg,#0a1240,#1A3EBF)', href: '#', accent: '#7EC8E3', status: 'completed', date: '2023', index: '02', title: 'Project Two',   desc: '',  tags: [], tools: [] },
+            { image: 'linear-gradient(135deg,#051a10,#0d3320)', href: '#', accent: '#A8E6CF', status: 'completed', date: '2023', index: '03', title: 'Project Three', desc: '',  tags: [], tools: [] },
         ];
+
         const slides = (window.PROJ_FEATURED_SLIDES && window.PROJ_FEATURED_SLIDES.length >= 2)
             ? window.PROJ_FEATURED_SLIDES
             : fallback;
@@ -37,9 +54,10 @@
         grid.style.gridTemplateColumns = `repeat(${COLS}, 1fr)`;
         grid.style.gridTemplateRows    = `repeat(${ROWS}, 1fr)`;
 
+        /* ── Helpers ─────────────────────────────────────────── */
         function getImgDims() {
-            const img = grid.parentElement;
-            return { W: img ? img.offsetWidth : 800, H: img ? img.offsetHeight : 360 };
+            const wrap = grid.parentElement;
+            return { W: wrap ? wrap.offsetWidth : 800, H: wrap ? wrap.offsetHeight : 500 };
         }
 
         function coverDims(natW, natH, W, H) {
@@ -49,9 +67,9 @@
         }
 
         function applySlide(el, val, col, row) {
-            const isImage = val.startsWith('http') || val.startsWith('/') || val.startsWith('./');
+            const isImage = val && (val.startsWith('http') || val.startsWith('/') || val.startsWith('./'));
             if (!isImage) {
-                el.style.background = val;
+                el.style.background = val || '#070709';
                 el.style.backgroundImage = 'none';
                 return;
             }
@@ -77,6 +95,40 @@
             img.src = val;
         }
 
+        /* ── Update all text + meta to a given slide ──────────── */
+        function updateContent(slide) {
+            if (cardEl)     cardEl.href = slide.href || '#';
+            if (titleEl)    titleEl.textContent = slide.title || '';
+            if (descEl)     descEl.textContent  = slide.desc  || '';
+            if (dateEl)     dateEl.textContent  = slide.date  || '';
+            if (indexEl)    indexEl.textContent = slide.index || '';
+
+            if (statusLed) {
+                statusLed.className = 'proj-status-led ' + (slide.status || 'active');
+            }
+            if (statusText) {
+                const s = slide.status || 'active';
+                statusText.textContent = s.charAt(0).toUpperCase() + s.slice(1);
+            }
+
+            if (tagsEl) {
+                tagsEl.innerHTML = (slide.tags || [])
+                    .map(t => `<span class="proj-feat-tag">${t}</span>`)
+                    .join('');
+            }
+            if (toolsEl) {
+                toolsEl.innerHTML = (slide.tools || [])
+                    .map(t => `<span class="proj-feat-tool">${t}</span>`)
+                    .join('');
+            }
+
+            /* Update accent on the card element */
+            if (cardEl) {
+                cardEl.style.setProperty('--feat-accent', slide.accent || 'var(--green)');
+            }
+        }
+
+        /* ── Build tiles ──────────────────────────────────────── */
         const tiles = [];
         for (let r = 0; r < ROWS; r++) {
             for (let c = 0; c < COLS; c++) {
@@ -84,10 +136,10 @@
                 tile.className = 'proj-feat-tile';
                 const front = document.createElement('div');
                 front.className = 'proj-feat-tile-front';
-                applySlide(front, slides[0], c, r);
+                applySlide(front, slides[0].image, c, r);
                 const back = document.createElement('div');
                 back.className = 'proj-feat-tile-back';
-                applySlide(back, slides[1 % slides.length], c, r);
+                applySlide(back, slides[1 % slides.length].image, c, r);
                 tile.appendChild(front);
                 tile.appendChild(back);
                 grid.appendChild(tile);
@@ -95,16 +147,20 @@
             }
         }
 
+        /* Set initial content from slide 0 */
+        updateContent(slides[0]);
+
+        /* ── Resize: repaint tiles ────────────────────────────── */
         window.addEventListener('resize', () => {
             Object.keys(dimCache).forEach(k => delete dimCache[k]);
             const afterIdx = (current + 1) % slides.length;
             tiles.forEach(t => {
-                applySlide(t.front, slides[current],  t.col, t.row);
-                applySlide(t.back,  slides[afterIdx], t.col, t.row);
+                applySlide(t.front, slides[current].image,   t.col, t.row);
+                applySlide(t.back,  slides[afterIdx].image,  t.col, t.row);
             });
         });
 
-        /* Build dots — clicking a dot triggers transition, stops propagation so card link is NOT followed */
+        /* ── Build dots ───────────────────────────────────────── */
         slides.forEach((_, i) => {
             const d = document.createElement('button');
             d.className = 'proj-feat-dot' + (i === 0 ? ' active' : '');
@@ -112,7 +168,9 @@
             d.addEventListener('click', e => {
                 e.stopPropagation();
                 e.preventDefault();
+                clearInterval(timer);
                 goTo(i);
+                timer = setInterval(advance, INTERVAL);
             });
             dotsEl.appendChild(d);
         });
@@ -123,12 +181,16 @@
             );
         }
 
+        /* ── Core transition ──────────────────────────────────── */
         function goTo(target) {
             if (isAnimating || target === current) return;
             isAnimating = true;
 
             const nextIdx  = target;
             const afterIdx = (nextIdx + 1) % slides.length;
+
+            /* STEP 1 — fade content out immediately */
+            if (contentEl) contentEl.classList.add('content-out');
 
             const delays = tiles.map(t => {
                 const base  = (t.col / (COLS - 1)) * WAVE_SPREAD;
@@ -142,7 +204,7 @@
             tiles.forEach(t => {
                 t.el.style.transition = 'none';
                 t.el.classList.remove('flipped', 'flip-blur');
-                applySlide(t.back, slides[nextIdx], t.col, t.row);
+                applySlide(t.back, slides[nextIdx].image, t.col, t.row);
                 t.el.getBoundingClientRect();
             });
 
@@ -155,42 +217,76 @@
                 setTimeout(() => t.el.classList.remove('flip-blur'), delay + dur + 20);
             });
 
+            /* STEP 2 — swap content at the midpoint of the wave */
+            setTimeout(() => {
+                updateContent(slides[nextIdx]);
+            }, maxDelay / 2);
+
+            /* STEP 3 — flip complete: reset tiles, fade content back in */
             setTimeout(() => {
                 tiles.forEach(t => {
                     t.el.style.transition = 'none';
                     t.el.classList.remove('flipped', 'flip-blur');
-                    applySlide(t.front, slides[nextIdx],  t.col, t.row);
-                    applySlide(t.back,  slides[afterIdx], t.col, t.row);
+                    applySlide(t.front, slides[nextIdx].image,  t.col, t.row);
+                    applySlide(t.back,  slides[afterIdx].image, t.col, t.row);
                 });
                 current = nextIdx;
                 updateDots(current);
                 isAnimating = false;
+
+                /* Fade content back in */
+                if (contentEl) contentEl.classList.remove('content-out');
             }, maxDelay + FLIP_DUR + 140);
         }
 
         function advance() { goTo((current + 1) % slides.length); }
+        function retreat() { goTo((current - 1 + slides.length) % slides.length); }
 
-        /* Auto timer — pauses on hover */
+        /* ── Wire up prev / next arrows ───────────────────────── */
+        const prevBtn = document.querySelector('.proj-feat-prev');
+        const nextBtn = document.querySelector('.proj-feat-next');
+        if (prevBtn) {
+            prevBtn.addEventListener('click', e => {
+                e.stopPropagation();
+                e.preventDefault();
+                clearInterval(timer);
+                retreat();
+                timer = setInterval(advance, INTERVAL);
+            });
+        }
+        if (nextBtn) {
+            nextBtn.addEventListener('click', e => {
+                e.stopPropagation();
+                e.preventDefault();
+                clearInterval(timer);
+                advance();
+                timer = setInterval(advance, INTERVAL);
+            });
+        }
+
+        /* ── Auto timer — pauses on hover ─────────────────────── */
         let timer = setInterval(advance, INTERVAL);
-        if (cardEl) {
-            cardEl.addEventListener('mouseenter', () => clearInterval(timer));
-            cardEl.addEventListener('mouseleave', () => {
+        const heroWrap = document.querySelector('.proj-hero-wrap');
+        if (heroWrap) {
+            heroWrap.addEventListener('mouseenter', () => clearInterval(timer));
+            heroWrap.addEventListener('mouseleave', () => {
                 clearInterval(timer);
                 timer = setInterval(advance, INTERVAL);
             });
         }
 
-        /* Tab visibility fix */
+        /* ── Tab visibility fix ───────────────────────────────── */
         document.addEventListener('visibilitychange', () => {
             if (document.visibilityState !== 'visible') return;
             clearInterval(timer);
             isAnimating = false;
+            if (contentEl) contentEl.classList.remove('content-out');
             const afterIdx = (current + 1) % slides.length;
             tiles.forEach(t => {
                 t.el.style.transition = 'none';
                 t.el.classList.remove('flipped', 'flip-blur');
-                applySlide(t.front, slides[current],  t.col, t.row);
-                applySlide(t.back,  slides[afterIdx], t.col, t.row);
+                applySlide(t.front, slides[current].image,   t.col, t.row);
+                applySlide(t.back,  slides[afterIdx].image,  t.col, t.row);
             });
             timer = setInterval(advance, INTERVAL);
         });
@@ -199,13 +295,13 @@
 
     /* ============================================================
        FILTER TABS
+       Only affects the card grid below — hero always shows all slides.
     ============================================================ */
     function initFilters() {
         const tabs      = document.querySelectorAll('.proj-filter-btn');
-        const featCard  = document.querySelector('.proj-featured-card');
-        const divider   = document.getElementById('projSectionDivide');
         const cards     = document.querySelectorAll('.proj-card');
         const noResults = document.getElementById('projNoResults');
+        const divider   = document.getElementById('projSectionDivide');
 
         if (!tabs.length) return;
 
@@ -215,15 +311,8 @@
                 tab.classList.add('active');
 
                 const filter = tab.dataset.filter;
-
-                if (featCard) {
-                    const featFilters = (featCard.dataset.filter || '').split(' ');
-                    const featVisible = filter === 'all' || featFilters.includes(filter);
-                    featCard.style.display = featVisible ? 'block' : 'none';
-                    if (divider) divider.style.display = featVisible ? 'flex' : 'none';
-                }
-
                 let visibleCount = 0;
+
                 cards.forEach(card => {
                     const cardFilters = (card.dataset.filter || '').split(' ');
                     const match = filter === 'all' || cardFilters.includes(filter);
@@ -232,30 +321,20 @@
                 });
 
                 if (noResults) {
-                    const featVisible = featCard ? featCard.style.display !== 'none' : false;
-                    noResults.classList.toggle('visible', visibleCount === 0 && !featVisible);
+                    noResults.classList.toggle('visible', visibleCount === 0);
                 }
             });
         });
     }
 
 
-    document.addEventListener('DOMContentLoaded', () => {
-        initFeaturedFlip();
-        initFilters();
-        initScrollIn();
-    });
-
-})();
-
-
     /* ============================================================
        SCROLL-IN ANIMATION
-       Cards and featured card animate in as they enter the viewport.
-       Uses IntersectionObserver — no layout shift, no jank.
+       Featured card already has proj-visible in HTML (visible on load).
+       Grid cards animate in as they enter the viewport.
     ============================================================ */
     function initScrollIn() {
-        const targets = document.querySelectorAll('.proj-featured-card, .proj-card, .proj-section-divide');
+        const targets = document.querySelectorAll('.proj-card, .proj-section-divide');
         if (!targets.length) return;
 
         const observer = new IntersectionObserver((entries) => {
@@ -266,9 +345,18 @@
                 }
             });
         }, {
-            threshold: 0.08,
-            rootMargin: '0px 0px -40px 0px'
+            threshold: 0.06,
+            rootMargin: '0px 0px -30px 0px'
         });
 
         targets.forEach(el => observer.observe(el));
     }
+
+
+    document.addEventListener('DOMContentLoaded', () => {
+        initFeaturedFlip();
+        initFilters();
+        initScrollIn();
+    });
+
+})();
