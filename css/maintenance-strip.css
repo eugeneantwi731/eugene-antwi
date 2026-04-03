@@ -1,0 +1,165 @@
+/* ============================================================
+   MAINTENANCE STRIP — standalone, reusable
+   For pages that are live but actively being updated.
+
+   HOW TO USE
+   ──────────
+   1. Link CSS in <head>:
+         <link rel="stylesheet" href="./css/maintenance-strip.css">
+
+   2. Paste this HTML as the VERY FIRST child of <body>:
+
+      <div class="maint-strip" id="maintStrip">
+        <div class="maint-track" id="maintTrack">
+          <span class="maint-item"><span class="maint-dot"></span>Page currently being updated</span>
+          <span class="maint-sep">·</span>
+          <span class="maint-item">Some sections may change</span>
+          <span class="maint-sep">·</span>
+          <span class="maint-item">Check back soon for new work</span>
+          <span class="maint-sep">·</span>
+        </div>
+      </div>
+
+      ONE set only. JS clones it, measures the exact pixel width,
+      then starts the animation. Animation never runs until JS
+      confirms the clone is in the DOM and the distance is set.
+
+   3. Link the JS before </body>:
+         <script src="./js/maintenance-strip.js"></script>
+
+   4. To remove: delete the <link>, the HTML snippet, and the <script>.
+============================================================ */
+
+/* ===== TOKENS ===== */
+:root {
+    --maint-h:    30px;   /* strip height */
+    --maint-gap:  6px;    /* breathing room between strip and navbar */
+}
+
+/* ===== STRIP ===== */
+.maint-strip {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--maint-h);
+    background: #150f00;
+    border-bottom: 1px solid rgba(255, 176, 0, 0.2);
+    overflow: hidden;
+    z-index: 99999;
+
+    /* Soft fade at both edges */
+    -webkit-mask-image: linear-gradient(
+        to right,
+        transparent 0%,
+        #000 5%,
+        #000 95%,
+        transparent 100%
+    );
+    mask-image: linear-gradient(
+        to right,
+        transparent 0%,
+        #000 5%,
+        #000 95%,
+        transparent 100%
+    );
+}
+
+/* ===== TRACK =====
+   No animation by default.
+   JS clones the items, measures exact pixel width of one set,
+   writes --maint-dist as a negative px value, then adds
+   .maint-running. Only then does the animation start.
+   Clone confirmed in DOM + pixel distance confirmed = no flash.
+===== */
+.maint-track {
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+    height: 100%;
+    will-change: transform;
+}
+
+.maint-track.maint-running {
+    animation: maint-scroll var(--maint-speed, 28s) linear infinite;
+}
+
+.maint-strip:hover .maint-track.maint-running {
+    animation-play-state: paused;
+}
+
+@keyframes maint-scroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(var(--maint-dist, -50%)); }
+}
+
+/* ===== ITEMS ===== */
+.maint-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 0 32px;
+    font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 0.625rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255, 176, 0, 0.68);
+    user-select: none;
+}
+
+/* ===== SEPARATOR ===== */
+.maint-sep {
+    font-size: 0.75rem;
+    color: rgba(255, 176, 0, 0.2);
+    user-select: none;
+    flex-shrink: 0;
+}
+
+/* ===== PULSING DOT ===== */
+.maint-dot {
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #FFB000;
+    flex-shrink: 0;
+    animation: maint-pulse 1.8s ease-in-out infinite;
+}
+
+@keyframes maint-pulse {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.15; }
+}
+
+/* ===== OFFSETS =====
+   Body padding pushes page content below the strip.
+   Navbar (.site-header) gets strip height + gap so it
+   sits with breathing room beneath the strip.
+   Update .site-header if your navbar uses a different class.
+===== */
+body {
+    padding-top: calc(var(--maint-h) + var(--maint-gap));
+}
+
+.site-header {
+    top: calc(var(--maint-h) + var(--maint-gap)) !important;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    :root {
+        --maint-h:   26px;
+        --maint-gap: 4px;
+    }
+
+    .maint-item {
+        font-size: 0.563rem;
+        padding: 0 22px;
+        letter-spacing: 0.15em;
+    }
+
+    .maint-track {
+        animation-duration: 20s;
+    }
+}
