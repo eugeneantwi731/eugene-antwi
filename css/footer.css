@@ -207,6 +207,32 @@
     }
 }
 
+/* ===== PDF TAG FOR CV LINK ===== */
+.footer-pdf-tag {
+    display: inline-flex;
+    align-items: center;
+    margin-left: 6px;
+    padding: 1px 5px;
+    border: 1px solid color-mix(in srgb, var(--accent, var(--green)) 35%, transparent);
+    border-radius: 3px;
+    background: color-mix(in srgb, var(--accent, var(--green)) 8%, transparent);
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    color: color-mix(in srgb, var(--accent, var(--green)) 55%, transparent);
+    line-height: 1.6;
+    vertical-align: middle;
+    position: relative;
+    top: -1px;
+    transition: var(--transition-smooth);
+}
+
+.footer-links a:hover .footer-pdf-tag {
+    border-color: color-mix(in srgb, var(--accent, var(--green)) 60%, transparent);
+    color: color-mix(in srgb, var(--accent, var(--green)) 80%, transparent);
+    background: color-mix(in srgb, var(--accent, var(--green)) 14%, transparent);
+}
+
 /* ===== ACCESSIBILITY ===== */
 @media (prefers-reduced-motion: reduce) {
     .footer-links a,
