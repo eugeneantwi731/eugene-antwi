@@ -105,10 +105,11 @@ main.page-content {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 2.8rem 3.2rem;
+    padding: 2.8rem 3.2rem 2.8rem 5.5rem;
+    /* Left padding clears the prev arrow (40px wide at 1.5rem from edge) */
     /* Push content below navbar — navbar sits at ~36px + ~56px tall */
     padding-top: 120px;
-    max-width: 600px;
+    max-width: 640px;
     pointer-events: none;
     opacity: 1;
     transition: opacity 0.18s ease;
@@ -685,7 +686,7 @@ main.page-content {
     }
     .proj-feat-content {
         max-width: 520px;
-        padding: 2rem 2.4rem;
+        padding: 2rem 2.4rem 2rem 5rem;
         padding-top: 100px;
     }
     .proj-sticky-bar { top: 82px; }
