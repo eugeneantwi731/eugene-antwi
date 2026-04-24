@@ -185,6 +185,42 @@
 .ps-hero-tool:hover { color: var(--project-accent); border-color: var(--project-accent); }
 
 /* ============================================================
+   HERO VARIANT — INSET
+   Floats the hero inside the page with breathing room on
+   top, left, and right. Bottom still flows naturally.
+   Add  class="ps-hero ps-hero--inset"  to the <section>.
+============================================================ */
+.ps-hero--inset {
+    margin: calc(var(--navbar-height, 72px) + 1.5rem) 1.5rem 0;
+    border-radius: 16px;
+    height: 80vh;
+    min-height: 480px;
+}
+
+@media (max-width: 1024px) {
+    .ps-hero--inset {
+        margin: calc(var(--navbar-height, 72px) + 1.2rem) 1.2rem 0;
+        height: 78vh;
+    }
+}
+
+@media (max-width: 768px) {
+    .ps-hero--inset {
+        margin: calc(var(--navbar-height, 64px) + 1rem) 1rem 0;
+        border-radius: 10px;
+        height: 72vh;
+    }
+}
+
+@media (max-width: 480px) {
+    .ps-hero--inset {
+        margin: calc(var(--navbar-height, 60px) + 0.75rem) 0.75rem 0;
+        border-radius: 8px;
+        height: 65vh;
+    }
+}
+
+/* ============================================================
    LAYOUT
 ============================================================ */
 .ps-main { padding-top: 0; }

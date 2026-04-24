@@ -1,0 +1,8 @@
+{
+  "name": "eugene-portfolio",
+  "version": "1.0.0",
+  "description": "Portfolio with Claude AI",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.32.1"
+  }
+}

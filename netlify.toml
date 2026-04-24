@@ -1,3 +1,11 @@
+[build]
+  publish = "."
+  functions = "netlify/functions"
+
+[functions]
+  node_bundler = "esbuild"
+
+# Keep your existing 404 redirect at the end
 [[redirects]]
   from = "/*"
   to = "/404.html"
