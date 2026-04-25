@@ -23,7 +23,7 @@
     --purple: #8B5CF6;
     --blue: #4A9EFF;
     --cyan-blue: #00D9FF;
-    --green: #24FF72; /* New green accent color */
+    --green: #f0f0f0; /* Default white — overridden by lightrays.js from localStorage */
     
     /* UI Elements */
     --border-subtle: rgba(255, 255, 255, 0.08);

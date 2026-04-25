@@ -28,7 +28,7 @@
   // How long after page load before she peeks (ms)
   // Waits for preloader if present, otherwise just a short delay
   const INTRO_DELAY_FRESH = 800;
-  const INTRO_DELAY_RETURNING = 400;
+  const INTRO_DELAY_RETURNING = 0; // No preloader on inner pages — appear immediately
 
   // ---- State ----
   let currentState = 'hidden';
@@ -592,10 +592,10 @@
         childList: false,
       });
 
-      // Fallback: if preloader never fires the observer, start after 4s
+      // Fallback: if preloader never fires the observer, start after 1.5s
       setTimeout(() => {
         if (currentState === 'hidden') onPreloaderDone();
-      }, 4000);
+      }, 1500);
 
     } else {
       // No preloader on this page
