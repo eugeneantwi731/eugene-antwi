@@ -1,0 +1,646 @@
+/* ============================================================
+   BOAHEMAA WIDGET — CSS
+   Fully integrated with eugene-antwi.com design system.
+   Uses --green CSS variable which inherits the live accent color
+   from the hero light rays system.
+   
+   Z-index stack:
+   - scroll-to-top button: 998
+   - boahemaa avatar:      999
+   - boahemaa chat panel:  1000
+   - boahemaa overlay:     1001 (if needed)
+   ============================================================ */
+
+/* ============================================================
+   AVATAR — The peeking character at bottom right
+   ============================================================ */
+
+#boahemaa-avatar {
+  position: fixed;
+  bottom: 0;
+  right: 110px; /* Clears the scroll-to-top button (right: 40px, width: 56px) with a gap */
+  width: 72px;
+  height: 72px;
+  z-index: 999;
+  cursor: pointer;
+  transform: translateY(calc(100% - 28px)); /* Peek: show top 28px above screen edge */
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+/* Peek state — default after intro */
+#boahemaa-avatar.state-peek {
+  transform: translateY(calc(100% - 28px));
+}
+
+/* Hover state — rises to waist */
+#boahemaa-avatar.state-hover {
+  transform: translateY(calc(100% - 68px));
+}
+
+/* Intro state — fully visible for wave */
+#boahemaa-avatar.state-intro {
+  transform: translateY(calc(100% - 72px));
+}
+
+/* Hidden — before preloader finishes */
+#boahemaa-avatar.state-hidden {
+  transform: translateY(100%);
+  pointer-events: none;
+}
+
+/* Chat open — avatar travels to top of panel, becomes header avatar */
+#boahemaa-avatar.state-chat-open {
+  transform: translateY(100%);
+  pointer-events: none;
+  opacity: 0;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease 0.15s;
+}
+
+/* ---- Avatar Inner Structure ---- */
+
+.boahemaa-avatar-body {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* The face circle — placeholder until real sprite */
+.boahemaa-face {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--card-bg, #1a1a24);
+  border: 2px solid var(--green, #f0f0f0);
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.05);
+  overflow: hidden;
+  transition: border-color 0.3s ease;
+}
+
+/* Initials inside face */
+.boahemaa-initials {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Sugar Snow', cursive;
+  font-size: 1.4rem;
+  color: var(--green, #f0f0f0);
+  letter-spacing: 1px;
+  transition: color 0.3s ease;
+  pointer-events: none;
+}
+
+/* Eyes — two small circles that blink and track mouse */
+.boahemaa-eyes {
+  position: absolute;
+  bottom: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 36px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  pointer-events: none;
+}
+
+.boahemaa-eye {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--green, #f0f0f0);
+  position: relative;
+  overflow: hidden;
+  animation: boahemaa-blink 4s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+.boahemaa-eye:nth-child(2) {
+  animation-delay: 0.08s; /* Slight offset so both eyes don't blink in perfect sync */
+}
+
+/* Pupil inside eye — moves for mouse tracking */
+.boahemaa-pupil {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--bg-dark, #0a0a0f);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s ease-out;
+}
+
+@keyframes boahemaa-blink {
+  0%, 90%, 100% { transform: scaleY(1); }
+  94%, 96%      { transform: scaleY(0.08); }
+}
+
+/* Occasional slow blink variation */
+.boahemaa-eye.slow-blink {
+  animation: boahemaa-blink-slow 6s ease-in-out infinite;
+}
+
+@keyframes boahemaa-blink-slow {
+  0%, 85%, 100% { transform: scaleY(1); }
+  90%, 92%      { transform: scaleY(0.08); }
+}
+
+/* Wave hand — appears during intro animation */
+.boahemaa-wave-hand {
+  position: absolute;
+  bottom: 12px;
+  right: -8px;
+  font-size: 1.1rem;
+  opacity: 0;
+  transform-origin: bottom center;
+  pointer-events: none;
+}
+
+.boahemaa-wave-hand.waving {
+  opacity: 1;
+  animation: boahemaa-wave 0.5s ease-in-out 4;
+}
+
+@keyframes boahemaa-wave {
+  0%   { transform: rotate(0deg); }
+  25%  { transform: rotate(20deg); }
+  75%  { transform: rotate(-10deg); }
+  100% { transform: rotate(0deg); }
+}
+
+/* Subtle idle breathing — very gentle */
+.boahemaa-face {
+  animation: boahemaa-breathe 3.5s ease-in-out infinite;
+}
+
+@keyframes boahemaa-breathe {
+  0%, 100% { transform: translateX(-50%) scale(1); }
+  50%       { transform: translateX(-50%) scale(1.025); }
+}
+
+/* Pause breathing during interactions */
+#boahemaa-avatar.state-hover .boahemaa-face,
+#boahemaa-avatar.state-intro .boahemaa-face {
+  animation-play-state: paused;
+}
+
+/* ---- Speech Bubble ---- */
+.boahemaa-bubble {
+  position: absolute;
+  bottom: 78px;
+  right: 80px; /* Sits to the LEFT of the avatar */
+  background: var(--card-bg, #1a1a24);
+  border: 1px solid var(--green, #f0f0f0);
+  border-radius: 12px 12px 12px 4px; /* Tail points bottom-right toward her */
+  padding: 10px 16px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.8rem;
+  color: var(--text-light, #ffffff);
+  opacity: 0;
+  transform: translateY(6px) scale(0.92);
+  transform-origin: bottom right;
+  transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  pointer-events: none;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  z-index: 2;
+  max-width: 180px;
+  white-space: normal;
+  text-align: left;
+  line-height: 1.4;
+}
+
+/* Bubble tail — points right toward her face */
+.boahemaa-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  right: -6px;
+  width: 10px;
+  height: 10px;
+  background: var(--card-bg, #1a1a24);
+  border-right: 1px solid var(--green, #f0f0f0);
+  border-bottom: 1px solid var(--green, #f0f0f0);
+  transform: rotate(-45deg);
+}
+
+.boahemaa-bubble.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* ============================================================
+   CHAT PANEL
+   ============================================================ */
+
+#boahemaa-panel {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  width: 370px;
+  max-height: 640px;
+  background: var(--bg-dark, #0a0a0f);
+  border: 1px solid var(--border-subtle, rgba(255,255,255,0.08));
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 1000;
+  box-shadow:
+    0 24px 60px rgba(0,0,0,0.6),
+    0 0 0 1px rgba(255,255,255,0.04);
+
+  /* Panel starts collapsed — animates open */
+  opacity: 0;
+  transform: translateY(20px) scale(0.96);
+  transform-origin: bottom right;
+  pointer-events: none;
+  transition:
+    opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.35s cubic-bezier(0.34, 1.3, 0.64, 1);
+}
+
+#boahemaa-panel.open {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: all;
+}
+
+/* ---- Panel Header ---- */
+.boahemaa-panel-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border-subtle, rgba(255,255,255,0.08));
+  background: var(--card-bg, #1a1a24);
+  flex-shrink: 0;
+  position: relative;
+}
+
+/* Header avatar — the face that appears when panel opens */
+.boahemaa-header-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--bg-dark, #0a0a0f);
+  border: 1.5px solid var(--green, #f0f0f0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Sugar Snow', cursive;
+  font-size: 0.9rem;
+  color: var(--green, #f0f0f0);
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+  /* Animate in from below */
+  transform: translateY(20px);
+  opacity: 0;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) 0.15s,
+              opacity 0.3s ease 0.15s;
+}
+
+#boahemaa-panel.open .boahemaa-header-avatar {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Online indicator dot */
+.boahemaa-header-avatar::after {
+  content: '';
+  position: absolute;
+  bottom: 1px;
+  right: 1px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--green, #f0f0f0);
+  border: 2px solid var(--card-bg, #1a1a24);
+  box-shadow: 0 0 6px color-mix(in srgb, var(--green, #f0f0f0) 60%, transparent);
+}
+
+.boahemaa-header-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.boahemaa-header-name {
+  font-family: 'Sugar Snow', cursive;
+  font-size: 1rem;
+  color: var(--text-light, #ffffff);
+  line-height: 1.2;
+}
+
+.boahemaa-header-status {
+  font-size: 0.72rem;
+  color: var(--green, #f0f0f0);
+  opacity: 0.8;
+  letter-spacing: 0.3px;
+}
+
+/* Header action buttons */
+.boahemaa-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.boahemaa-btn-icon {
+  width: 30px;
+  height: 30px;
+  border: none;
+  background: transparent;
+  color: var(--text-dim, #6b6b75);
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease, background 0.2s ease;
+  padding: 0;
+}
+
+.boahemaa-btn-icon:hover {
+  color: var(--text-light, #ffffff);
+  background: rgba(255,255,255,0.06);
+}
+
+.boahemaa-btn-icon svg {
+  width: 15px;
+  height: 15px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ---- Messages Area ---- */
+.boahemaa-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  scroll-behavior: smooth;
+}
+
+/* Scrollbar styling */
+.boahemaa-messages::-webkit-scrollbar {
+  width: 3px;
+}
+.boahemaa-messages::-webkit-scrollbar-track {
+  background: transparent;
+}
+.boahemaa-messages::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.1);
+  border-radius: 2px;
+}
+.boahemaa-messages::-webkit-scrollbar-thumb:hover {
+  background: rgba(255,255,255,0.2);
+}
+
+/* Individual message */
+.boahemaa-message {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  animation: boahemaa-msg-in 0.3s cubic-bezier(0.34, 1.3, 0.64, 1) both;
+}
+
+@keyframes boahemaa-msg-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.boahemaa-message.from-user {
+  align-items: flex-end;
+}
+
+.boahemaa-message.from-boahemaa {
+  align-items: flex-start;
+}
+
+.boahemaa-message-bubble {
+  max-width: 82%;
+  padding: 9px 13px;
+  border-radius: 14px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: var(--text-light, #ffffff);
+}
+
+.from-user .boahemaa-message-bubble {
+  background: var(--green, #f0f0f0);
+  color: var(--bg-dark, #0a0a0f);
+  border-radius: 14px 14px 4px 14px;
+  font-weight: 500;
+}
+
+.from-boahemaa .boahemaa-message-bubble {
+  background: var(--card-bg, #1a1a24);
+  border: 1px solid var(--border-subtle, rgba(255,255,255,0.08));
+  border-radius: 4px 14px 14px 14px;
+}
+
+/* ---- Thinking Indicator (replaces "typing...") ---- */
+.boahemaa-thinking {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 10px 14px;
+  background: var(--card-bg, #1a1a24);
+  border: 1px solid var(--border-subtle, rgba(255,255,255,0.08));
+  border-radius: 4px 14px 14px 14px;
+  width: fit-content;
+  animation: boahemaa-msg-in 0.3s ease both;
+}
+
+.boahemaa-thinking-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--green, #f0f0f0);
+  opacity: 0.4;
+}
+
+.boahemaa-thinking-dot:nth-child(1) { animation: boahemaa-think 1.2s ease-in-out infinite 0s; }
+.boahemaa-thinking-dot:nth-child(2) { animation: boahemaa-think 1.2s ease-in-out infinite 0.2s; }
+.boahemaa-thinking-dot:nth-child(3) { animation: boahemaa-think 1.2s ease-in-out infinite 0.4s; }
+
+@keyframes boahemaa-think {
+  0%, 60%, 100% { opacity: 0.2; transform: scale(0.85); }
+  30%            { opacity: 1;   transform: scale(1.2); }
+}
+
+/* ---- Input Area ---- */
+.boahemaa-input-area {
+  padding: 12px 14px;
+  border-top: 1px solid var(--border-subtle, rgba(255,255,255,0.08));
+  background: var(--card-bg, #1a1a24);
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.boahemaa-input {
+  flex: 1;
+  background: var(--bg-dark, #0a0a0f);
+  border: 1px solid var(--border-subtle, rgba(255,255,255,0.08));
+  border-radius: 10px;
+  padding: 9px 12px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.875rem;
+  color: var(--text-light, #ffffff);
+  resize: none;
+  outline: none;
+  min-height: 40px;
+  max-height: 100px;
+  line-height: 1.5;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  scrollbar-width: none;
+}
+
+.boahemaa-input::-webkit-scrollbar { display: none; }
+
+.boahemaa-input::placeholder {
+  color: var(--text-dim, #6b6b75);
+}
+
+.boahemaa-input:focus {
+  border-color: var(--green, #f0f0f0);
+  box-shadow: none;
+  outline: none;
+}
+
+/* Send button */
+.boahemaa-send-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 9px;
+  border: none;
+  background: var(--green, #f0f0f0);
+  color: var(--bg-dark, #0a0a0f);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform 0.2s ease, filter 0.2s ease, opacity 0.2s ease;
+}
+
+.boahemaa-send-btn:hover {
+  transform: scale(1.08);
+  filter: brightness(1.15);
+}
+
+.boahemaa-send-btn:active {
+  transform: scale(0.95);
+}
+
+.boahemaa-send-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.boahemaa-send-btn svg {
+  width: 15px;
+  height: 15px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  display: block;
+  margin: auto;
+}
+
+/* ============================================================
+   VFX — Panel open transition particle burst
+   A ring of small dots that explode outward when panel opens,
+   matching the site's light ray aesthetic.
+   ============================================================ */
+
+.boahemaa-vfx-ring {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  width: 72px;
+  height: 72px;
+  pointer-events: none;
+  z-index: 1001;
+}
+
+.boahemaa-vfx-particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--green, #f0f0f0);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+}
+
+.boahemaa-vfx-particle.burst {
+  animation: boahemaa-particle-burst 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+/* Each particle gets a different angle via inline style --angle */
+@keyframes boahemaa-particle-burst {
+  0%   { opacity: 1; transform: translate(-50%, -50%) rotate(var(--angle)) translateX(0); }
+  60%  { opacity: 0.8; }
+  100% { opacity: 0; transform: translate(-50%, -50%) rotate(var(--angle)) translateX(45px); }
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 480px) {
+  #boahemaa-panel {
+    right: 12px;
+    bottom: 12px;
+    width: calc(100vw - 24px);
+    max-height: 70vh;
+    border-radius: 14px;
+  }
+
+  #boahemaa-avatar {
+    right: 80px; /* Still clears scroll button on small screens */
+  }
+}
+
+@media (max-width: 968px) {
+  #boahemaa-avatar {
+    right: 100px;
+  }
+}
+
+/* ============================================================
+   ACCESSIBILITY — Reduced motion
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  #boahemaa-avatar,
+  #boahemaa-panel,
+  .boahemaa-face,
+  .boahemaa-bubble,
+  .boahemaa-message {
+    transition-duration: 0.01ms !important;
+    animation: none !important;
+  }
+}
