@@ -14,11 +14,34 @@
 const BoahemaaSession = (() => {
 
   const KEYS = {
-    CONVERSATION:  'boahemaa_conversation',   // Array of {role, content} message objects
-    CHAT_OPEN:     'boahemaa_chat_open',       // 'true' | 'false'
-    INTRODUCED:    'boahemaa_introduced',      // 'true' once Akwaaba intro has played
-    CONVERSATION_ID: 'boahemaa_conversation_id', // UUID for this session's MongoDB tracking
+    CONVERSATION:  'boahemaa_conversation',
+    CHAT_OPEN:     'boahemaa_chat_open',
+    INTRODUCED:    'boahemaa_introduced',
+    CONVERSATION_ID: 'boahemaa_conversation_id',
+    SESSION_STAMP: 'boahemaa_session_stamp',   // Timestamp to detect tab restore
   };
+
+  // ---- TAB RESTORE DETECTION ----
+  // Chrome restores sessionStorage on tab restore after crash/power off.
+  // We stamp a timestamp every 30s. On load, if the stamp is older than
+  // 60s, we know the tab was restored and clear conversation state.
+  (function detectTabRestore() {
+    const stamp = sessionStorage.getItem(KEYS.SESSION_STAMP);
+    const now = Date.now();
+
+    if (stamp && (now - parseInt(stamp, 10)) > 60000) {
+      // Tab was restored after too long — clear conversation, keep introduced flag
+      sessionStorage.removeItem(KEYS.CONVERSATION);
+      sessionStorage.removeItem(KEYS.CHAT_OPEN);
+      sessionStorage.removeItem(KEYS.CONVERSATION_ID);
+    }
+
+    // Refresh the stamp now and keep refreshing every 30s while tab is alive
+    sessionStorage.setItem(KEYS.SESSION_STAMP, String(now));
+    setInterval(() => {
+      sessionStorage.setItem(KEYS.SESSION_STAMP, String(Date.now()));
+    }, 30000);
+  })();
 
   // ---- READ ----
 

@@ -21,7 +21,35 @@
   const FUNCTION_URL = '/.netlify/functions/chat';
   const INTRO_GREETING = "Akwaaba! I'm Boahemaa.";
   const HOVER_GREETING = "Hi there, I'm Boahemaa.";
-  const CHAT_OPENING_MESSAGE = "Hey! I'm Boahemaa, Eugene's AI assistant. I'm here to help you learn more about him, his work, and how to collaborate with him. What would you like to know?";
+
+  const OPENING_MESSAGES = [
+    "Hey! I'm Boahemaa, Eugene's AI assistant. Curious about his work? Ask me anything.",
+    "Hi there! I'm Boahemaa. I know everything about Eugene and what he does. What would you like to know?",
+    "Akwaaba! I'm Boahemaa. I'm here to help you get to know Eugene, his work, and how to work with him.",
+    "Hey! I'm Boahemaa. Whether you're a potential client, collaborator, or just curious — I've got you covered.",
+    "Hi! I'm Boahemaa, Eugene's assistant. Ask me about his skills, projects, or how to reach him.",
+    "Hello! I'm Boahemaa. Eugene built me to help visitors like you learn more about him. What's on your mind?",
+    "Hey there! I'm Boahemaa. I'm here to bridge the gap between you and Eugene's work. Where do you want to start?",
+    "Hi! I'm Boahemaa. I know Eugene's work inside out. Ask me anything — skills, projects, collabs, you name it.",
+    "Akwaaba! I'm Boahemaa. Think of me as your guide to everything Eugene Antwi. What are you looking for?",
+    "Hey! I'm Boahemaa. Need to know if Eugene's the right fit for your project? Let's talk.",
+    "Hi there! I'm Boahemaa. I live on this portfolio to help you understand who Eugene is and what he creates.",
+    "Hello! I'm Boahemaa. I'm here to help you explore Eugene's work and figure out if you'd like to collaborate.",
+    "Hey! I'm Boahemaa. From animation to branding to creative tech — I can tell you about all of it. What's up?",
+    "Hi! I'm Boahemaa. Eugene built me so his portfolio could talk back. What do you want to know?",
+    "Akwaaba! I'm Boahemaa. I'm here, I'm sharp, and I know Eugene's work well. Ask away.",
+    "Hey! I'm Boahemaa. If you're trying to understand what Eugene does and whether he's right for you, I can help.",
+    "Hi there! I'm Boahemaa. I'm Eugene's AI assistant — here to answer questions and make this portfolio feel alive.",
+    "Hello! I'm Boahemaa. Whether it's about Eugene's process, his tools, or his vision — I'm your person.",
+    "Hey! I'm Boahemaa. I know Eugene's story, his skills, and what he's building. What would you like to know?",
+    "Hi! I'm Boahemaa. Ask me about Eugene's animation work, his branding projects, or how to get in touch.",
+  ];
+
+  function getRandomOpening() {
+    return OPENING_MESSAGES[Math.floor(Math.random() * OPENING_MESSAGES.length)];
+  }
+
+  const CHAT_OPENING_MESSAGE = getRandomOpening;  // Called as a function each time
   const CHAT_OPENING_RETURNING = "Welcome back. Ready to pick up where we left off, or is there something new I can help you with?";
   const PARTICLE_COUNT = 10;
 
@@ -87,7 +115,7 @@
         <div class="boahemaa-header-avatar">AB</div>
         <div class="boahemaa-header-info">
           <div class="boahemaa-header-name">Boahemaa</div>
-          <div class="boahemaa-header-status">Here to help</div>
+          <div class="boahemaa-header-status">Eugene's AI assistant</div>
         </div>
         <div class="boahemaa-header-actions">
           <button class="boahemaa-btn-icon" id="boahemaa-new-chat" title="New conversation" aria-label="New conversation">
@@ -281,7 +309,7 @@
 
     // Only add opening message if panel is empty (not restored from session)
     if (messagesEl.children.length === 0) {
-      appendMessage('boahemaa', CHAT_OPENING_MESSAGE, false);
+      appendMessage('boahemaa', CHAT_OPENING_MESSAGE(), false);
     }
 
     // Focus input after animation
@@ -389,7 +417,7 @@
   function startNewConversation() {
     BoahemaaSession.resetConversation();
     messagesEl.innerHTML = '';
-    appendMessage('boahemaa', CHAT_OPENING_MESSAGE, false);
+    appendMessage('boahemaa', CHAT_OPENING_MESSAGE(), false);
     if (inputEl) {
       inputEl.value = '';
       inputEl.focus();
