@@ -141,55 +141,53 @@ exports.handler = async (event, context) => {
     const turnNumber = messages.length;
 
     // ============================================================
-    // MONGODB LOGGING — track every conversation turn
+    // MONGODB LOGGING — fire and forget, never blocks the response
     // ============================================================
-    try {
-      const client = await getMongoClient();
-      const db = client.db('boahemaa');
+    Promise.resolve().then(async () => {
+      try {
+        const client = await getMongoClient();
+        const db = client.db('boahemaa');
 
-      // One document per message turn
-      await db.collection('conversations').insertOne({
-        conversation_id: conversationId,
-        turn: turnNumber,
-        user_message: message || messages[messages.length - 1]?.content || '',
-        assistant_response: replyText,
-        page_url: pageUrl || null,
-        ip: event.headers['x-forwarded-for'] || event.headers['x-nf-client-connection-ip'] || 'unknown',
-        user_agent: event.headers['user-agent'] || 'unknown',
-        response_time_ms: responseTime,
-        input_tokens: inputTokens,
-        output_tokens: outputTokens,
-        total_tokens: inputTokens + outputTokens,
-        estimated_cost_usd: parseFloat(estimatedCost),
-        created_at: new Date(),
-      });
+        await db.collection('conversations').insertOne({
+          conversation_id: conversationId,
+          turn: turnNumber,
+          user_message: message || messages[messages.length - 1]?.content || '',
+          assistant_response: replyText,
+          page_url: pageUrl || null,
+          ip: event.headers['x-forwarded-for'] || event.headers['x-nf-client-connection-ip'] || 'unknown',
+          user_agent: event.headers['user-agent'] || 'unknown',
+          response_time_ms: responseTime,
+          input_tokens: inputTokens,
+          output_tokens: outputTokens,
+          total_tokens: inputTokens + outputTokens,
+          estimated_cost_usd: parseFloat(estimatedCost),
+          created_at: new Date(),
+        });
 
-      // One document per session — upserted so it accumulates across turns
-      await db.collection('sessions').updateOne(
-        { conversation_id: conversationId },
-        {
-          $set: {
-            last_active: new Date(),
-            page_url: pageUrl || null,
-            ip: event.headers['x-forwarded-for'] || 'unknown',
+        await db.collection('sessions').updateOne(
+          { conversation_id: conversationId },
+          {
+            $set: {
+              last_active: new Date(),
+              page_url: pageUrl || null,
+              ip: event.headers['x-forwarded-for'] || 'unknown',
+            },
+            $inc: {
+              total_turns: 1,
+              total_tokens: inputTokens + outputTokens,
+              total_cost_usd: parseFloat(estimatedCost),
+            },
+            $setOnInsert: {
+              conversation_id: conversationId,
+              started_at: new Date(),
+            }
           },
-          $inc: {
-            total_turns: 1,
-            total_tokens: inputTokens + outputTokens,
-            total_cost_usd: parseFloat(estimatedCost),
-          },
-          $setOnInsert: {
-            conversation_id: conversationId,
-            started_at: new Date(),
-          }
-        },
-        { upsert: true }
-      );
-
-    } catch (dbError) {
-      // DB failure should never block the chat response
-      console.error('MongoDB write error:', dbError.message);
-    }
+          { upsert: true }
+        );
+      } catch (dbError) {
+        console.error('MongoDB write error:', dbError.message);
+      }
+    });
 
     // Netlify function log — visible in Netlify dashboard → Functions → Logs
     console.log('--- Boahemaa Turn ---');

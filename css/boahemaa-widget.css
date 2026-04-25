@@ -410,6 +410,18 @@
   background: rgba(255,255,255,0.2);
 }
 
+/* Session restore note — shown when conversation continues across pages */
+.boahemaa-session-note {
+  text-align: center;
+  font-size: 0.7rem;
+  color: var(--text-dim, #6b6b75);
+  padding: 4px 10px;
+  border-top: 1px solid var(--border-subtle, rgba(255,255,255,0.06));
+  border-bottom: 1px solid var(--border-subtle, rgba(255,255,255,0.06));
+  margin: 4px 0;
+  letter-spacing: 0.3px;
+}
+
 /* Individual message */
 .boahemaa-message {
   display: flex;

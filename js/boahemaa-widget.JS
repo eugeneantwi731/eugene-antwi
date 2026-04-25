@@ -279,11 +279,9 @@
     panelEl.classList.add('open');
     BoahemaaSession.setChatOpen(true);
 
-    // If no messages yet, add opening message (no API call)
+    // Only add opening message if panel is empty (not restored from session)
     if (messagesEl.children.length === 0) {
-      const hasHistory = BoahemaaSession.getConversation().length > 0;
-      const openingText = hasHistory ? CHAT_OPENING_RETURNING : CHAT_OPENING_MESSAGE;
-      appendMessage('boahemaa', openingText, false); // false = don't save to session history
+      appendMessage('boahemaa', CHAT_OPENING_MESSAGE, false);
     }
 
     // Focus input after animation
@@ -361,15 +359,19 @@
     const history = BoahemaaSession.getConversation();
 
     if (history.length > 0) {
-      // Add opening message first (unsaved)
-      appendMessage('boahemaa', CHAT_OPENING_RETURNING, false);
+      // Show a small "welcome back" note above restored history
+      // This only runs on cross-page navigation, not on a fresh click
+      const note = document.createElement('div');
+      note.className = 'boahemaa-session-note';
+      note.textContent = 'Continuing your conversation';
+      messagesEl.appendChild(note);
 
       // Restore conversation turns
       history.forEach(msg => {
         appendMessage(
           msg.role === 'user' ? 'user' : 'boahemaa',
           msg.content,
-          false // Already in session, don't double-save
+          false
         );
       });
     }
