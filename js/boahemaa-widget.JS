@@ -26,21 +26,21 @@
     "Hey! I'm Boahemaa, Eugene's AI assistant. Curious about his work? Ask me anything.",
     "Hi there! I'm Boahemaa. I know everything about Eugene and what he does. What would you like to know?",
     "Akwaaba! I'm Boahemaa. I'm here to help you get to know Eugene, his work, and how to work with him.",
-    "Hey! I'm Boahemaa. Whether you're a potential client, collaborator, or just curious — I've got you covered.",
+    "Hey! I'm Boahemaa. Whether you're a potential client, collaborator, or just curious, I've got you covered.",
     "Hi! I'm Boahemaa, Eugene's assistant. Ask me about his skills, projects, or how to reach him.",
     "Hello! I'm Boahemaa. Eugene built me to help visitors like you learn more about him. What's on your mind?",
     "Hey there! I'm Boahemaa. I'm here to bridge the gap between you and Eugene's work. Where do you want to start?",
-    "Hi! I'm Boahemaa. I know Eugene's work inside out. Ask me anything — skills, projects, collabs, you name it.",
+    "Hi! I'm Boahemaa. I know Eugene's work inside out. Ask me anything: skills, projects, collabs, you name it.",
     "Akwaaba! I'm Boahemaa. Think of me as your guide to everything Eugene Antwi. What are you looking for?",
     "Hey! I'm Boahemaa. Need to know if Eugene's the right fit for your project? Let's talk.",
     "Hi there! I'm Boahemaa. I live on this portfolio to help you understand who Eugene is and what he creates.",
     "Hello! I'm Boahemaa. I'm here to help you explore Eugene's work and figure out if you'd like to collaborate.",
-    "Hey! I'm Boahemaa. From animation to branding to creative tech — I can tell you about all of it. What's up?",
+    "Hey! I'm Boahemaa. From animation to branding to creative tech, I can tell you about all of it. What's up?",
     "Hi! I'm Boahemaa. Eugene built me so his portfolio could talk back. What do you want to know?",
     "Akwaaba! I'm Boahemaa. I'm here, I'm sharp, and I know Eugene's work well. Ask away.",
     "Hey! I'm Boahemaa. If you're trying to understand what Eugene does and whether he's right for you, I can help.",
-    "Hi there! I'm Boahemaa. I'm Eugene's AI assistant — here to answer questions and make this portfolio feel alive.",
-    "Hello! I'm Boahemaa. Whether it's about Eugene's process, his tools, or his vision — I'm your person.",
+    "Hi there! I'm Boahemaa, Eugene's AI assistant. Here to answer your questions and make this portfolio feel alive.",
+    "Hello! I'm Boahemaa. Whether it's about Eugene's process, his tools, or his vision, I'm your person.",
     "Hey! I'm Boahemaa. I know Eugene's story, his skills, and what he's building. What would you like to know?",
     "Hi! I'm Boahemaa. Ask me about Eugene's animation work, his branding projects, or how to get in touch.",
   ];
@@ -119,25 +119,33 @@
         </div>
         <div class="boahemaa-header-actions">
           <button class="boahemaa-btn-icon" id="boahemaa-new-chat" title="New conversation" aria-label="New conversation">
-            <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+            </svg>
           </button>
-          <button class="boahemaa-btn-icon" id="boahemaa-close" title="Close" aria-label="Close chat">
-            <svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+          <button class="boahemaa-btn-icon boahemaa-btn-close" id="boahemaa-close" title="Close" aria-label="Close chat">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"/>
+              <line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
           </button>
         </div>
       </div>
       <div class="boahemaa-messages" id="boahemaa-messages"></div>
       <div class="boahemaa-input-area">
-        <textarea
-          class="boahemaa-input"
-          id="boahemaa-input"
-          placeholder="Ask me anything about Eugene…"
-          rows="1"
-          aria-label="Type your message"
-        ></textarea>
-        <button class="boahemaa-send-btn" id="boahemaa-send" aria-label="Send message">
-          <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-        </button>
+        <div class="boahemaa-input-wrapper">
+          <textarea
+            class="boahemaa-input"
+            id="boahemaa-input"
+            placeholder="Ask me anything about Eugene…"
+            rows="1"
+            aria-label="Type your message"
+          ></textarea>
+          <button class="boahemaa-send-btn" id="boahemaa-send" aria-label="Send message">
+            <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          </button>
+        </div>
       </div>
     `;
 

@@ -12,45 +12,40 @@
    ============================================================ */
 
 /* ============================================================
-   AVATAR — The peeking character at bottom right
+   AVATAR
    ============================================================ */
 
 #boahemaa-avatar {
   position: fixed;
   bottom: 0;
-  right: 110px; /* Clears the scroll-to-top button (right: 40px, width: 56px) with a gap */
+  right: 110px;
   width: 72px;
   height: 72px;
   z-index: 999;
   cursor: pointer;
-  transform: translateY(calc(100% - 28px)); /* Peek: show top 28px above screen edge */
+  transform: translateY(calc(100% - 28px));
   transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
   -webkit-tap-highlight-color: transparent;
   user-select: none;
 }
 
-/* Peek state — default after intro */
 #boahemaa-avatar.state-peek {
   transform: translateY(calc(100% - 28px));
 }
 
-/* Hover state — rises to waist */
 #boahemaa-avatar.state-hover {
   transform: translateY(calc(100% - 68px));
 }
 
-/* Intro state — fully visible for wave */
 #boahemaa-avatar.state-intro {
   transform: translateY(calc(100% - 72px));
 }
 
-/* Hidden — before preloader finishes */
 #boahemaa-avatar.state-hidden {
   transform: translateY(100%);
   pointer-events: none;
 }
 
-/* Chat open — avatar travels to top of panel, becomes header avatar */
 #boahemaa-avatar.state-chat-open {
   transform: translateY(100%);
   pointer-events: none;
@@ -58,15 +53,12 @@
   transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease 0.15s;
 }
 
-/* ---- Avatar Inner Structure ---- */
-
 .boahemaa-avatar-body {
   position: relative;
   width: 100%;
   height: 100%;
 }
 
-/* The face circle — placeholder until real sprite */
 .boahemaa-face {
   position: absolute;
   bottom: 0;
@@ -75,14 +67,26 @@
   width: 64px;
   height: 64px;
   border-radius: 50%;
-  background: var(--card-bg, #1a1a24);
-  border: 2px solid var(--green, #f0f0f0);
-  box-shadow: 0 0 0 1px rgba(255,255,255,0.05);
+  background: rgba(26, 26, 36, 0.7);
+  border: 1.5px solid color-mix(in srgb, var(--green, #f0f0f0) 60%, transparent);
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.04),
+    inset 0 1px 0 rgba(255,255,255,0.08);
   overflow: hidden;
   transition: border-color 0.3s ease;
+  animation: boahemaa-breathe 3.5s ease-in-out infinite;
 }
 
-/* Initials inside face */
+@keyframes boahemaa-breathe {
+  0%, 100% { transform: translateX(-50%) scale(1); }
+  50%       { transform: translateX(-50%) scale(1.025); }
+}
+
+#boahemaa-avatar.state-hover .boahemaa-face,
+#boahemaa-avatar.state-intro .boahemaa-face {
+  animation-play-state: paused;
+}
+
 .boahemaa-initials {
   position: absolute;
   inset: 0;
@@ -97,7 +101,6 @@
   pointer-events: none;
 }
 
-/* Eyes — two small circles that blink and track mouse */
 .boahemaa-eyes {
   position: absolute;
   bottom: 22px;
@@ -122,10 +125,9 @@
 }
 
 .boahemaa-eye:nth-child(2) {
-  animation-delay: 0.08s; /* Slight offset so both eyes don't blink in perfect sync */
+  animation-delay: 0.08s;
 }
 
-/* Pupil inside eye — moves for mouse tracking */
 .boahemaa-pupil {
   position: absolute;
   width: 5px;
@@ -143,7 +145,6 @@
   94%, 96%      { transform: scaleY(0.08); }
 }
 
-/* Occasional slow blink variation */
 .boahemaa-eye.slow-blink {
   animation: boahemaa-blink-slow 6s ease-in-out infinite;
 }
@@ -153,7 +154,6 @@
   90%, 92%      { transform: scaleY(0.08); }
 }
 
-/* Wave hand — appears during intro animation */
 .boahemaa-wave-hand {
   position: absolute;
   bottom: 12px;
@@ -176,30 +176,16 @@
   100% { transform: rotate(0deg); }
 }
 
-/* Subtle idle breathing — very gentle */
-.boahemaa-face {
-  animation: boahemaa-breathe 3.5s ease-in-out infinite;
-}
-
-@keyframes boahemaa-breathe {
-  0%, 100% { transform: translateX(-50%) scale(1); }
-  50%       { transform: translateX(-50%) scale(1.025); }
-}
-
-/* Pause breathing during interactions */
-#boahemaa-avatar.state-hover .boahemaa-face,
-#boahemaa-avatar.state-intro .boahemaa-face {
-  animation-play-state: paused;
-}
-
 /* ---- Speech Bubble ---- */
 .boahemaa-bubble {
   position: absolute;
   bottom: 78px;
-  right: 80px; /* Sits to the LEFT of the avatar */
-  background: var(--card-bg, #1a1a24);
-  border: 1px solid var(--green, #f0f0f0);
-  border-radius: 12px 12px 12px 4px; /* Tail points bottom-right toward her */
+  right: 80px;
+  background: rgba(10, 10, 15, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid color-mix(in srgb, var(--green, #f0f0f0) 40%, transparent);
+  border-radius: 12px 12px 12px 4px;
   padding: 10px 16px;
   font-family: 'Roboto', sans-serif;
   font-size: 0.8rem;
@@ -209,7 +195,9 @@
   transform-origin: bottom right;
   transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
   pointer-events: none;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  box-shadow:
+    0 4px 24px rgba(0,0,0,0.5),
+    inset 0 1px 0 rgba(255,255,255,0.06);
   z-index: 2;
   max-width: 180px;
   white-space: normal;
@@ -217,7 +205,6 @@
   line-height: 1.4;
 }
 
-/* Bubble tail — points right toward her face */
 .boahemaa-bubble::after {
   content: '';
   position: absolute;
@@ -225,9 +212,9 @@
   right: -6px;
   width: 10px;
   height: 10px;
-  background: var(--card-bg, #1a1a24);
-  border-right: 1px solid var(--green, #f0f0f0);
-  border-bottom: 1px solid var(--green, #f0f0f0);
+  background: rgba(10, 10, 15, 0.75);
+  border-right: 1px solid color-mix(in srgb, var(--green, #f0f0f0) 40%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--green, #f0f0f0) 40%, transparent);
   transform: rotate(-45deg);
 }
 
@@ -237,7 +224,7 @@
 }
 
 /* ============================================================
-   CHAT PANEL
+   CHAT PANEL — Dark glass
    ============================================================ */
 
 #boahemaa-panel {
@@ -246,18 +233,21 @@
   right: 40px;
   width: 370px;
   max-height: 640px;
-  background: var(--bg-dark, #0a0a0f);
-  border: 1px solid var(--border-subtle, rgba(255,255,255,0.08));
+  background: rgba(10, 10, 15, 0.72);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid color-mix(in srgb, var(--green, #f0f0f0) 20%, rgba(255,255,255,0.06));
   border-radius: 16px;
   display: flex;
   flex-direction: column;
   overflow: hidden;
   z-index: 1000;
   box-shadow:
-    0 24px 60px rgba(0,0,0,0.6),
-    0 0 0 1px rgba(255,255,255,0.04);
+    0 32px 64px rgba(0,0,0,0.7),
+    0 0 0 1px rgba(255,255,255,0.03),
+    inset 0 1px 0 rgba(255,255,255,0.07),
+    inset 0 -1px 0 rgba(255,255,255,0.02);
 
-  /* Panel starts collapsed — animates open */
   opacity: 0;
   transform: translateY(20px) scale(0.96);
   transform-origin: bottom right;
@@ -279,19 +269,18 @@
   align-items: center;
   gap: 12px;
   padding: 14px 16px;
-  border-bottom: 1px solid var(--border-subtle, rgba(255,255,255,0.08));
-  background: var(--card-bg, #1a1a24);
+  border-bottom: 1px solid color-mix(in srgb, var(--green, #f0f0f0) 12%, rgba(255,255,255,0.05));
+  background: rgba(255, 255, 255, 0.03);
   flex-shrink: 0;
   position: relative;
 }
 
-/* Header avatar — the face that appears when panel opens */
 .boahemaa-header-avatar {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: var(--bg-dark, #0a0a0f);
-  border: 1.5px solid var(--green, #f0f0f0);
+  background: rgba(10, 10, 15, 0.8);
+  border: 1.5px solid color-mix(in srgb, var(--green, #f0f0f0) 70%, transparent);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -301,7 +290,6 @@
   flex-shrink: 0;
   position: relative;
   overflow: hidden;
-  /* Animate in from below */
   transform: translateY(20px);
   opacity: 0;
   transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) 0.15s,
@@ -313,7 +301,6 @@
   opacity: 1;
 }
 
-/* Online indicator dot */
 .boahemaa-header-avatar::after {
   content: '';
   position: absolute;
@@ -323,8 +310,7 @@
   height: 9px;
   border-radius: 50%;
   background: var(--green, #f0f0f0);
-  border: 2px solid var(--card-bg, #1a1a24);
-  box-shadow: 0 0 6px color-mix(in srgb, var(--green, #f0f0f0) 60%, transparent);
+  border: 2px solid rgba(10, 10, 15, 0.9);
 }
 
 .boahemaa-header-info {
@@ -334,19 +320,17 @@
 
 .boahemaa-header-name {
   font-family: 'Sugar Snow', cursive;
-  font-size: 1rem;
+  font-size: 1.35rem;
   color: var(--text-light, #ffffff);
   line-height: 1.2;
 }
 
 .boahemaa-header-status {
-  font-size: 0.72rem;
-  color: var(--green, #f0f0f0);
-  opacity: 0.8;
+  font-size: 0.63rem;
+  color: color-mix(in srgb, var(--green, #f0f0f0) 80%, transparent);
   letter-spacing: 0.3px;
 }
 
-/* Header action buttons */
 .boahemaa-header-actions {
   display: flex;
   align-items: center;
@@ -359,7 +343,7 @@
   height: 30px;
   border: none;
   background: transparent;
-  color: var(--text-dim, #6b6b75);
+  color: color-mix(in srgb, var(--green, #f0f0f0) 60%, transparent);
   border-radius: 6px;
   cursor: pointer;
   display: flex;
@@ -370,8 +354,18 @@
 }
 
 .boahemaa-btn-icon:hover {
-  color: var(--text-light, #ffffff);
-  background: rgba(255,255,255,0.06);
+  color: var(--green, #f0f0f0);
+  background: color-mix(in srgb, var(--green, #f0f0f0) 10%, transparent);
+}
+
+/* Close button — same as new chat, fully consistent */
+.boahemaa-btn-close {
+  color: color-mix(in srgb, var(--green, #f0f0f0) 60%, transparent);
+}
+
+.boahemaa-btn-close:hover {
+  color: var(--green, #f0f0f0);
+  background: color-mix(in srgb, var(--green, #f0f0f0) 10%, transparent);
 }
 
 .boahemaa-btn-icon svg {
@@ -393,36 +387,30 @@
   flex-direction: column;
   gap: 10px;
   scroll-behavior: smooth;
-}
-
-/* Scrollbar styling */
-.boahemaa-messages::-webkit-scrollbar {
-  width: 3px;
-}
-.boahemaa-messages::-webkit-scrollbar-track {
   background: transparent;
 }
+
+.boahemaa-messages::-webkit-scrollbar { width: 3px; }
+.boahemaa-messages::-webkit-scrollbar-track { background: transparent; }
 .boahemaa-messages::-webkit-scrollbar-thumb {
-  background: rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.08);
   border-radius: 2px;
 }
 .boahemaa-messages::-webkit-scrollbar-thumb:hover {
-  background: rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.15);
 }
 
-/* Session restore note — shown when conversation continues across pages */
 .boahemaa-session-note {
   text-align: center;
   font-size: 0.7rem;
   color: var(--text-dim, #6b6b75);
   padding: 4px 10px;
-  border-top: 1px solid var(--border-subtle, rgba(255,255,255,0.06));
-  border-bottom: 1px solid var(--border-subtle, rgba(255,255,255,0.06));
+  border-top: 1px solid rgba(255,255,255,0.05);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
   margin: 4px 0;
   letter-spacing: 0.3px;
 }
 
-/* Individual message */
 .boahemaa-message {
   display: flex;
   flex-direction: column;
@@ -435,17 +423,12 @@
   to   { opacity: 1; transform: translateY(0); }
 }
 
-.boahemaa-message.from-user {
-  align-items: flex-end;
-}
-
-.boahemaa-message.from-boahemaa {
-  align-items: flex-start;
-}
+.boahemaa-message.from-user { align-items: flex-end; }
+.boahemaa-message.from-boahemaa { align-items: flex-start; }
 
 .boahemaa-message-bubble {
   max-width: 82%;
-  padding: 9px 13px;
+  padding: 10px 14px;
   border-radius: 14px;
   font-family: 'Roboto', sans-serif;
   font-size: 0.875rem;
@@ -453,30 +436,43 @@
   color: var(--text-light, #ffffff);
 }
 
+/* User bubble — accent glass */
 .from-user .boahemaa-message-bubble {
-  background: var(--green, #f0f0f0);
+  background: color-mix(in srgb, var(--green, #f0f0f0) 85%, transparent);
   color: var(--bg-dark, #0a0a0f);
   border-radius: 14px 14px 4px 14px;
   font-weight: 500;
+  border: 1px solid color-mix(in srgb, var(--green, #f0f0f0) 60%, transparent);
+  box-shadow:
+    0 2px 12px color-mix(in srgb, var(--green, #f0f0f0) 20%, transparent),
+    inset 0 1px 0 rgba(255,255,255,0.15);
 }
 
+/* Boahemaa bubble — dark glass */
 .from-boahemaa .boahemaa-message-bubble {
-  background: var(--card-bg, #1a1a24);
-  border: 1px solid var(--border-subtle, rgba(255,255,255,0.08));
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid color-mix(in srgb, var(--green, #f0f0f0) 18%, rgba(255,255,255,0.08));
   border-radius: 4px 14px 14px 14px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.06),
+    0 2px 8px rgba(0,0,0,0.3);
 }
 
-/* ---- Thinking Indicator (replaces "typing...") ---- */
+/* ---- Thinking ---- */
 .boahemaa-thinking {
   display: flex;
   align-items: center;
   gap: 5px;
   padding: 10px 14px;
-  background: var(--card-bg, #1a1a24);
-  border: 1px solid var(--border-subtle, rgba(255,255,255,0.08));
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid color-mix(in srgb, var(--green, #f0f0f0) 18%, rgba(255,255,255,0.08));
   border-radius: 4px 14px 14px 14px;
   width: fit-content;
   animation: boahemaa-msg-in 0.3s ease both;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 .boahemaa-thinking-dot {
@@ -499,29 +495,34 @@
 /* ---- Input Area ---- */
 .boahemaa-input-area {
   padding: 12px 14px;
-  border-top: 1px solid var(--border-subtle, rgba(255,255,255,0.08));
-  background: var(--card-bg, #1a1a24);
+  border-top: 1px solid color-mix(in srgb, var(--green, #f0f0f0) 10%, rgba(255,255,255,0.04));
+  background: rgba(255, 255, 255, 0.02);
+  flex-shrink: 0;
+}
+
+/* Wrapper that makes the button sit inside the input visually */
+.boahemaa-input-wrapper {
+  position: relative;
   display: flex;
   align-items: flex-end;
-  gap: 10px;
-  flex-shrink: 0;
 }
 
 .boahemaa-input {
   flex: 1;
-  background: var(--bg-dark, #0a0a0f);
-  border: 1px solid var(--border-subtle, rgba(255,255,255,0.08));
-  border-radius: 10px;
-  padding: 9px 12px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 10px 50px 10px 14px; /* Right padding makes room for button */
   font-family: 'Roboto', sans-serif;
   font-size: 0.875rem;
   color: var(--text-light, #ffffff);
   resize: none;
   outline: none;
-  min-height: 40px;
+  min-height: 44px;
   max-height: 100px;
   line-height: 1.5;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition: border-color 0.2s ease;
   scrollbar-width: none;
 }
 
@@ -532,16 +533,18 @@
 }
 
 .boahemaa-input:focus {
-  border-color: var(--green, #f0f0f0);
-  box-shadow: none;
+  border-color: color-mix(in srgb, var(--green, #f0f0f0) 60%, transparent);
   outline: none;
 }
 
-/* Send button */
+/* Send button — inside the input, right edge */
 .boahemaa-send-btn {
-  width: 36px;
-  height: 36px;
-  border-radius: 9px;
+  position: absolute;
+  right: 6px;
+  bottom: 6px;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
   border: none;
   background: var(--green, #f0f0f0);
   color: var(--bg-dark, #0a0a0f);
@@ -550,27 +553,25 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  transition: transform 0.2s ease, filter 0.2s ease, opacity 0.2s ease;
+  transition: transform 0.15s ease, filter 0.15s ease, opacity 0.15s ease;
 }
 
 .boahemaa-send-btn:hover {
-  transform: scale(1.08);
   filter: brightness(1.15);
+  transform: scale(1.05);
 }
 
-.boahemaa-send-btn:active {
-  transform: scale(0.95);
-}
+.boahemaa-send-btn:active { transform: scale(0.93); }
 
 .boahemaa-send-btn:disabled {
-  opacity: 0.35;
+  opacity: 0.3;
   cursor: not-allowed;
   transform: none;
 }
 
 .boahemaa-send-btn svg {
-  width: 15px;
-  height: 15px;
+  width: 14px;
+  height: 14px;
   stroke: currentColor;
   fill: none;
   stroke-width: 2;
@@ -581,9 +582,7 @@
 }
 
 /* ============================================================
-   VFX — Panel open transition particle burst
-   A ring of small dots that explode outward when panel opens,
-   matching the site's light ray aesthetic.
+   VFX
    ============================================================ */
 
 .boahemaa-vfx-ring {
@@ -612,7 +611,6 @@
   animation: boahemaa-particle-burst 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }
 
-/* Each particle gets a different angle via inline style --angle */
 @keyframes boahemaa-particle-burst {
   0%   { opacity: 1; transform: translate(-50%, -50%) rotate(var(--angle)) translateX(0); }
   60%  { opacity: 0.8; }
@@ -631,20 +629,15 @@
     max-height: 70vh;
     border-radius: 14px;
   }
-
-  #boahemaa-avatar {
-    right: 80px; /* Still clears scroll button on small screens */
-  }
+  #boahemaa-avatar { right: 80px; }
 }
 
 @media (max-width: 968px) {
-  #boahemaa-avatar {
-    right: 100px;
-  }
+  #boahemaa-avatar { right: 100px; }
 }
 
 /* ============================================================
-   ACCESSIBILITY — Reduced motion
+   ACCESSIBILITY
    ============================================================ */
 @media (prefers-reduced-motion: reduce) {
   #boahemaa-avatar,
