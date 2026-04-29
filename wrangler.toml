@@ -4,3 +4,11 @@ compatibility_flags = ["nodejs_compat"]
 
 [build]
 command = "npm install"
+
+# ---- Cloudflare D1 (SQLite) — replaces MongoDB for logging ----
+# After running `wrangler d1 create boahemaa-logs`, paste the
+# database_id you receive into the field below.
+[[d1_databases]]
+binding = "DB"
+database_name = "boahemaa-logs"
+database_id = "PASTE_YOUR_D1_DATABASE_ID_HERE"

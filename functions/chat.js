@@ -1,28 +1,13 @@
 import Anthropic from '@anthropic-ai/sdk';
-import { MongoClient, ServerApiVersion } from 'mongodb';
 
 // ============================================================
 // BOAHEMAA — Cloudflare Pages Function
 // Handles all chat requests from the portfolio widget.
 // API key stays server-side. Never exposed to the browser.
+//
+// Logging: Cloudflare D1 (SQLite) — fully Workers-compatible.
+// No Node.js built-ins needed.
 // ============================================================
-
-// Reuse MongoDB connection across warm invocations
-let cachedClient = null;
-
-async function getMongoClient(uri) {
-  if (cachedClient) return cachedClient;
-  const client = new MongoClient(uri, {
-    serverApi: {
-      version: ServerApiVersion.v1,
-      strict: true,
-      deprecationErrors: true,
-    }
-  });
-  await client.connect();
-  cachedClient = client;
-  return client;
-}
 
 // ============================================================
 // SYSTEM PROMPT — Boahemaa's personality and knowledge
@@ -75,6 +60,58 @@ export async function onRequestOptions() {
 }
 
 // ============================================================
+// D1 LOGGING — fire and forget
+// env.DB is the D1 binding defined in wrangler.toml
+// ============================================================
+async function logToD1(env, request, {
+  conversationId, turnNumber, message, messages,
+  replyText, pageUrl, responseTime, inputTokens, outputTokens, estimatedCost
+}) {
+  if (!env.DB) return; // D1 not bound — skip silently
+
+  const ip =
+    request.headers.get('cf-connecting-ip') ||
+    request.headers.get('x-forwarded-for') ||
+    'unknown';
+  const userAgent = request.headers.get('user-agent') || 'unknown';
+  const userMessage = message || messages[messages.length - 1]?.content || '';
+  const now = new Date().toISOString();
+  const totalTokens = inputTokens + outputTokens;
+  const cost = parseFloat(estimatedCost);
+
+  // Insert conversation turn
+  await env.DB.prepare(`
+    INSERT INTO conversations
+      (conversation_id, turn, user_message, assistant_response, page_url,
+       ip, user_agent, response_time_ms, input_tokens, output_tokens,
+       total_tokens, estimated_cost_usd, created_at)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+  `).bind(
+    conversationId, turnNumber, userMessage, replyText, pageUrl || null,
+    ip, userAgent, responseTime, inputTokens, outputTokens,
+    totalTokens, cost, now
+  ).run();
+
+  // Upsert session summary
+  await env.DB.prepare(`
+    INSERT INTO sessions
+      (conversation_id, started_at, last_active, page_url, ip,
+       total_turns, total_tokens, total_cost_usd)
+    VALUES (?, ?, ?, ?, ?, 1, ?, ?)
+    ON CONFLICT(conversation_id) DO UPDATE SET
+      last_active     = excluded.last_active,
+      page_url        = excluded.page_url,
+      ip              = excluded.ip,
+      total_turns     = total_turns + 1,
+      total_tokens    = total_tokens + excluded.total_tokens,
+      total_cost_usd  = total_cost_usd + excluded.total_cost_usd
+  `).bind(
+    conversationId, now, now, pageUrl || null, ip,
+    totalTokens, cost
+  ).run();
+}
+
+// ============================================================
 // MAIN HANDLER — Cloudflare Pages Functions syntax
 // ============================================================
 export async function onRequestPost(context) {
@@ -95,9 +132,7 @@ export async function onRequestPost(context) {
       );
     }
 
-    const anthropic = new Anthropic({
-      apiKey: env.ANTHROPIC_API_KEY
-    });
+    const anthropic = new Anthropic({ apiKey: env.ANTHROPIC_API_KEY });
 
     const startTime = Date.now();
 
@@ -105,7 +140,7 @@ export async function onRequestPost(context) {
       model: 'claude-haiku-4-5-20251001',
       max_tokens: 1024,
       system: getSystemPrompt(env),
-      messages: messages
+      messages,
     });
 
     const responseTime = Date.now() - startTime;
@@ -115,54 +150,14 @@ export async function onRequestPost(context) {
     const replyText = response.content[0].text;
     const turnNumber = messages.length;
 
-    // ============================================================
-    // MONGODB LOGGING — fire and forget
-    // ============================================================
-    context.waitUntil((async () => {
-      try {
-        const client = await getMongoClient(env.MONGODB_URI);
-        const db = client.db('boahemaa');
-
-        await db.collection('conversations').insertOne({
-          conversation_id: conversationId,
-          turn: turnNumber,
-          user_message: message || messages[messages.length - 1]?.content || '',
-          assistant_response: replyText,
-          page_url: pageUrl || null,
-          ip: request.headers.get('cf-connecting-ip') || request.headers.get('x-forwarded-for') || 'unknown',
-          user_agent: request.headers.get('user-agent') || 'unknown',
-          response_time_ms: responseTime,
-          input_tokens: inputTokens,
-          output_tokens: outputTokens,
-          total_tokens: inputTokens + outputTokens,
-          estimated_cost_usd: parseFloat(estimatedCost),
-          created_at: new Date(),
-        });
-
-        await db.collection('sessions').updateOne(
-          { conversation_id: conversationId },
-          {
-            $set: {
-              last_active: new Date(),
-              page_url: pageUrl || null,
-              ip: request.headers.get('cf-connecting-ip') || 'unknown',
-            },
-            $inc: {
-              total_turns: 1,
-              total_tokens: inputTokens + outputTokens,
-              total_cost_usd: parseFloat(estimatedCost),
-            },
-            $setOnInsert: {
-              conversation_id: conversationId,
-              started_at: new Date(),
-            }
-          },
-          { upsert: true }
-        );
-      } catch (dbError) {
-        console.error('MongoDB write error:', dbError.message);
-      }
-    })());
+    // ---- Logging (fire and forget) ----
+    context.waitUntil(
+      logToD1(env, request, {
+        conversationId, turnNumber, message, messages,
+        replyText, pageUrl, responseTime,
+        inputTokens, outputTokens, estimatedCost,
+      }).catch(err => console.error('D1 write error:', err.message))
+    );
 
     console.log('--- Boahemaa Turn ---');
     console.log('Conversation ID:', conversationId);
@@ -189,7 +184,7 @@ export async function onRequestPost(context) {
           turn: turnNumber,
           timestamp: new Date().toISOString(),
           responseTime,
-        }
+        },
       }),
       { status: 200, headers: CORS_HEADERS }
     );
@@ -200,7 +195,7 @@ export async function onRequestPost(context) {
     return new Response(
       JSON.stringify({
         success: false,
-        error: 'Boahemaa could not respond. Please try again.'
+        error: 'Boahemaa could not respond. Please try again.',
       }),
       { status: 500, headers: CORS_HEADERS }
     );
