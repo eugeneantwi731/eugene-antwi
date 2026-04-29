@@ -9,6 +9,10 @@ import Anthropic from '@anthropic-ai/sdk';
 // No Node.js built-ins needed.
 // ============================================================
 
+// TO READ CONVERSATIONS — run this in your terminal:
+// wrangler d1 execute boahemaa-logs --command="SELECT user_message, assistant_response, created_at FROM conversations ORDER BY created_at DESC LIMIT 20" --remote
+// ============================================================
+
 // ============================================================
 // SYSTEM PROMPT — Boahemaa's personality and knowledge
 // ============================================================
