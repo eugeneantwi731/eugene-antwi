@@ -521,8 +521,8 @@
             if (!url) return;
 
             const isLocal = /\.(mp4|webm|ogg)(\?.*)?$/i.test(url)
-                         || url.startsWith('./videos/')
-                         || url.startsWith('../videos/')
+                         || url.startsWith('https://assets.eugene-antwi.com/videos/')
+                         || url.startsWith('.https://assets.eugene-antwi.com/videos/')
                          || url.startsWith('/videos/');
 
             wrap.addEventListener('click', function () {

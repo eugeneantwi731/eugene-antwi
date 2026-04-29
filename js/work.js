@@ -6,16 +6,16 @@ const workItems = [
     {
         id: 1,
         title: "Akofena Poster Compositing Breakdown",
-        img: "./images/akofena-poster-compositing-breakdown-cover.png",
+        img: "https://assets.eugene-antwi.com/images/akofena-poster-compositing-breakdown-cover.png",
         category: "design",
         type: "video",
-        videoUrl: "./videos/akofena-poster-compositing-breakdown.mp4",
+        videoUrl: "https://assets.eugene-antwi.com/videos/akofena-poster-compositing-breakdown.mp4",
         height: 500
     },
     {
         id: 2,
         title: "Apple Cider Product Design",
-        img: "./images/apple-cider-product.png",
+        img: "https://assets.eugene-antwi.com/images/apple-cider-product.png",
         category: "design",
         type: "image",
         height: 450
@@ -23,7 +23,7 @@ const workItems = [
     {
         id: 3,
         title: "International Pharm Design",
-        img: "./images/international-pharm.png",
+        img: "https://assets.eugene-antwi.com/images/international-pharm.png",
         category: "design",
         type: "image",
         height: 350
@@ -31,7 +31,7 @@ const workItems = [
     {
         id: 4,
         title: "JBLHA Design",
-        img: "./images/jblha.png",
+        img: "https://assets.eugene-antwi.com/images/jblha.png",
         category: "design",
         type: "image",
         height: 500
@@ -39,7 +39,7 @@ const workItems = [
     {
         id: 5,
         title: "Pixel Babe T-Shirt",
-        img: "./images/pixel-babe-tshirt.png",
+        img: "https://assets.eugene-antwi.com/images/pixel-babe-tshirt.png",
         category: "design",
         type: "image",
         height: 600
@@ -47,7 +47,7 @@ const workItems = [
     {
         id: 6,
         title: "Portfolio UI Design",
-        img: "./images/portfolio-ui-design.png",
+        img: "https://assets.eugene-antwi.com/images/portfolio-ui-design.png",
         category: "design",
         type: "image",
         height: 400
@@ -57,25 +57,25 @@ const workItems = [
     {
         id: 7,
         title: "Antwic Probiotic Ad",
-        img: "./images/antwic-probiotic-ad-cover.png",
+        img: "https://assets.eugene-antwi.com/images/antwic-probiotic-ad-cover.png",
         category: "animation",
         type: "video",
-        videoUrl: "./videos/antwic-probiotic-ad.mp4",
+        videoUrl: "https://assets.eugene-antwi.com/videos/antwic-probiotic-ad.mp4",
         height: 450
     },
     {
         id: 8,
         title: "Electragene Ignition X Commercial",
-        img: "./images/electragene-ignition-x-commercial-cover.png",
+        img: "https://assets.eugene-antwi.com/images/electragene-ignition-x-commercial-cover.png",
         category: "animation",
         type: "video",
-        videoUrl: "./videos/electragene-ignition-x-commercial.mp4",
+        videoUrl: "https://assets.eugene-antwi.com/videos/electragene-ignition-x-commercial.mp4",
         height: 500
     },
     {
         id: 9,
         title: "The Last Shepherd",
-        img: "./images/last-shepherd-cover.png",
+        img: "https://assets.eugene-antwi.com/images/last-shepherd-cover.png",
         category: "animation",
         type: "video",
         videoUrl: "https://vimeo.com/775281800",
@@ -85,10 +85,10 @@ const workItems = [
     {
         id: 10,
         title: "ProNews HUD Mograph",
-        img: "./images/pronews-hud-mograph-cover.png",
+        img: "https://assets.eugene-antwi.com/images/pronews-hud-mograph-cover.png",
         category: "animation",
         type: "video",
-        videoUrl: "./videos/pronews-hud-mograph.mp4",
+        videoUrl: "https://assets.eugene-antwi.com/videos/pronews-hud-mograph.mp4",
         height: 400
     },
     
@@ -96,7 +96,7 @@ const workItems = [
     {
         id: 11,
         title: "Akwaaba",
-        img: "./images/akwaaba.png",
+        img: "https://assets.eugene-antwi.com/images/akwaaba.png",
         category: "cg",
         type: "image",
         height: 500
@@ -104,7 +104,7 @@ const workItems = [
     {
         id: 12,
         title: "BTHA Portrait",
-        img: "./images/btha-portrait.png",
+        img: "https://assets.eugene-antwi.com/images/btha-portrait.png",
         category: "cg",
         type: "image",
         height: 600
@@ -112,16 +112,16 @@ const workItems = [
     {
         id: 13,
         title: "Digital Avatar Breakdown",
-        img: "./images/digital-avatar-cover.png",
+        img: "https://assets.eugene-antwi.com/images/digital-avatar-cover.png",
         category: "cg",
         type: "video",
-        videoUrl: "./videos/digital-avatar-breakdown.mp4",
+        videoUrl: "https://assets.eugene-antwi.com/videos/digital-avatar-breakdown.mp4",
         height: 450
     },
     {
         id: 14,
         title: "Warrior Breakdown",
-        img: "./images/warrior-breakdown-cover.png",
+        img: "https://assets.eugene-antwi.com/images/warrior-breakdown-cover.png",
         category: "cg",
         type: "video",
         videoUrl: "https://youtu.be/MnJRjzsJRKM",
@@ -133,7 +133,7 @@ const workItems = [
     {
         id: 15,
         title: "Abstract Illustration",
-        img: "./images/abstract-1.png",
+        img: "https://assets.eugene-antwi.com/images/abstract-1.png",
         category: "illustration",
         type: "image",
         height: 400
@@ -141,7 +141,7 @@ const workItems = [
     {
         id: 16,
         title: "Akan Princess",
-        img: "./images/akan-princess.png",
+        img: "https://assets.eugene-antwi.com/images/akan-princess.png",
         category: "illustration",
         type: "image",
         height: 550
@@ -149,7 +149,7 @@ const workItems = [
     {
         id: 17,
         title: "Maabena",
-        img: "./images/maabena.png",
+        img: "https://assets.eugene-antwi.com/images/maabena.png",
         category: "illustration",
         type: "image",
         height: 600
@@ -157,7 +157,7 @@ const workItems = [
     {
         id: 18,
         title: "Three Maidens",
-        img: "./images/three-maidens.png",
+        img: "https://assets.eugene-antwi.com/images/three-maidens.png",
         category: "illustration",
         type: "image",
         height: 500
@@ -807,10 +807,10 @@ function setupShowreel() {
 {
     id: NEXT_NUMBER,
     title: "Your Work Title",
-    img: "./images/your-image.png",  // or "./images/your-cover.png" for videos
+    img: "https://assets.eugene-antwi.com/images/your-image.png",  // or "https://assets.eugene-antwi.com/images/your-cover.png" for videos
     category: "design" | "animation" | "cg" | "illustration",
     type: "image" | "video",
-    videoUrl: "./videos/your-video.mp4", // only for videos
+    videoUrl: "https://assets.eugene-antwi.com/videos/your-video.mp4", // only for videos
     isExternal: true, // only if YouTube/Vimeo
     height: 400 // any number between 350-600
 }
