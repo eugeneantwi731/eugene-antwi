@@ -18,7 +18,7 @@
   'use strict';
 
   // ---- Config ----
-  const FUNCTION_URL = './functions/chat';
+  const FUNCTION_URL = '/functions/chat';
   const INTRO_GREETING = "Akwaaba! I'm Boahemaa.";
   const HOVER_GREETING = "Hi there, I'm Boahemaa.";
 
