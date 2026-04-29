@@ -2,12 +2,12 @@ import Anthropic from '@anthropic-ai/sdk';
 import { MongoClient, ServerApiVersion } from 'mongodb';
 
 // ============================================================
-// BOAHEMAA — Cloudflare Worker
+// BOAHEMAA — Cloudflare Pages Function
 // Handles all chat requests from the portfolio widget.
 // API key stays server-side. Never exposed to the browser.
 // ============================================================
 
-// Reuse MongoDB connection across warm worker invocations
+// Reuse MongoDB connection across warm invocations
 let cachedClient = null;
 
 async function getMongoClient(uri) {
@@ -68,150 +68,141 @@ const CORS_HEADERS = {
 };
 
 // ============================================================
-// MAIN HANDLER — Cloudflare Workers use fetch() not exports.handler
+// CORS PREFLIGHT
 // ============================================================
-export default {
-  async fetch(request, env, ctx) {
+export async function onRequestOptions() {
+  return new Response('', { status: 204, headers: CORS_HEADERS });
+}
 
-    // Handle CORS preflight
-    if (request.method === 'OPTIONS') {
-      return new Response('', { status: 204, headers: CORS_HEADERS });
-    }
+// ============================================================
+// MAIN HANDLER — Cloudflare Pages Functions syntax
+// ============================================================
+export async function onRequestPost(context) {
+  const { request, env } = context;
 
-    if (request.method !== 'POST') {
+  try {
+    const body = await request.json();
+    const { message, conversationId, conversationHistory, pageUrl } = body;
+
+    const messages = (conversationHistory && conversationHistory.length > 0)
+      ? conversationHistory
+      : [{ role: 'user', content: message }];
+
+    if (!messages || messages.length === 0) {
       return new Response(
-        JSON.stringify({ success: false, error: 'Method Not Allowed' }),
-        { status: 405, headers: CORS_HEADERS }
+        JSON.stringify({ success: false, error: 'No message content provided' }),
+        { status: 400, headers: CORS_HEADERS }
       );
     }
 
-    try {
-      const body = await request.json();
-      const { message, conversationId, conversationHistory, pageUrl } = body;
+    const anthropic = new Anthropic({
+      apiKey: env.ANTHROPIC_API_KEY
+    });
 
-      const messages = (conversationHistory && conversationHistory.length > 0)
-        ? conversationHistory
-        : [{ role: 'user', content: message }];
+    const startTime = Date.now();
 
-      if (!messages || messages.length === 0) {
-        return new Response(
-          JSON.stringify({ success: false, error: 'No message content provided' }),
-          { status: 400, headers: CORS_HEADERS }
-        );
-      }
+    const response = await anthropic.messages.create({
+      model: 'claude-haiku-4-5-20251001',
+      max_tokens: 1024,
+      system: getSystemPrompt(env),
+      messages: messages
+    });
 
-      const anthropic = new Anthropic({
-        apiKey: env.ANTHROPIC_API_KEY
-      });
+    const responseTime = Date.now() - startTime;
+    const inputTokens = response.usage.input_tokens;
+    const outputTokens = response.usage.output_tokens;
+    const estimatedCost = ((inputTokens * 0.000001) + (outputTokens * 0.000002)).toFixed(6);
+    const replyText = response.content[0].text;
+    const turnNumber = messages.length;
 
-      const startTime = Date.now();
+    // ============================================================
+    // MONGODB LOGGING — fire and forget
+    // ============================================================
+    context.waitUntil((async () => {
+      try {
+        const client = await getMongoClient(env.MONGODB_URI);
+        const db = client.db('boahemaa');
 
-      const response = await anthropic.messages.create({
-        model: 'claude-haiku-4-5-20251001',
-        max_tokens: 1024,
-        system: getSystemPrompt(env),
-        messages: messages
-      });
+        await db.collection('conversations').insertOne({
+          conversation_id: conversationId,
+          turn: turnNumber,
+          user_message: message || messages[messages.length - 1]?.content || '',
+          assistant_response: replyText,
+          page_url: pageUrl || null,
+          ip: request.headers.get('cf-connecting-ip') || request.headers.get('x-forwarded-for') || 'unknown',
+          user_agent: request.headers.get('user-agent') || 'unknown',
+          response_time_ms: responseTime,
+          input_tokens: inputTokens,
+          output_tokens: outputTokens,
+          total_tokens: inputTokens + outputTokens,
+          estimated_cost_usd: parseFloat(estimatedCost),
+          created_at: new Date(),
+        });
 
-      const responseTime = Date.now() - startTime;
-      const inputTokens = response.usage.input_tokens;
-      const outputTokens = response.usage.output_tokens;
-      const estimatedCost = ((inputTokens * 0.000001) + (outputTokens * 0.000002)).toFixed(6);
-      const replyText = response.content[0].text;
-      const turnNumber = messages.length;
-
-      // ============================================================
-      // MONGODB LOGGING — fire and forget via ctx.waitUntil
-      // In Cloudflare Workers we use ctx.waitUntil instead of
-      // Promise.resolve().then() to keep the async task alive
-      // after the response is sent.
-      // ============================================================
-      ctx.waitUntil((async () => {
-        try {
-          const client = await getMongoClient(env.MONGODB_URI);
-          const db = client.db('boahemaa');
-
-          await db.collection('conversations').insertOne({
-            conversation_id: conversationId,
-            turn: turnNumber,
-            user_message: message || messages[messages.length - 1]?.content || '',
-            assistant_response: replyText,
-            page_url: pageUrl || null,
-            ip: request.headers.get('cf-connecting-ip') || request.headers.get('x-forwarded-for') || 'unknown',
-            user_agent: request.headers.get('user-agent') || 'unknown',
-            response_time_ms: responseTime,
-            input_tokens: inputTokens,
-            output_tokens: outputTokens,
-            total_tokens: inputTokens + outputTokens,
-            estimated_cost_usd: parseFloat(estimatedCost),
-            created_at: new Date(),
-          });
-
-          await db.collection('sessions').updateOne(
-            { conversation_id: conversationId },
-            {
-              $set: {
-                last_active: new Date(),
-                page_url: pageUrl || null,
-                ip: request.headers.get('cf-connecting-ip') || 'unknown',
-              },
-              $inc: {
-                total_turns: 1,
-                total_tokens: inputTokens + outputTokens,
-                total_cost_usd: parseFloat(estimatedCost),
-              },
-              $setOnInsert: {
-                conversation_id: conversationId,
-                started_at: new Date(),
-              }
+        await db.collection('sessions').updateOne(
+          { conversation_id: conversationId },
+          {
+            $set: {
+              last_active: new Date(),
+              page_url: pageUrl || null,
+              ip: request.headers.get('cf-connecting-ip') || 'unknown',
             },
-            { upsert: true }
-          );
-        } catch (dbError) {
-          console.error('MongoDB write error:', dbError.message);
-        }
-      })());
-
-      console.log('--- Boahemaa Turn ---');
-      console.log('Conversation ID:', conversationId);
-      console.log('Turn:', turnNumber);
-      console.log('Page:', pageUrl || 'unknown');
-      console.log('User message:', message || '(from history)');
-      console.log('Response preview:', replyText.substring(0, 120));
-      console.log('Response time:', responseTime + 'ms');
-      console.log('Tokens:', inputTokens + ' in / ' + outputTokens + ' out');
-      console.log('Estimated cost: $' + estimatedCost);
-      console.log('--- End ---');
-
-      return new Response(
-        JSON.stringify({
-          success: true,
-          reply: replyText,
-          usage: {
-            input_tokens: inputTokens,
-            output_tokens: outputTokens,
-            estimated_cost_usd: parseFloat(estimatedCost),
+            $inc: {
+              total_turns: 1,
+              total_tokens: inputTokens + outputTokens,
+              total_cost_usd: parseFloat(estimatedCost),
+            },
+            $setOnInsert: {
+              conversation_id: conversationId,
+              started_at: new Date(),
+            }
           },
-          metadata: {
-            conversationId,
-            turn: turnNumber,
-            timestamp: new Date().toISOString(),
-            responseTime,
-          }
-        }),
-        { status: 200, headers: CORS_HEADERS }
-      );
+          { upsert: true }
+        );
+      } catch (dbError) {
+        console.error('MongoDB write error:', dbError.message);
+      }
+    })());
 
-    } catch (error) {
-      console.error('Handler error:', error.message);
-      console.error('Stack:', error.stack);
-      return new Response(
-        JSON.stringify({
-          success: false,
-          error: 'Boahemaa could not respond. Please try again.'
-        }),
-        { status: 500, headers: CORS_HEADERS }
-      );
-    }
+    console.log('--- Boahemaa Turn ---');
+    console.log('Conversation ID:', conversationId);
+    console.log('Turn:', turnNumber);
+    console.log('Page:', pageUrl || 'unknown');
+    console.log('User message:', message || '(from history)');
+    console.log('Response preview:', replyText.substring(0, 120));
+    console.log('Response time:', responseTime + 'ms');
+    console.log('Tokens:', inputTokens + ' in / ' + outputTokens + ' out');
+    console.log('Estimated cost: $' + estimatedCost);
+    console.log('--- End ---');
+
+    return new Response(
+      JSON.stringify({
+        success: true,
+        reply: replyText,
+        usage: {
+          input_tokens: inputTokens,
+          output_tokens: outputTokens,
+          estimated_cost_usd: parseFloat(estimatedCost),
+        },
+        metadata: {
+          conversationId,
+          turn: turnNumber,
+          timestamp: new Date().toISOString(),
+          responseTime,
+        }
+      }),
+      { status: 200, headers: CORS_HEADERS }
+    );
+
+  } catch (error) {
+    console.error('Handler error:', error.message);
+    console.error('Stack:', error.stack);
+    return new Response(
+      JSON.stringify({
+        success: false,
+        error: 'Boahemaa could not respond. Please try again.'
+      }),
+      { status: 500, headers: CORS_HEADERS }
+    );
   }
-};
+}
