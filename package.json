@@ -2,6 +2,7 @@
   "name": "eugene-portfolio",
   "version": "1.0.0",
   "description": "Portfolio with Claude AI",
+  "type": "module",
   "dependencies": {
     "@anthropic-ai/sdk": "^0.32.1",
     "mongodb": "^7.2.0"
